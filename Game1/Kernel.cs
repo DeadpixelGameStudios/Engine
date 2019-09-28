@@ -1,9 +1,11 @@
 ﻿using Game1.Engine.Entity;
 using Game1.Engine.Input;
+using Game1.Engine.Misc.FPSCounter;
 using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Game1
@@ -18,6 +20,8 @@ namespace Game1
 
         public static int ScreenWidth, ScreenHeight;
 
+        private FrameCounter frameCounter = new FrameCounter();
+
         // Just testing out the npc from the yt video
         Texture2D texture;
         Vector2 textureLocn;
@@ -28,6 +32,8 @@ namespace Game1
         iEntityManager entityManager = new EntityManager();
 
         iSceneManager sceneManager = new SceneManager();
+
+        Input inputMan = new Input();
 
         //SpriteFont font;
 
@@ -43,7 +49,7 @@ namespace Game1
 
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1600;
-
+            
             this.IsMouseVisible = true;
 
             #region set screen to middle
@@ -61,12 +67,6 @@ namespace Game1
 
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -75,15 +75,10 @@ namespace Game1
 
             //font = Content.Load<SpriteFont>("Text");
 
-            //ball = new Ball();
-            //paddle = new List<Paddle>();
-            //paddle.Add(new Paddle());
-            //paddle.Add(new Paddle());
-
             ball = entityManager.RequestInstance<Ball>();
             paddle.Add(entityManager.RequestInstance<Paddle>());
             paddle.Add(entityManager.RequestInstance<Paddle>());
-
+            
             base.Initialize();
         }
 
@@ -105,11 +100,15 @@ namespace Game1
 
             // if multiple objects got the same texture use this?
             paddle.ForEach(p => p.Texture = Content.Load<Texture2D>("Resources/paddle"));
+        
+            // Subscribe paddles to input (terrible way of doing this - need to figure out a better way to do this)
+            paddle[0].subscirbeToInput(new Entity.BasicInput(Keys.W, Keys.S, Keys.A, Keys.D));
+            paddle[1].subscirbeToInput(new Entity.BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right));
 
             sceneManager.Spawn(ball, new Vector2(ScreenWidth / 2, ScreenWidth / 2));
             sceneManager.Spawn(paddle[0], new Vector2(0, ScreenHeight / 2 - 50));
             sceneManager.Spawn(paddle[1], new Vector2(1550, ScreenHeight / 2 - 50));
-
+            
             sceneManager.LoadResources(Content);
         }
 
@@ -141,11 +140,7 @@ namespace Game1
             Vector2 p1Velocity = Input.GetKeyboardInputDirection(PlayerIndex.One);
             Vector2 p2Velocity = Input.GetKeyboardInputDirection(PlayerIndex.Two);
 
-
-            //paddle.ForEach(p => p.Update());
-
-            paddle[0].Update(p1Velocity);
-            paddle[1].Update(p2Velocity);
+            inputMan.Update();
 
             if (GameEntity.CheckPaddleBallCollistion(paddle[0], ball))
             {
@@ -160,6 +155,12 @@ namespace Game1
                     + p2Velocity;
             }
 
+            // Code for displaying FPS in output
+            //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //frameCounter.Update(deltaTime);
+            //var fps = string.Format("FPS: {0}", frameCounter.AverageFramesPerSecond);
+            //Console.WriteLine("Current fps - " + fps);
+
             base.Update(gameTime);
         }
 
@@ -172,6 +173,7 @@ namespace Game1
             GraphicsDevice.Clear(Color.BlueViolet);
 
             // TODO: Add your drawing code here
+            
 
             spriteBatch.Begin();
             //WWspriteBatch.Draw(texture, textureLocn, Color.White);
