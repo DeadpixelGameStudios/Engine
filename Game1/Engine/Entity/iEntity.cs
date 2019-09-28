@@ -11,7 +11,7 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Contract for any game entity
     /// </summary>
-    interface iEntity
+    public interface iEntity
     {
         Guid UID { get; set; }
         String UName { get; set; }

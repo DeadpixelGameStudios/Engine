@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game1.Engine.Entity
 {
@@ -72,6 +73,34 @@ namespace Game1.Engine.Entity
         {
             get;
             set;
+        }
+
+        public struct BasicInput
+        {
+            public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pJump = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)
+            {
+                up = pUp;
+                down = pDown;
+                left = pLeft;
+                right = pRight;
+                jump = pJump;
+                use = pUse;
+                rotate = pRotate;
+
+                allKeys = new List<Keys>(new Keys[] { up, down, left, right, jump, use, rotate });
+                allKeys.RemoveAll((Keys key) => key == Keys.None);
+            }
+
+            public Keys up;
+            public Keys down;
+            public Keys left;
+            public Keys right;
+            public Keys jump;
+            public Keys use;
+            public Keys rotate;
+
+            public List<Keys> allKeys;
+
         }
 
         #endregion

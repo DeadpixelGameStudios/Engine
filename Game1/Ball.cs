@@ -65,7 +65,7 @@ namespace Game1
 
         public override void Update(GameTime gametime)
         {
-            Position += Velocity;
+            //Position += Velocity;
             CheckWallCollision();
 
             base.Update(gametime);
