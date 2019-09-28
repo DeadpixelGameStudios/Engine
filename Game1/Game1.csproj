@@ -47,7 +47,10 @@
     <Compile Include="Engine\Entity\GameEntity.cs" />
     <Compile Include="Engine\Entity\iEntity.cs" />
     <Compile Include="Engine\Entity\iEntityManager.cs" />
+    <Compile Include="Engine\Input\IInputObserver.cs" />
+    <Compile Include="Engine\Input\IInputObserverable.cs" />
     <Compile Include="Engine\Input\Input.cs" />
+    <Compile Include="Engine\Misc\FPSCounter.cs" />
     <Compile Include="Engine\Scene\iSceneGraph.cs" />
     <Compile Include="Engine\Scene\iSceneManager.cs" />
     <Compile Include="Engine\Scene\SceneGraph.cs" />
