@@ -47,9 +47,12 @@
     <Compile Include="Engine\Entity\GameEntity.cs" />
     <Compile Include="Engine\Entity\iEntity.cs" />
     <Compile Include="Engine\Entity\iEntityManager.cs" />
-    <Compile Include="Engine\Input\IInputObserver.cs" />
-    <Compile Include="Engine\Input\IInputObserverable.cs" />
-    <Compile Include="Engine\Input\Input.cs" />
+    <Compile Include="Engine\Input\IMouseInputObserver.cs" />
+    <Compile Include="Engine\Input\IKeyboardInputObserver.cs" />
+    <Compile Include="Engine\Input\IMouseInputObserverable.cs" />
+    <Compile Include="Engine\Input\IKeyboardInputObserverable.cs" />
+    <Compile Include="Engine\Input\MouseInput.cs" />
+    <Compile Include="Engine\Input\KeyboardInput.cs" />
     <Compile Include="Engine\Misc\FPSCounter.cs" />
     <Compile Include="Engine\Scene\iSceneGraph.cs" />
     <Compile Include="Engine\Scene\iSceneManager.cs" />
@@ -80,7 +83,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Engine\Widgets\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

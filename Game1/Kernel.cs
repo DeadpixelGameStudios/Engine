@@ -33,7 +33,9 @@ namespace Game1
 
         iSceneManager sceneManager = new SceneManager();
 
-        Input inputMan = new Input();
+        KeyboardInput inputMan = new KeyboardInput();
+
+        MouseInput mouseInput = new MouseInput();
 
         //SpriteFont font;
 
@@ -105,6 +107,11 @@ namespace Game1
             paddle[0].subscirbeToInput(new Entity.BasicInput(Keys.W, Keys.S, Keys.A, Keys.D));
             paddle[1].subscirbeToInput(new Entity.BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right));
 
+            MouseInput.Subscribe(paddle[0]);
+            MouseInput.Subscribe(paddle[1]);
+
+
+
             sceneManager.Spawn(ball, new Vector2(ScreenWidth / 2, ScreenWidth / 2));
             sceneManager.Spawn(paddle[0], new Vector2(0, ScreenHeight / 2 - 50));
             sceneManager.Spawn(paddle[1], new Vector2(1550, ScreenHeight / 2 - 50));
@@ -133,27 +140,12 @@ namespace Game1
 
             // TODO: Add your update logic here
 
+            
             //ball.Update(gameTime);
-
             sceneManager.Update(gameTime);
-
-            Vector2 p1Velocity = Input.GetKeyboardInputDirection(PlayerIndex.One);
-            Vector2 p2Velocity = Input.GetKeyboardInputDirection(PlayerIndex.Two);
-
             inputMan.Update();
+            mouseInput.Update();
 
-            if (GameEntity.CheckPaddleBallCollistion(paddle[0], ball))
-            {
-                ball.Velocity = new Vector2(-ball.Velocity.X, ball.Velocity.Y)
-                    + p1Velocity;
-                entityManager.Terminate(paddle[1].UID, paddle[1].UName);
-            }
-
-            if (GameEntity.CheckPaddleBallCollistion(paddle[1], ball))
-            {
-                ball.Velocity = new Vector2(-ball.Velocity.X, ball.Velocity.Y)
-                    + p2Velocity;
-            }
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

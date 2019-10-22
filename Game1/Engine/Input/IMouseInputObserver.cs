@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Game1.Engine.Input
 {
-    public interface IInputObserver
+    public interface IMouseInputObserver
     {
-        void input(Keys keys);
+        void mouseInput(Vector2 pos, bool pressed);
     }
 }
