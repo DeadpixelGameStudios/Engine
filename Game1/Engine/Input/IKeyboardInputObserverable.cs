@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game1.Engine.Input
 {
-    interface IInputObserverable
+    interface IKeyboardInputObserverable
     {
         void notifyInput(Keys keys);
     }

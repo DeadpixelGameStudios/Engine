@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    class Paddle : GameEntity, IInputObserver
+    class Paddle : GameEntity, IKeyboardInputObserver, IMouseInputObserver
     {
         private float playerAcceleration = 5f;
         private BasicInput inputKeys;
@@ -41,7 +41,7 @@ namespace Game1
 
         public void subscirbeToInput(BasicInput keys)
         {
-            Input.Subscribe(this, keys.allKeys);
+            KeyboardInput.Subscribe(this, keys.allKeys);
             inputKeys = keys;
         }
 
@@ -51,21 +51,26 @@ namespace Game1
             {
                 if(key == inputKeys.up)
                 {
-                    Update(new Vector2(0, (-1 - playerAcceleration)));
+                    Update(new Vector2(0, (-1 * playerAcceleration)));
                 }
                 else if(key == inputKeys.down)
                 {
-                    Update(new Vector2(0, (-1 + playerAcceleration)));
+                    Update(new Vector2(0, (playerAcceleration)));
                 }
                 else if(key == inputKeys.left)
                 {
-                    Update(new Vector2((-1 - playerAcceleration), 0));
+                    Update(new Vector2((-1 * playerAcceleration), 0));
                 }
                 else if (key == inputKeys.right)
                 {
-                    Update(new Vector2((-1 + playerAcceleration), 0));
+                    Update(new Vector2((playerAcceleration), 0));
                 }
             }
+        }
+
+        public void mouseInput(Vector2 pos, bool pressed)
+        {
+            
         }
     }
 }
