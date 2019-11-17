@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 
 namespace Game1
 {
@@ -22,22 +24,14 @@ namespace Game1
 
         private FrameCounter frameCounter = new FrameCounter();
 
-        // Just testing out the npc from the yt video
-        Texture2D texture;
-        Vector2 textureLocn;
+        //Ball ball;
+        //List<Paddle> paddle = new List<Paddle>();
 
-        Ball ball;
-        List<Paddle> paddle = new List<Paddle>();
-
-        iEntityManager entityManager = new EntityManager();
-
+        iEntityManager entityManager;
         iSceneManager sceneManager = new SceneManager();
-
         KeyboardInput inputMan = new KeyboardInput();
-
         MouseInput mouseInput = new MouseInput();
-
-        //SpriteFont font;
+        
 
         //Look at this - he made an engine using mono game where u can drag drop stuff. engine got ui
         // https://github.com/Memorix101/MonoGame_ComponentSystem
@@ -47,10 +41,12 @@ namespace Game1
         public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "Content/Resources";
 
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1600;
+
+            entityManager = new EntityManager(Content);
             
             this.IsMouseVisible = true;
 
@@ -75,12 +71,6 @@ namespace Game1
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
-            //font = Content.Load<SpriteFont>("Text");
-
-            ball = entityManager.RequestInstance<Ball>();
-            paddle.Add(entityManager.RequestInstance<Paddle>());
-            paddle.Add(entityManager.RequestInstance<Paddle>());
-            
             base.Initialize();
         }
 
@@ -93,29 +83,11 @@ namespace Game1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            foreach (var asset in entityManager.requestLevel("test-level.tmx"))
+            {
+                sceneManager.Spawn(asset);
+            }
 
-            //texture = Content.Load<Texture2D>("Textures/NPC/main_character_single");
-            //textureLocn = new Vector2(ScreenWidth / 2, ScreenHeight / 2);
-
-            ball.Texture = Content.Load<Texture2D>("Resources/ball");
-
-            // if multiple objects got the same texture use this?
-            paddle.ForEach(p => p.Texture = Content.Load<Texture2D>("Resources/paddle"));
-        
-            // Subscribe paddles to input (terrible way of doing this - need to figure out a better way to do this)
-            paddle[0].subscirbeToInput(new Entity.BasicInput(Keys.W, Keys.S, Keys.A, Keys.D));
-            paddle[1].subscirbeToInput(new Entity.BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right));
-
-            MouseInput.Subscribe(paddle[0]);
-            MouseInput.Subscribe(paddle[1]);
-
-
-
-            sceneManager.Spawn(ball, new Vector2(ScreenWidth / 2, ScreenWidth / 2));
-            sceneManager.Spawn(paddle[0], new Vector2(0, ScreenHeight / 2 - 50));
-            sceneManager.Spawn(paddle[1], new Vector2(1550, ScreenHeight / 2 - 50));
-            
             sceneManager.LoadResources(Content);
         }
 
@@ -126,6 +98,7 @@ namespace Game1
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
         }
 
         /// <summary>
@@ -141,7 +114,6 @@ namespace Game1
             // TODO: Add your update logic here
 
             
-            //ball.Update(gameTime);
             sceneManager.Update(gameTime);
             inputMan.Update();
             mouseInput.Update();
@@ -162,7 +134,7 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.BlueViolet);
+            GraphicsDevice.Clear(Color.PaleTurquoise);
 
             // TODO: Add your drawing code here
             
@@ -171,14 +143,10 @@ namespace Game1
             //WWspriteBatch.Draw(texture, textureLocn, Color.White);
 
             sceneManager.Draw(spriteBatch);
-
-            //ball.Draw(spriteBatch);
-
+            
             // look i got this. so instead of saying for each paddle list call draw. do it in linq
             //https://stackoverflow.com/questions/3198053/generics-call-a-method-on-every-object-in-a-listt
             //paddle.ForEach(p => p.Draw(spriteBatch));
-
-            //spriteBatch.DrawString(font, "test", new Vector2(0, 0), Color.Black);
 
             spriteBatch.End();
 
