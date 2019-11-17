@@ -135,6 +135,17 @@ namespace Game1.Engine.Entity
             UName = name;
         }
 
+        //Override
+        public void Setup(Guid id, string name, Texture2D tex, Vector2 pos)
+        {
+            UID = id;
+            UName = name;
+            Texture = tex;
+            Position = pos;
+        }
+
+
+
         /// <summary>
         /// This will distribute it to all other classes 
         /// In the hierarchy and any class which implements 

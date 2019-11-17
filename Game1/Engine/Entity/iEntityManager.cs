@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,12 @@ namespace Game1.Engine.Entity
         /// <returns>Reference to EntityInstance</returns>
         T RequestInstance<T>() where T : iEntity, new();
 
-        /// <summary>
-        /// Load Resources of entity
-        /// </summary>
-        /// <param name="conManager">content manager</param>
-        void LoadResources(ContentManager conManager);
+        T RequestInstanceAndSetup<T>(string texture, Vector2 postion) where T : iEntity, new();
+
+
+        //request a level by string
+        List<iEntity> requestLevel(string level);
+
 
         /// <summary>
         /// Get Entity from their ID and name

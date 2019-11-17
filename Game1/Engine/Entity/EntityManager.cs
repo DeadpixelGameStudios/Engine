@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game1.Engine.Scene;
+using Microsoft.Xna.Framework;
 
 namespace Game1.Engine.Entity
 {
@@ -15,8 +18,7 @@ namespace Game1.Engine.Entity
     {
         #region Data Members
 
-        Guid id;
-
+        
         /// <summary>
         /// Store list of the entity names
         /// </summary>
@@ -33,44 +35,23 @@ namespace Game1.Engine.Entity
 
         #endregion
 
+        private ContentManager contentMan;
+        private LevelLoader levelLoader;
+
         #region Methods
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public EntityManager()
+        public EntityManager(ContentManager content)
         {
-            Initialize();
-        }
+            contentMan = content;
 
-        /// <summary>
-        /// Any Initialization done here not in constructor
-        /// </summary>
-        private void Initialize()
-        {
             storeEntity = new List<iEntity>();
             entityNames = new List<string>();
-
-            //* Was trying to serialize entity *
-            // its a bit wrong it would create an xml
-            // then scene manager would open it and read it
-
-            //Stream stream = File.Open("EntityManager.xml", FileMode.Create);
-            //BinaryFormatter formatter = new BinaryFormatter();
-            //formatter.Serialize(stream, GetType().Name);
-            //stream.Close();
-
-            //(this)formatter.Deserialize(stream);
+            levelLoader = new LevelLoader();
         }
 
-        /// <summary>
-        /// Load Resources of entity
-        /// </summary>
-        /// <param name="conManager">content manager</param>
-        public void LoadResources(ContentManager conManager)
-        {
-            //idk what to do here
-        }
 
         /// <summary>
         /// Request Instance of entity
@@ -82,6 +63,56 @@ namespace Game1.Engine.Entity
             return CreateInstance<T>();
         }
 
+        public T RequestInstanceAndSetup<T>(string texture, Vector2 position) where T : iEntity, new()
+        {
+            return CreateInstanceAndSetup<T>(texture, position);
+        }
+
+
+        public List<iEntity> requestLevel(string level)
+        {
+            var assets = levelLoader.requestLevel(level);
+            List<iEntity> returnList = new List<iEntity>();
+
+            foreach(var asset in assets)
+            {
+                var texture = asset.info.texture;
+                var position = asset.position;
+                var type = asset.info.type;
+
+                //Assembly t = typeof("Wall").Assembly;
+                //T test = objectFromVar<iEntity>(type);
+                //Type genericType = typeof(Wall).MakeGenericType(new Type[] { type });
+                //iEntity test = (iEntity)genericType;
+                //Setup(test, texture, position);
+
+                //I really, really hate this - going to try to look at a workaround but haven't found anything yet
+                //In the mean time, every time you add an texture in Tiled, a new case for the class will have to be added here
+                iEntity entity;
+
+                switch(type)
+                {
+                    case "Wall":
+                        entity = CreateInstanceAndSetup<Wall>(texture, position);
+                        break;
+
+                    case "Player":
+                        entity = CreateInstanceAndSetup<Player>(texture, position);
+                        break;
+
+                    default:
+                        entity = CreateInstanceAndSetup<Wall>(texture, position);
+                        break;
+                }
+
+
+                returnList.Add(entity);
+            }
+
+            return returnList;
+        }
+
+
         /// <summary>
         /// Create Instance, this is where it generates a id
         /// and gives its uname
@@ -90,25 +121,41 @@ namespace Game1.Engine.Entity
         /// <returns></returns>
         private T CreateInstance<T>() where T : iEntity, new()
         {
-            // create new instance
-            T iReqestedEntity = new T();
-
-            // Generate UID
-            id = Guid.NewGuid();
-
-            // Add the entity class name to list
-            entityNames.Add(iReqestedEntity.GetType().Name);
-
-            // call entity setup method
-            iReqestedEntity.Setup
-                (id, setEntityUName(iReqestedEntity.GetType().Name));
-
-            // add entity to list
-            storeEntity.Add(iReqestedEntity);
-
-            // return
-            return iReqestedEntity;
+            T requestedEntity = new T();
+            
+            storeEntity.Add(requestedEntity);
+            entityNames.Add(requestedEntity.GetType().Name);
+            Setup(requestedEntity);
+            
+            return requestedEntity;
         }
+
+        private T CreateInstanceAndSetup<T>(string texture, Vector2 pos) where T : iEntity, new()
+        {
+            var requestedEntity = CreateInstance<T>();
+            Setup(requestedEntity, texture, pos);
+
+            return requestedEntity;
+        }
+
+        private void Setup(iEntity entity, string texture = "default", Vector2 pos = default(Vector2))
+        {
+            var id = Guid.NewGuid();
+
+            Texture2D loadedTexture;
+
+            try
+            {
+                loadedTexture = contentMan.Load<Texture2D>(texture);
+            }
+            catch
+            {
+                loadedTexture = contentMan.Load<Texture2D>("default");
+            }
+
+            entity.Setup(id, setEntityUName(entity.GetType().Name), loadedTexture, pos);
+        }
+
 
         /// <summary>
         /// Give entity unique name by class and number

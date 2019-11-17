@@ -23,6 +23,7 @@ namespace Game1.Engine.Entity
         bool Visible { get; set; }
 
         void Setup(Guid id, string name);
+        void Setup(Guid id, string name, Texture2D texture, Vector2 position);
         void Update(GameTime gametime);
     }
 }

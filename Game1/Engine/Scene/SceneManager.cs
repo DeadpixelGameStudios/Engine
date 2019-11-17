@@ -71,8 +71,7 @@ namespace Game1.Engine.Scene
         /// Spawn entity into scene
         /// </summary>
         /// <param name="entityInstance">Spawn Entity</param>
-        /// <param name="position">pentity spawned position</param>
-        public void Spawn(iEntity entityInstance, Vector2 position)
+        public void Spawn(iEntity entityInstance)
         {
             // if list doesnt contain entity
             if (!storeEntity.Contains(entityInstance))
@@ -86,9 +85,6 @@ namespace Game1.Engine.Scene
                 // record entity has been spawned
                 storeEntity.Add(entityInstance);
             }
-
-            // if it it then just set the position of the entity
-            entityInstance.Position = position;
         }
 
         /// <summary>

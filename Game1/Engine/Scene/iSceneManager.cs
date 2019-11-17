@@ -32,8 +32,7 @@ namespace Game1.Engine.Scene
         /// Spawn entity into scene
         /// </summary>
         /// <param name="entityInstance">Spawn Entity</param>
-        /// <param name="position">pentity spawned position</param>
-        void Spawn(iEntity entityInstance, Vector2 position);
+        void Spawn(iEntity entityInstance);
 
         /// <summary>
         /// Entity Removal from scene
