@@ -97,3 +97,8 @@ C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\player
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\player2.xnb
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\player3.xnb
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\player4.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\LevelLoader\Levels\test-level.tmx
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3player.png
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3player.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\4player.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\2player.xnb

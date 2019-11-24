@@ -33,6 +33,12 @@ namespace Game1.Engine.Entity
             get;
             set;
         }
+        
+        public string TextureString
+        {
+            get;
+            set;
+        }
 
         public Guid UID
         {
@@ -136,11 +142,11 @@ namespace Game1.Engine.Entity
         }
 
         //Override
-        public void Setup(Guid id, string name, Texture2D tex, Vector2 pos)
+        public void Setup(Guid id, string name, string tex, Vector2 pos)
         {
             UID = id;
             UName = name;
-            Texture = tex;
+            TextureString = tex;
             Position = pos;
         }
 
@@ -151,7 +157,7 @@ namespace Game1.Engine.Entity
         /// In the hierarchy and any class which implements 
         /// An update with the same signature.
         /// </summary>
-        public virtual void Update(GameTime gametime)
+        public virtual void Update()
         {
 
         }

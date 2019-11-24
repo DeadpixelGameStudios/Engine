@@ -27,5 +27,8 @@
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/player2.png</File>
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/player3.png</File>
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/player4.png</File>
+    <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/3player.png</File>
+    <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/4player.png</File>
+    <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/2player.png</File>
   </SourceFiles>
 </SourceFileCollection>

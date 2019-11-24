@@ -34,8 +34,7 @@ namespace Game1.Engine.Entity
         public List<iEntity> storeEntity { get; set; }
 
         #endregion
-
-        private ContentManager contentMan;
+        
         private LevelLoader levelLoader;
 
         #region Methods
@@ -43,10 +42,8 @@ namespace Game1.Engine.Entity
         /// <summary>
         /// Constructor
         /// </summary>
-        public EntityManager(ContentManager content)
+        public EntityManager()
         {
-            contentMan = content;
-
             storeEntity = new List<iEntity>();
             entityNames = new List<string>();
             levelLoader = new LevelLoader();
@@ -142,18 +139,7 @@ namespace Game1.Engine.Entity
         {
             var id = Guid.NewGuid();
 
-            Texture2D loadedTexture;
-
-            try
-            {
-                loadedTexture = contentMan.Load<Texture2D>(texture);
-            }
-            catch
-            {
-                loadedTexture = contentMan.Load<Texture2D>("default");
-            }
-
-            entity.Setup(id, setEntityUName(entity.GetType().Name), loadedTexture, pos);
+            entity.Setup(id, setEntityUName(entity.GetType().Name), texture, pos);
         }
 
 

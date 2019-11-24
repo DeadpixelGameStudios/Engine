@@ -29,9 +29,9 @@ namespace Game1
             Position = new Vector2(xPos, yPos);
         }
 
-        public override void Update(GameTime gametime)
+        public override void Update()
         {
-            base.Update(gametime);
+
         }
 
         public void Update(Vector2 vel)

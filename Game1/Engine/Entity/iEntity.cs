@@ -18,12 +18,13 @@ namespace Game1.Engine.Entity
         Vector2 Position { get; set; }
         Vector2 Velocity { get; set; }
         Texture2D Texture { get; set; }
+        string TextureString { get; set; }
         float currentHealth { get; set; }
         float maxHealth { get; set; }
         bool Visible { get; set; }
 
         void Setup(Guid id, string name);
-        void Setup(Guid id, string name, Texture2D texture, Vector2 position);
-        void Update(GameTime gametime);
+        void Setup(Guid id, string name, string texture, Vector2 position);
+        void Update();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Game1.Engine.Entity;
 using Game1.Engine.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,13 @@ namespace Game1
     class Player : GameEntity, IKeyboardInputObserver
     {
 
-        private List<BasicInput> inputOptions = new List<BasicInput> { new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D), new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right),
-                                                                        new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L), new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6) };
+        private List<BasicInput> inputOptions = new List<BasicInput>
+        {
+            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D),
+            new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right),
+            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L),
+            new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6)
+        };
         private BasicInput inputKeys;
         private static int playerCount = 0;
 
@@ -31,10 +37,12 @@ namespace Game1
             {
                 keys = new BasicInput();
             }
-            
+        
             KeyboardInput.Subscribe(this, keys.allKeys);
             inputKeys = keys;
             playerCount++;
+
+            CameraManager.RequestCamera(this);
         }
 
         public void input(Keys key)
@@ -43,26 +51,29 @@ namespace Game1
             {
                 if (key == inputKeys.up)
                 {
-                    Update(new Vector2(0, (-1 * acceleration)));
+                    Velocity = new Vector2(0, (-1 * acceleration));
                 }
                 else if (key == inputKeys.down)
                 {
-                    Update(new Vector2(0, (acceleration)));
+                    Velocity = new Vector2(0, (acceleration));
                 }
                 else if (key == inputKeys.left)
                 {
-                    Update(new Vector2((-1 * acceleration), 0));
+                    Velocity = new Vector2((-1 * acceleration), 0);
                 }
                 else if (key == inputKeys.right)
                 {
-                    Update(new Vector2((acceleration), 0));
+                    Velocity = new Vector2((acceleration), 0);
                 }
+
+                Position += Velocity;
             }
         }
+        
 
-        public void Update(Vector2 vel)
+        public override void Update()
         {
-            Position += vel;
+
         }
     }
 }

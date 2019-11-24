@@ -1,4 +1,5 @@
 ﻿using Game1.Engine.Entity;
+using Game1.Engine.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,11 +28,14 @@ namespace Game1.Engine.Scene
 
         #endregion
 
+        private Renderer renderMan;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public SceneManager()
+        public SceneManager(GraphicsDevice graph)
         {
+            renderMan = new Renderer(graph);
             Initialize();
         }
 
@@ -42,15 +46,6 @@ namespace Game1.Engine.Scene
         {
             sceneGraph = new SceneGraph();
             storeEntity = new List<iEntity>();
-
-            // Unsure what to initialize
-
-            // * Tried to open the entity manager xml *
-
-            //Stream stream = File.Open("EntityManager.xml", FileMode.Open);
-            //BinaryFormatter formatter = new BinaryFormatter();
-            //sceneGraph = (SceneGraph)formatter.Deserialize(stream);
-            //stream.Close();
         }
 
         /// <summary>
@@ -64,7 +59,9 @@ namespace Game1.Engine.Scene
             //• It is recommended to associate resources before other initialisation operations, which might require
             //(some of) the associated resources
 
-            sceneGraph.childNodes.ForEach(e => e.Texture = Content.Load<Texture2D>(e.Texture.Name));
+            sceneGraph.childNodes.ForEach(e => e.Texture = Content.Load<Texture2D>(e.TextureString));
+
+            renderMan.Init();
         }
 
         /// <summary>
@@ -73,17 +70,20 @@ namespace Game1.Engine.Scene
         /// <param name="entityInstance">Spawn Entity</param>
         public void Spawn(iEntity entityInstance)
         {
-            // if list doesnt contain entity
             if (!storeEntity.Contains(entityInstance))
             {
                 // Insert entity into scene
                 sceneGraph.addEntity(entityInstance);
-
-                // how would you record entity has been spawned?
-                // store it in a list of entities?
-
-                // record entity has been spawned
                 storeEntity.Add(entityInstance);
+
+                if(entityInstance.UName.Contains("UI"))
+                {
+                    renderMan.addUI(entityInstance);
+                }
+                else
+                {
+                    renderMan.addEntity(entityInstance);
+                }
             }
         }
 
@@ -106,6 +106,7 @@ namespace Game1.Engine.Scene
                 // how do i set entity position to null?
             }
         }
+
 
         /// <summary>
         /// Retrieval of reference to spawned entity
@@ -131,6 +132,7 @@ namespace Game1.Engine.Scene
             }
         }
 
+
         /// <summary>
         /// The unload content ensures all content from the current scene is
         /// released before loading a new scene
@@ -140,19 +142,14 @@ namespace Game1.Engine.Scene
             sceneGraph.removeAll();
         }
 
-        public void Update(GameTime gametime)
+        public void Update()
         {
-            sceneGraph.childNodes.ForEach(entity => entity.Update(gametime));
+            sceneGraph.childNodes.ForEach(entity => entity.Update());
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            //spriteBatch.Draw(Texture, Position, Color.White);
-
-            foreach (iEntity entity in sceneGraph.childNodes)
-            {
-                spriteBatch.Draw(entity.Texture, entity.Position, Color.White);
-            }
+            renderMan.Draw();
         }
     }
 }

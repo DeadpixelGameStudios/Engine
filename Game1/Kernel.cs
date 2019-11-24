@@ -18,7 +18,6 @@ namespace Game1
     public class Kernel : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
         public static int ScreenWidth, ScreenHeight;
 
@@ -27,11 +26,10 @@ namespace Game1
         //Ball ball;
         //List<Paddle> paddle = new List<Paddle>();
 
-        iEntityManager entityManager;
-        iSceneManager sceneManager = new SceneManager();
+        iEntityManager entityManager = new EntityManager();
+        iSceneManager sceneManager;
         KeyboardInput inputMan = new KeyboardInput();
         MouseInput mouseInput = new MouseInput();
-        
 
         //Look at this - he made an engine using mono game where u can drag drop stuff. engine got ui
         // https://github.com/Memorix101/MonoGame_ComponentSystem
@@ -42,11 +40,9 @@ namespace Game1
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content/Resources";
-
+            
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1600;
-
-            entityManager = new EntityManager(Content);
             
             this.IsMouseVisible = true;
 
@@ -71,6 +67,8 @@ namespace Game1
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
+            sceneManager = new SceneManager(GraphicsDevice);
+
             base.Initialize();
         }
 
@@ -80,13 +78,19 @@ namespace Game1
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            int playerCount = 0;
             foreach (var asset in entityManager.requestLevel("test-level.tmx"))
             {
                 sceneManager.Spawn(asset);
+
+                if (asset.UName.Contains("Player"))
+                {
+                    playerCount++;
+                }
             }
+            
+            string uiSeperator = "Walls/" + playerCount.ToString() + "player";
+            sceneManager.Spawn(entityManager.RequestInstanceAndSetup<UI>(uiSeperator, new Vector2(0, 0)));
 
             sceneManager.LoadResources(Content);
         }
@@ -98,6 +102,7 @@ namespace Game1
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            sceneManager.UnloadContent();
 
         }
 
@@ -114,10 +119,9 @@ namespace Game1
             // TODO: Add your update logic here
 
             
-            sceneManager.Update(gameTime);
+            sceneManager.Update();
             inputMan.Update();
             mouseInput.Update();
-
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -134,22 +138,10 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.PaleTurquoise);
+            GraphicsDevice.Clear(Color.MediumSlateBlue);
 
-            // TODO: Add your drawing code here
+            sceneManager.Draw();
             
-
-            spriteBatch.Begin();
-            //WWspriteBatch.Draw(texture, textureLocn, Color.White);
-
-            sceneManager.Draw(spriteBatch);
-            
-            // look i got this. so instead of saying for each paddle list call draw. do it in linq
-            //https://stackoverflow.com/questions/3198053/generics-call-a-method-on-every-object-in-a-listt
-            //paddle.ForEach(p => p.Draw(spriteBatch));
-
-            spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

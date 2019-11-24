@@ -101,8 +101,6 @@ public class LevelLoader
 
             string asset = node.Attributes["source"].Value;
 
-            Console.WriteLine(asset);
-
             var parser = new XmlDocument();
             parser.Load(asset.Insert(0, LevelPath));
             asset = parser.DocumentElement.Attributes["name"].Value.Insert(0, "Walls/");

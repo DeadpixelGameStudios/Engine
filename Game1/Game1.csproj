@@ -41,9 +41,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\Camera\CameraManager.cs" />
+    <Compile Include="Engine\Camera\Camera.cs" />
+    <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="Wall.cs" />
-    <Compile Include="Ball.cs" />
     <Compile Include="Engine\Entity\Entity.cs" />
     <Compile Include="Engine\Entity\EntityManager.cs" />
     <Compile Include="Engine\Entity\GameEntity.cs" />
@@ -83,6 +86,10 @@
     <Content Include="Content\Resources\paddle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\3player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resources\Walls\4player.png" />
     <Content Include="Content\Resources\Walls\player1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -154,6 +161,9 @@
     <None Include="app.manifest" />
     <None Include="Engine\LevelLoader\Levels\level1.tmx" />
     <None Include="Engine\LevelLoader\Levels\level2.tmx" />
+    <None Include="Engine\LevelLoader\Levels\test-level.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
