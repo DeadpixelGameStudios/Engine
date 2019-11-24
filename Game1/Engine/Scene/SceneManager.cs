@@ -132,6 +132,13 @@ namespace Game1.Engine.Scene
             }
         }
 
+        public List<iEntity> GetAllEntities()
+        {
+
+            return storeEntity;
+
+
+        }
 
         /// <summary>
         /// The unload content ensures all content from the current scene is

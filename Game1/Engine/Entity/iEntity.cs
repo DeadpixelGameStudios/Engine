@@ -22,7 +22,9 @@ namespace Game1.Engine.Entity
         float currentHealth { get; set; }
         float maxHealth { get; set; }
         bool Visible { get; set; }
-
+        bool isColliding { get; set; }
+        iEntity CollidingEntity { get; set; }
+        Rectangle HitBox { get; }
         void Setup(Guid id, string name);
         void Setup(Guid id, string name, string texture, Vector2 position);
         void Update();

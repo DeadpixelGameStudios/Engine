@@ -67,6 +67,7 @@ namespace Game1.Engine.Entity
 
         public Rectangle HitBox
         {
+            
             get
             {
                 return new Rectangle(
@@ -80,7 +81,19 @@ namespace Game1.Engine.Entity
             get;
             set;
         }
+        #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
+        public bool isColliding
+        {
+            get;
+            set;
+        }
 
+        public iEntity CollidingEntity
+        {
+            get;
+            set;
+        }
+        #endregion
         public struct BasicInput
         {
             public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pJump = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)

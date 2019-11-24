@@ -26,8 +26,9 @@ namespace Game1
         //Ball ball;
         //List<Paddle> paddle = new List<Paddle>();
 
-        iEntityManager entityManager = new EntityManager();
+        iEntityManager entityManager;
         iSceneManager sceneManager;
+        iCollisionManager collManager = new CollisionManager();
         KeyboardInput inputMan = new KeyboardInput();
         MouseInput mouseInput = new MouseInput();
 
@@ -119,9 +120,11 @@ namespace Game1
             // TODO: Add your update logic here
 
             
-            sceneManager.Update();
+            sceneManager.Update(gameTime);
+            collManager.CheckCollision(sceneManager.GetAllEntities());
             inputMan.Update();
             mouseInput.Update();
+            
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

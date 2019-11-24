@@ -44,6 +44,10 @@
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
+    <Compile Include="Engine\Collision\CollisionManager.cs" />
+    <Compile Include="Engine\Collision\CollisionMap.cs" />
+    <Compile Include="Engine\Collision\iCollidable.cs" />
+    <Compile Include="Engine\Collision\iCollisionManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Wall.cs" />
@@ -98,7 +102,7 @@
     </Content>
     <Content Include="Content\Resources\Walls\player3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Content> 
     <Content Include="Content\Resources\Walls\player4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

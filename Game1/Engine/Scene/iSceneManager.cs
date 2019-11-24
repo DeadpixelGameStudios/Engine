@@ -64,6 +64,9 @@ namespace Game1.Engine.Scene
         void UnloadContent();
 
         void Update();
+        List<iEntity> GetAllEntities();
+
+        void Update(GameTime gametime);
 
         void Draw();
 
