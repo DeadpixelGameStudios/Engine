@@ -43,6 +43,7 @@ namespace Game1
             playerCount++;
 
             CameraManager.RequestCamera(this);
+            CollisionManager.subCollision(this);
         }
 
         public void input(Keys key)
@@ -51,19 +52,19 @@ namespace Game1
             {
                 if (key == inputKeys.up)
                 {
-                    Velocity = new Vector2(0, (-1 * acceleration));
+                    Velocity = new Vector2(0, -1 * acceleration);
                 }
                 else if (key == inputKeys.down)
                 {
-                    Velocity = new Vector2(0, (acceleration));
+                    Velocity = new Vector2(0, acceleration);
                 }
                 else if (key == inputKeys.left)
                 {
-                    Velocity = new Vector2((-1 * acceleration), 0);
+                    Velocity = new Vector2(-1 * acceleration, 0);
                 }
                 else if (key == inputKeys.right)
                 {
-                    Velocity = new Vector2((acceleration), 0);
+                    Velocity = new Vector2(acceleration , 0);
                 }
 
                 Position += Velocity;
@@ -71,40 +72,37 @@ namespace Game1
         }
         
 
-        public void Update(Vector2 vel)
+        public override void Update()
         {
             #region remove this dirty ass code after prototyping
 
-            if (isColliding == true)
-            {
-                Console.WriteLine(UName + " Colliding with: " + CollidingEntity.UName);
+            Vector2 vel = new Vector2(0,0);
 
+            if (isColliding)
+            {
                 if (Position.X > CollidingEntity.Position.X)
                 {
-                    vel = new Vector2(1, 0);
+                    vel = new Vector2(4, 0);
                 }
                 else
                 {
-                    vel = new Vector2(-1, 0);
+                    vel = new Vector2(-4, 0);
                 }
 
                 if (Position.Y > CollidingEntity.Position.Y)
                 {
-                    vel = new Vector2(0, 1);
+                    vel = new Vector2(0, 4);
                 }
                 else
                 {
-                    vel = new Vector2(0, -1);
+                    vel = new Vector2(0, -4);
                 }
-                
-
             }
-
-            #endregion
+            isColliding = false;
 
             Position += vel;
 
-           
+            #endregion
 
         }
     }

@@ -29,8 +29,6 @@ namespace Game1.Engine.Render
             
             entityList = new List<iEntity>();
             uiList = new List<iEntity>();
-
-            
         }
 
         public void Init()
@@ -56,7 +54,7 @@ namespace Game1.Engine.Render
             {
                 graphDevice.Viewport = cam.viewPort;
 
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cam.transform);
+                spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, cam.transform);
                     drawEntities(entityList);
                 spriteBatch.End();
             }

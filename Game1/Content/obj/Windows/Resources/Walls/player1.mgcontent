@@ -3,11 +3,11 @@
   <SourceFile>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/player1.png</SourceFile>
   <SourceTime>2019-11-17T12:11:14.2881817+00:00</SourceTime>
   <DestFile>C:/Code/GitHub/Engine/Game1/Content/bin/Windows/Resources/Walls/player1.xnb</DestFile>
-  <DestTime>2019-11-24T17:25:32.9668723+00:00</DestTime>
+  <DestTime>2019-11-24T18:09:11.8213347+00:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
+  <ImporterTime>2015-04-29T18:14:44+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2017-03-01T15:05:36+00:00</ProcessorTime>
+  <ProcessorTime>2015-04-29T18:14:44+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
@@ -26,10 +26,6 @@
   </Parameters>
   <Parameters>
     <Key>ResizeToPowerOfTwo</Key>
-    <Value>False</Value>
-  </Parameters>
-  <Parameters>
-    <Key>MakeSquare</Key>
     <Value>False</Value>
   </Parameters>
   <Parameters>

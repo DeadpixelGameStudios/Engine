@@ -8,8 +8,9 @@ namespace Game1
     public interface iCollisionManager
     {
 
-        void UpdateCollidableList(List<iEntity> pCollidables);
-        void CheckCollision(List<iEntity> pCollidables);
+        void UpdateCollidableList(List<iEntity> entList);
+        void addCollidables(List<iEntity> entList);
+        void CheckCollision();
         void Update();
 
 

@@ -168,3 +168,8 @@ F:\University\Games\Engine\Game1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 F:\University\Games\Engine\Game1\bin\Windows\x86\Debug\SharpDX.XInput.xml
 F:\University\Games\Engine\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 F:\University\Games\Engine\Game1\obj\x86\Debug\Game1.csproj.CopyComplete
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3player.png
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\2player.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3player.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\4player.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\LevelLoader\Levels\test-level.tmx

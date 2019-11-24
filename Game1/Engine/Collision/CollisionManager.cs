@@ -13,7 +13,7 @@ namespace Game1
         #region SHIT COLLISION TO BE DELETED WHEN EVENTS ARE IN
 
         List<iEntity> Collidables = new List<iEntity>();
-
+        public static List<iEntity> subList = new List<iEntity>();
         
 
         public void UpdateCollidableList(List<iEntity> pCollidables)
@@ -30,50 +30,45 @@ namespace Game1
              
         }
 
-        public void CheckCollision(List<iEntity> pCollidables)
+        public void addCollidables(List<iEntity> entList)
         {
-            UpdateCollidableList(pCollidables);
-            if (pCollidables.Count > 1)
-            {
-                checkCollidables(pCollidables);
-
-            }
-           
-
-
-
+            UpdateCollidableList(entList);
         }
 
-        public void checkCollidables(List<iEntity> pEntityList)
+        public void CheckCollision()
         {
+            checkCollidables();
+        }
 
-            iEntity ColidedEntity = null;
+        public static void subCollision(iEntity ent)
+        {
+            subList.Add(ent);
+        }
 
-            for (int i = 0; i < pEntityList.Count; i++)
+        private void checkCollidables()
+        {
+            foreach (var ent1 in subList)
             {
-                for (int k = 0; k < pEntityList.Count; k++)
+                foreach (var ent2 in Collidables)
                 {
-                    if (pEntityList[i].HitBox.Intersects(pEntityList[k].HitBox))
+                    if(ent1.UName != ent2.UName)
                     {
-                        pEntityList[i].isColliding = true;
-                        pEntityList[k].isColliding = true;
-
-                        ColidedEntity = pEntityList[k];
-                        pEntityList[i].CollidingEntity = ColidedEntity;
-                    }
-                    else
-                    {
-                        pEntityList[i].isColliding = false;
-
-
+                        if (ent1.HitBox.Intersects(ent2.HitBox))
+                        {
+                            ent1.isColliding = true;
+                            iEntity ColidedEntity = ent2;
+                            ent1.CollidingEntity = ColidedEntity;
+                        }
                     }
                 }
             }
 
         }
+
+
         public void Update()
         {
-
+            CheckCollision();
         }
         #endregion  
     }
