@@ -63,6 +63,8 @@ namespace Game1.Engine.Scene
         /// </summary>
         void UnloadContent();
 
+        List<iEntity> GetAllEntities();
+
         void Update(GameTime gametime);
 
         void Draw(SpriteBatch spriteBatch);

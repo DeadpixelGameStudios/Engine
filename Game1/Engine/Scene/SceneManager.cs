@@ -65,6 +65,8 @@ namespace Game1.Engine.Scene
             //(some of) the associated resources
 
             sceneGraph.childNodes.ForEach(e => e.Texture = Content.Load<Texture2D>(e.Texture.Name));
+
+            
         }
 
         /// <summary>
@@ -129,6 +131,14 @@ namespace Game1.Engine.Scene
             {
                 return null;
             }
+        }
+
+        public List<iEntity> GetAllEntities()
+        {
+
+            return storeEntity;
+
+
         }
 
         /// <summary>
