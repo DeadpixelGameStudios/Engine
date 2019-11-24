@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    class Wall : GameEntity
+    class Wall : GameEntity, iCollidable
     {
         public Wall()
         {

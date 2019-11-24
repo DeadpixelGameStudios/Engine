@@ -29,6 +29,7 @@ namespace Game1
 
         iEntityManager entityManager;
         iSceneManager sceneManager = new SceneManager();
+        iCollisionManager collManager = new CollisionManager();
         KeyboardInput inputMan = new KeyboardInput();
         MouseInput mouseInput = new MouseInput();
         
@@ -115,9 +116,10 @@ namespace Game1
 
             
             sceneManager.Update(gameTime);
+            collManager.CheckCollision(sceneManager.GetAllEntities());
             inputMan.Update();
             mouseInput.Update();
-
+            
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

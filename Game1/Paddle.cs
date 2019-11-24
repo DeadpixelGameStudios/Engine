@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    class Paddle : GameEntity, IKeyboardInputObserver, IMouseInputObserver
+    class Paddle : GameEntity, IKeyboardInputObserver, IMouseInputObserver, iCollidable
     {
         private float playerAcceleration = 5f;
         private BasicInput inputKeys;

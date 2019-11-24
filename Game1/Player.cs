@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    class Player : GameEntity, IKeyboardInputObserver
+    class Player : GameEntity, IKeyboardInputObserver, iCollidable
     {
 
         private List<BasicInput> inputOptions = new List<BasicInput> { new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D), new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right),
@@ -62,7 +62,39 @@ namespace Game1
 
         public void Update(Vector2 vel)
         {
+            #region remove this dirty ass code after prototyping
+
+            if (isColliding == true)
+            {
+                Console.WriteLine(UName + " Colliding with: " + CollidingEntity.UName);
+
+                if (Position.X > CollidingEntity.Position.X)
+                {
+                    vel = new Vector2(1, 0);
+                }
+                else
+                {
+                    vel = new Vector2(-1, 0);
+                }
+
+                if (Position.Y > CollidingEntity.Position.Y)
+                {
+                    vel = new Vector2(0, 1);
+                }
+                else
+                {
+                    vel = new Vector2(0, -1);
+                }
+                
+
+            }
+
+            #endregion
+
             Position += vel;
+
+           
+
         }
     }
 }
