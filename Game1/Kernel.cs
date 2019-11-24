@@ -26,7 +26,7 @@ namespace Game1
         //Ball ball;
         //List<Paddle> paddle = new List<Paddle>();
 
-        iEntityManager entityManager;
+        iEntityManager entityManager = new EntityManager();
         iSceneManager sceneManager;
         iCollisionManager collManager = new CollisionManager();
         KeyboardInput inputMan = new KeyboardInput();
@@ -93,6 +93,8 @@ namespace Game1
             string uiSeperator = "Walls/" + playerCount.ToString() + "player";
             sceneManager.Spawn(entityManager.RequestInstanceAndSetup<UI>(uiSeperator, new Vector2(0, 0)));
 
+            collManager.addCollidables(sceneManager.GetAllEntities());
+
             sceneManager.LoadResources(Content);
         }
 
@@ -120,8 +122,8 @@ namespace Game1
             // TODO: Add your update logic here
 
             
-            sceneManager.Update(gameTime);
-            collManager.CheckCollision(sceneManager.GetAllEntities());
+            sceneManager.Update();
+            collManager.Update();
             inputMan.Update();
             mouseInput.Update();
             
