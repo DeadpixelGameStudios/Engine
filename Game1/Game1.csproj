@@ -41,6 +41,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\Collision\CollisionManager.cs" />
+    <Compile Include="Engine\Collision\CollisionMap.cs" />
+    <Compile Include="Engine\Collision\iCollidable.cs" />
+    <Compile Include="Engine\Collision\iCollisionManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Ball.cs" />

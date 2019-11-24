@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Code/GitHub/Engine/Game1/Content/Resources/paddle.png</SourceFile>
-  <SourceTime>2019-09-23T17:50:36.1129335+01:00</SourceTime>
-  <DestFile>C:/Code/GitHub/Engine/Game1/Content/bin/Windows/Resources/paddle.xnb</DestFile>
-  <DestTime>2019-11-17T11:27:41.5853191+00:00</DestTime>
+  <SourceFile>F:/University/Games/Engine/Game1/Content/Resources/paddle.png</SourceFile>
+  <SourceTime>2019-11-24T15:25:50.6519904+00:00</SourceTime>
+  <DestFile>F:/University/Games/Engine/Game1/Content/bin/Windows/Resources/paddle.xnb</DestFile>
+  <DestTime>2019-11-24T15:29:16.3908471+00:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2015-04-29T18:14:44+01:00</ImporterTime>
+  <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2015-04-29T18:14:44+01:00</ProcessorTime>
+  <ProcessorTime>2017-03-01T15:05:36+00:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
@@ -26,6 +26,10 @@
   </Parameters>
   <Parameters>
     <Key>ResizeToPowerOfTwo</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>MakeSquare</Key>
     <Value>False</Value>
   </Parameters>
   <Parameters>
