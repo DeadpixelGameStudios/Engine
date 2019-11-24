@@ -7,7 +7,7 @@ using System.Xml;
 
 public class LevelLoader
 {
-    
+
     public struct LevelAsset
     {
         public LevelAsset(Vector2 pos, AssetInfo inf)
@@ -27,7 +27,7 @@ public class LevelLoader
             texture = tex;
             type = ty;
         }
-        
+
         public string texture;
         public string type;
     }
@@ -51,32 +51,40 @@ public class LevelLoader
     //Parses level file and creates a list of assets to be added
     private List<LevelAsset> parseLevel(string level)
     {
-        var parser = new XmlDocument();
+        //var parser = new XmlDocument();
+        XmlDocument parser = new XmlDocument();
         parser.Load(level.Insert(0, LevelPath));
 
-        
-        var assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
-        
-        var tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);
-        var tileWidth = int.Parse(parser.DocumentElement.Attributes["tilewidth"].Value);
+
+        //var assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
+        Dictionary<int, AssetInfo> assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
 
 
-        var levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
+        //var tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);
+        //var tileWidth = int.Parse(parser.DocumentElement.Attributes["tilewidth"].Value);
+        int tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);
+        int tileWidth = int.Parse(parser.DocumentElement.Attributes["tilewidth"].Value);
+
+        //var levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
+        string levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
         string[] lines = levelData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
         List<LevelAsset> levelAssetList = new List<LevelAsset>();
 
-        uint rowNumber = 0;
-        foreach (var line in lines)
+        int rowNumber = 0;
+        //var line in lines
+        foreach (string line in lines)
         {
             if (!string.IsNullOrWhiteSpace(line))
             {
-                var splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
+                //var splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
+                string[] splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
 
-                var columnNumber = 0;
-                foreach(var asset in splitLine)
+                //var columnNumber = 0;
+                int columnNumber = 0;
+                foreach (string asset in splitLine)
                 {
-                    if(asset != "0" && !string.IsNullOrWhiteSpace(asset))
+                    if (asset != "0" && !string.IsNullOrWhiteSpace(asset))
                     {
                         levelAssetList.Add(new LevelAsset(new Vector2(columnNumber * tileWidth, rowNumber * tileHeight), assetDictionary[int.Parse(asset)]));
                     }
@@ -88,7 +96,7 @@ public class LevelLoader
 
         return levelAssetList;
     }
-    
+
 
     //Generates dictionairy of corresponding asset file to asset
     private Dictionary<int, AssetInfo> createAssetDictionary(XmlNodeList tileset)
@@ -103,18 +111,22 @@ public class LevelLoader
 
             Console.WriteLine(asset);
 
-            var parser = new XmlDocument();
+            //var parser = new XmlDocument();
+            XmlDocument parser = new XmlDocument();
             parser.Load(asset.Insert(0, LevelPath));
             asset = parser.DocumentElement.Attributes["name"].Value.Insert(0, "Walls/");
 
-            var propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
-            var type = "";
-            if(propertyName == "class")
+            //var propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
+            //var type = "";
+            string propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
+            string type = "";
+            if (propertyName == "class")
             {
                 type = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value;
             }
 
-            var newAsset = new AssetInfo(asset, type);
+            //var newAsset = new AssetInfo(asset, type);
+            AssetInfo newAsset = new AssetInfo(asset, type);
 
             textureDict.Add(uid, newAsset);
         }

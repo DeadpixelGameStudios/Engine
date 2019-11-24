@@ -28,6 +28,19 @@ namespace Game1.Engine.Entity
             set;
         }
 
+        public float Rotation
+        {
+            get;
+            set;
+
+        }
+
+        public Vector2 Origin
+        {
+            get;
+            set;
+        }
+
         public Texture2D Texture
         {
             get;
@@ -75,6 +88,10 @@ namespace Game1.Engine.Entity
             set;
         }
 
+        #endregion
+
+        #region Input structs
+
         public struct BasicInput
         {
             public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pJump = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)
@@ -101,6 +118,35 @@ namespace Game1.Engine.Entity
 
             public List<Keys> allKeys;
 
+        }
+
+        public struct GamePadInput
+        {
+            public Buttons up;
+            public Buttons down;
+            public Buttons left;
+            public Buttons right;
+            public Buttons jump;
+            public Buttons use;
+            public Buttons rotateCW;
+            public Buttons rotateACW;
+
+            public List<Buttons> allButtons;
+
+            public GamePadInput(Buttons pUp = 0, Buttons pDown = 0, Buttons pLeft = 0, Buttons pRight = 0, Buttons pRotateCW = 0, Buttons pRotateACW = 0, Buttons pJump = 0, Buttons pUse = 0)
+            {
+                up = pUp;
+                down = pDown;
+                left = pLeft;
+                right = pRight;
+                jump = pJump;
+                use = pUse;
+                rotateCW = pRotateCW;
+                rotateACW = pRotateACW;
+
+                allButtons = new List<Buttons>(new Buttons[] { up, down, left, right, rotateCW, rotateACW, jump, use });
+                allButtons.RemoveAll((Buttons key) => key == 0);
+            }
         }
 
         #endregion
@@ -143,8 +189,6 @@ namespace Game1.Engine.Entity
             Texture = tex;
             Position = pos;
         }
-
-
 
         /// <summary>
         /// This will distribute it to all other classes 

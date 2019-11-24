@@ -19,6 +19,8 @@ namespace Game1.Engine.Scene
 
         iSceneGraph sceneGraph;
 
+        Vector2 origin;
+
         #endregion
 
         #region Properites
@@ -151,7 +153,10 @@ namespace Game1.Engine.Scene
 
             foreach (iEntity entity in sceneGraph.childNodes)
             {
-                spriteBatch.Draw(entity.Texture, entity.Position, Color.White);
+                origin.X = entity.Texture.Width / 2;
+                origin.Y = entity.Texture.Height / 2;
+
+                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, origin, 1, SpriteEffects.None, 0);
             }
         }
     }

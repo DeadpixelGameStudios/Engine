@@ -5,6 +5,7 @@ using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PS4Mono;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,19 +25,11 @@ namespace Game1
 
         private FrameCounter frameCounter = new FrameCounter();
 
-        //Ball ball;
-        //List<Paddle> paddle = new List<Paddle>();
-
         iEntityManager entityManager;
         iSceneManager sceneManager = new SceneManager();
         KeyboardInput inputMan = new KeyboardInput();
         MouseInput mouseInput = new MouseInput();
-        
-
-        //Look at this - he made an engine using mono game where u can drag drop stuff. engine got ui
-        // https://github.com/Memorix101/MonoGame_ComponentSystem
-
-        // https://www.youtube.com/watch?v=9QYfcJBsy1k
+        ControllerInput controllerMan = new ControllerInput();
 
         public Kernel()
         {
@@ -70,6 +63,8 @@ namespace Game1
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
+
+            //Ps4Input.Initialize(this, 2000);
 
             base.Initialize();
         }
@@ -113,11 +108,12 @@ namespace Game1
 
             // TODO: Add your update logic here
 
-            
             sceneManager.Update(gameTime);
             inputMan.Update();
             mouseInput.Update();
+            controllerMan.Update();
 
+            //Ps4Input.Update();
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -137,16 +133,10 @@ namespace Game1
             GraphicsDevice.Clear(Color.PaleTurquoise);
 
             // TODO: Add your drawing code here
-            
 
             spriteBatch.Begin();
-            //WWspriteBatch.Draw(texture, textureLocn, Color.White);
 
             sceneManager.Draw(spriteBatch);
-            
-            // look i got this. so instead of saying for each paddle list call draw. do it in linq
-            //https://stackoverflow.com/questions/3198053/generics-call-a-method-on-every-object-in-a-listt
-            //paddle.ForEach(p => p.Draw(spriteBatch));
 
             spriteBatch.End();
 

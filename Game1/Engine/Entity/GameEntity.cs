@@ -13,10 +13,10 @@ namespace Game1.Engine.Entity
     /// </summary>
     abstract class GameEntity : Entity
     {
-        public static bool CheckPaddleBallCollistion(Paddle player, Ball ball)
-        {
-            return player.HitBox.Intersects(ball.HitBox);
-        }
+        //public static bool CheckPaddleBallCollistion(Paddle player, Ball ball)
+        //{
+        //    return player.HitBox.Intersects(ball.HitBox);
+        //}
 
         public void Draw(SpriteBatch spritebatch)
         {

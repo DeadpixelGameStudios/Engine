@@ -41,9 +41,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\Input\ControllerInput.cs" />
+    <Compile Include="Engine\Input\iControllerObserver.cs" />
+    <Compile Include="Engine\Input\iControllerObserverable.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Wall.cs" />
-    <Compile Include="Ball.cs" />
     <Compile Include="Engine\Entity\Entity.cs" />
     <Compile Include="Engine\Entity\EntityManager.cs" />
     <Compile Include="Engine\Entity\GameEntity.cs" />
@@ -62,13 +64,15 @@
     <Compile Include="Engine\Scene\SceneGraph.cs" />
     <Compile Include="Engine\Scene\SceneManager.cs" />
     <Compile Include="Kernel.cs" />
-    <Compile Include="Paddle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PS4Mono">
+      <HintPath>Engine\PS4Mono.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />

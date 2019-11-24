@@ -18,11 +18,13 @@ namespace Game1.Engine.Entity
     {
         #region Data Members
 
-        
         /// <summary>
         /// Store list of the entity names
         /// </summary>
         List<String> entityNames;
+
+        private ContentManager contentMan;
+        private LevelLoader levelLoader;
 
         #endregion
 
@@ -34,9 +36,6 @@ namespace Game1.Engine.Entity
         public List<iEntity> storeEntity { get; set; }
 
         #endregion
-
-        private ContentManager contentMan;
-        private LevelLoader levelLoader;
 
         #region Methods
 
@@ -52,7 +51,6 @@ namespace Game1.Engine.Entity
             levelLoader = new LevelLoader();
         }
 
-
         /// <summary>
         /// Request Instance of entity
         /// </summary>
@@ -67,7 +65,6 @@ namespace Game1.Engine.Entity
         {
             return CreateInstanceAndSetup<T>(texture, position);
         }
-
 
         public List<iEntity> requestLevel(string level)
         {
@@ -112,7 +109,6 @@ namespace Game1.Engine.Entity
             return returnList;
         }
 
-
         /// <summary>
         /// Create Instance, this is where it generates a id
         /// and gives its uname
@@ -155,7 +151,6 @@ namespace Game1.Engine.Entity
 
             entity.Setup(id, setEntityUName(entity.GetType().Name), loadedTexture, pos);
         }
-
 
         /// <summary>
         /// Give entity unique name by class and number
