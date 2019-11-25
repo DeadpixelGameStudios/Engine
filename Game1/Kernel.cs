@@ -121,7 +121,7 @@ namespace Game1
             // TODO: Add your update logic here
 
             
-            sceneManager.Update(gameTime);
+            sceneManager.Update();
             inputMan.Update();
             mouseInput.Update();
             controllerMan.Update();

@@ -94,7 +94,11 @@ namespace Game1.Engine.Input
         public void notifyGamePadInput(int playerIndex, Buttons gamePadButtons)
         {
             //m_subList.ForEach(sub => sub.gamePadInput(playerIndex, gamePadButtons));
-            playerDict[playerIndex].gamePadInput(playerIndex, gamePadButtons);
+            if(playerIndex < playerDict.Count)
+            {
+                playerDict[playerIndex].gamePadInput(playerIndex, gamePadButtons);
+            }
+            
         }
     }
 }

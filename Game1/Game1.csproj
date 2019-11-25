@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
+    <Compile Include="Engine\Input\ControllerInput.cs" />
+    <Compile Include="Engine\Input\iControllerObserver.cs" />
+    <Compile Include="Engine\Input\iControllerObserverable.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />
     <Compile Include="Engine\Collision\CollisionMap.cs" />
@@ -105,7 +108,7 @@
     </Content>
     <Content Include="Content\Resources\Walls\player3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content> 
+    </Content>
     <Content Include="Content\Resources\Walls\player4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

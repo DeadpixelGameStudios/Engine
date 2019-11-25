@@ -26,7 +26,7 @@ namespace Game1
         private BasicInput inputKeys;
         private static int playerCount = 0;
 
-        private float acceleration = 5f;
+        private float acceleration = 2f;
         float rotationVel = 3f;
         float linearVel = 4;
 
@@ -140,6 +140,7 @@ namespace Game1
 
         private void update2(Vector2 val)
         {
+            Rotation = val.X;
             // this rotation was testing
             if (val.X > 0)
             {
@@ -153,23 +154,25 @@ namespace Game1
 
         public void gamePadInput(int playerIndex, Buttons gamePadButtons)
         {
+            Vector2 vel = new Vector2(0, 0);
+
             if (inputButtons.allButtons.Contains(gamePadButtons))
             {
                 if (gamePadButtons == Buttons.LeftThumbstickUp)
                 {
-                    Update(new Vector2(0, (-1 * acceleration)));
+                    vel = new Vector2(0, (-1 * acceleration));
                 }
                 else if (gamePadButtons == Buttons.LeftThumbstickDown)
                 {
-                    Update(new Vector2(0, (acceleration)));
+                    vel = new Vector2(0, (acceleration));
                 }
                 else if (gamePadButtons == Buttons.LeftThumbstickLeft)
                 {
-                    Update(new Vector2((-1 * acceleration), 0));
+                    vel = new Vector2((-1 * acceleration), 0);
                 }
                 else if (gamePadButtons == Buttons.LeftThumbstickRight)
                 {
-                    Update(new Vector2((acceleration), 0));
+                    vel = new Vector2((acceleration), 0);
                 }
                 // rotate
                 else if (gamePadButtons == Buttons.RightThumbstickRight)
@@ -186,6 +189,7 @@ namespace Game1
 
                     update2(GamePad.GetState(playerIndex).ThumbSticks.Right);
                 }
+                Position += vel;
             }
         }
     }

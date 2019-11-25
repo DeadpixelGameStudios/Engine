@@ -26,7 +26,7 @@ namespace Game1.Engine.Render
         {
             graphDevice = graph;
             spriteBatch = new SpriteBatch(graphDevice);
-            
+
             entityList = new List<iEntity>();
             uiList = new List<iEntity>();
         }
@@ -46,35 +46,48 @@ namespace Game1.Engine.Render
         {
             uiList.Add(ui);
         }
-        
+
 
         public void Draw()
         {
-            foreach(var cam in cameraMan.Update())
+            foreach (var cam in cameraMan.Update())
             {
                 graphDevice.Viewport = cam.viewPort;
 
                 spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, cam.transform);
-                    drawEntities(entityList);
+                drawEntities(entityList);
                 spriteBatch.End();
             }
 
             graphDevice.Viewport = defaultView;
 
             spriteBatch.Begin();
-                drawEntities(uiList);
+            drawEntities(uiList);
             spriteBatch.End();
-            
+
         }
 
         private void drawEntities(List<iEntity> drawList)
         {
             foreach (var entity in drawList)
             {
-                spriteBatch.Draw(entity.Texture, entity.Position, Color.White);
+                //if (entity.Visible)
+               // {
+                    if (entity.UName.Contains("Player"))
+                    {
+                        spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2((int)entity.Texture.Width / 2, (int)entity.Texture.Height / 2), 1, SpriteEffects.None, 0);
+
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(entity.Texture, entity.Position, Color.White);
+
+                    }
+                //}
+
             }
         }
 
     }
-       
+
 }
