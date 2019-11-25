@@ -32,7 +32,6 @@ namespace Game1.Engine.Input
 
         }
 
-
         public static void Subscribe(IKeyboardInputObserver sub, List<Keys> keys)
         {
             m_subList.Add(sub);
