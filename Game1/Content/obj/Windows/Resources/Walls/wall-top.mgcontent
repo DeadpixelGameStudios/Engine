@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Zaib/Documents/Engine/Game1/Content/Resources/Walls/wall-top.png</SourceFile>
-  <SourceTime>2019-11-24T17:51:22.8802355+00:00</SourceTime>
-  <DestFile>D:/Zaib/Documents/Engine/Game1/Content/bin/Windows/Resources/Walls/wall-top.xnb</DestFile>
-  <DestTime>2019-11-24T17:52:59.0236566+00:00</DestTime>
+  <SourceFile>C:/Users/warc2_16/Documents/GitHub/Engine/Game1/Content/Resources/Walls/wall-top.png</SourceFile>
+  <SourceTime>2019-11-25T15:23:57.0967977+00:00</SourceTime>
+  <DestFile>C:/Users/warc2_16/Documents/GitHub/Engine/Game1/Content/bin/Windows/Resources/Walls/wall-top.xnb</DestFile>
+  <DestTime>2019-11-25T16:17:03.8022135+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

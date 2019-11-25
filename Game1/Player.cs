@@ -47,13 +47,13 @@ namespace Game1
             {
                 try
                 {
-                    controller = inputOptionsController[playerCount];
+                    controller = inputOptionsController[0];
                 }
                 catch
                 {
                     controller = new GamePadInput();
                 }
-                ControllerInput.Subscribe(this, controller.allButtons);
+                ControllerInput.Subscribe(this, controller.allButtons, playerCount);
                 inputButtons = controller;
             }
             else

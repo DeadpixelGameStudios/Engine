@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game1.Engine.Entity;
 using Microsoft.Xna.Framework.Input;
 using PS4Mono;
 
@@ -12,6 +13,8 @@ namespace Game1.Engine.Input
     {
         static List<EntityButton> m_entityButtonList = new List<EntityButton>();
         static List<iControllerObserver> m_subList = new List<iControllerObserver>();
+
+        private static Dictionary<int, iControllerObserver> playerDict = new Dictionary<int, iControllerObserver>();
 
         private struct EntityButton
         {
@@ -38,35 +41,60 @@ namespace Game1.Engine.Input
 
         }
 
-        public static void Subscribe(iControllerObserver sub, List<Buttons> buttons)
+        public static void Subscribe(iControllerObserver sub, List<Buttons> buttons, int playerCOun)
         {
             m_subList.Add(sub);
             m_entityButtonList.Add(new EntityButton(0, buttons));
+            playerDict.Add(playerCOun, sub);
         }
 
         public void Update()
         {
-            for (int i = 0; i < controllerConnected; i++)
+            for(var i = 0; i < 5; ++i)
             {
                 GamePadState gamePadState = GamePad.GetState(controllerConnected - 1);
+                Console.WriteLine(gamePadState.IsConnected + " " + i);
+            }
 
-                foreach (EntityButton sub in m_entityButtonList)
+            for (int i = 0; i < 4; i++)
+            {
+                //GamePadState gamePadState = GamePad.GetState(controllerConnected - 1);
+
+                if (GamePad.GetCapabilities(i).IsConnected)
                 {
-                    foreach (Buttons button in sub.buttons)
+                    GamePadState gamePadState = GamePad.GetState(i);
+
+                    foreach (EntityButton sub in m_entityButtonList)
                     {
-                        if (gamePadState.IsButtonDown(button)) //Ps4Input.Ps4CheckAsnyc(controllerConnected - 1, button))
+                        foreach (Buttons button in sub.buttons)
                         {
-                            notifyGamePadInput(controllerConnected - 1, button);
+                            if (gamePadState.IsButtonDown(button)) //Ps4Input.Ps4CheckAsnyc(controllerConnected - 1, button))
+                            {
+                                
+                                notifyGamePadInput(i, button);
+                            }
                         }
                     }
                 }
+
+                //foreach (EntityButton sub in m_entityButtonList)
+                //{
+                //    foreach (Buttons button in sub.buttons)
+                //    {
+                //        if (gamePadState.IsButtonDown(button)) //Ps4Input.Ps4CheckAsnyc(controllerConnected - 1, button))
+                //        {
+                //            notifyGamePadInput(controllerConnected - 1, button);
+                //        }
+                //    }
+                //}
             }
 
         }
 
         public void notifyGamePadInput(int playerIndex, Buttons gamePadButtons)
         {
-            m_subList.ForEach(sub => sub.gamePadInput(playerIndex, gamePadButtons));
+            //m_subList.ForEach(sub => sub.gamePadInput(playerIndex, gamePadButtons));
+            playerDict[playerIndex].gamePadInput(playerIndex, gamePadButtons);
         }
     }
 }
