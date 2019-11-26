@@ -21,10 +21,9 @@ namespace Game1
 
         public static int ScreenWidth, ScreenHeight;
 
-        private FrameCounter frameCounter = new FrameCounter();
+        //private FrameCounter frameCounter = new FrameCounter();
 
-        //Ball ball;
-        //List<Paddle> paddle = new List<Paddle>();
+        bool paused = false;
 
         iEntityManager entityManager = new EntityManager();
         iSceneManager sceneManager;
@@ -109,6 +108,8 @@ namespace Game1
 
         }
 
+        
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -117,16 +118,25 @@ namespace Game1
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                paused = !paused;
+            }
+                
 
             // TODO: Add your update logic here
 
-            
-            sceneManager.Update();
-            collManager.Update();
-            inputMan.Update();
-            mouseInput.Update();
-            
+            if(!paused)
+            {
+                sceneManager.Update();
+                collManager.Update();
+                inputMan.Update();
+                mouseInput.Update();
+            }
+
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -146,7 +156,7 @@ namespace Game1
             GraphicsDevice.Clear(Color.MediumSlateBlue);
 
             sceneManager.Draw();
-            
+
             base.Draw(gameTime);
         }
     }

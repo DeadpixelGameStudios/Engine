@@ -32,7 +32,8 @@ public class LevelLoader
         public string type;
     }
 
-    private const string LevelPath = "../../../../Engine/LevelLoader/Levels/";
+    private const string LevelPath = "Engine/LevelLoader/Levels/";
+
 
     //Class for loading levels
     //Create Map file in Tiled (.tmx) and load in assets found in \Engine\LevelLoader\Levels\Tiles
@@ -51,36 +52,28 @@ public class LevelLoader
     //Parses level file and creates a list of assets to be added
     private List<LevelAsset> parseLevel(string level)
     {
-        //var parser = new XmlDocument();
         XmlDocument parser = new XmlDocument();
         parser.Load(level.Insert(0, LevelPath));
 
 
-        //var assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
         Dictionary<int, AssetInfo> assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
 
 
-        //var tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);
-        //var tileWidth = int.Parse(parser.DocumentElement.Attributes["tilewidth"].Value);
         int tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);
         int tileWidth = int.Parse(parser.DocumentElement.Attributes["tilewidth"].Value);
 
-        //var levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
         string levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
         string[] lines = levelData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
         List<LevelAsset> levelAssetList = new List<LevelAsset>();
 
         int rowNumber = 0;
-        //var line in lines
         foreach (string line in lines)
         {
             if (!string.IsNullOrWhiteSpace(line))
             {
-                //var splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
                 string[] splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
 
-                //var columnNumber = 0;
                 int columnNumber = 0;
                 foreach (string asset in splitLine)
                 {
@@ -109,15 +102,10 @@ public class LevelLoader
 
             string asset = node.Attributes["source"].Value;
 
-            Console.WriteLine(asset);
-
-            //var parser = new XmlDocument();
             XmlDocument parser = new XmlDocument();
             parser.Load(asset.Insert(0, LevelPath));
             asset = parser.DocumentElement.Attributes["name"].Value.Insert(0, "Walls/");
 
-            //var propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
-            //var type = "";
             string propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
             string type = "";
             if (propertyName == "class")
@@ -125,7 +113,6 @@ public class LevelLoader
                 type = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value;
             }
 
-            //var newAsset = new AssetInfo(asset, type);
             AssetInfo newAsset = new AssetInfo(asset, type);
 
             textureDict.Add(uid, newAsset);

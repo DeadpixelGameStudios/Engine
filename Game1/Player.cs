@@ -45,6 +45,7 @@ namespace Game1
             CameraManager.RequestCamera(this);
             CollisionManager.subCollision(this);
         }
+        
 
         public void input(Keys key)
         {
