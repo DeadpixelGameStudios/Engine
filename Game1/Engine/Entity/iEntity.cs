@@ -27,6 +27,10 @@ namespace Game1.Engine.Entity
         bool isColliding { get; set; }
         iEntity CollidingEntity { get; set; }
         Rectangle HitBox { get; }
+        float DrawPriority { get; set; }
+
+        event EventHandler<EntityRequestArgs> EntityRequested;
+
         void Setup(Guid id, string name);
         void Setup(Guid id, string name, string texture, Vector2 position);
         void Update();

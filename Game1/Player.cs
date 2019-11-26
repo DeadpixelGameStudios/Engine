@@ -12,53 +12,47 @@ using PS4Mono;
 
 namespace Game1
 {
+    
+
     class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable
     {
+
         #region Data Members
 
         private List<BasicInput> inputOptions = new List<BasicInput>
         {
-            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D),
-            new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right),
-            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L),
-            new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6)
+            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.None, Keys.E),
+            new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.None, Keys.End),
+            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
+            new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6, Keys.None, Keys.NumPad9)
         };
+
         private BasicInput inputKeys;
         private static int playerCount = 0;
 
         private float acceleration = 2f;
-        float rotationVel = 3f;
-        float linearVel = 4;
 
-        List<GamePadInput> inputOptionsController = new List<GamePadInput>
-        {
-            new GamePadInput(Buttons.LeftThumbstickUp, Buttons.LeftThumbstickDown, Buttons.LeftThumbstickLeft, Buttons.LeftThumbstickRight, Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft)
-        };
+        private uint abilityTimer = 0;
+        private bool abilityTimeout = false;
 
-        GamePadInput inputButtons;
+        private bool sprintActive = false;
+
+        GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
         #endregion
 
+        
         public Player()
         {
-            BasicInput keys;
-            GamePadInput controller;
-
-            if (GamePad.GetCapabilities(playerCount).IsConnected)//Ps4Input.Ps4Count > playerCount)
+            
+            if (GamePad.GetCapabilities(playerCount).IsConnected)
             {
-                try
-                {
-                    controller = inputOptionsController[0];
-                }
-                catch
-                {
-                    controller = new GamePadInput();
-                }
-                ControllerInput.Subscribe(this, controller.allButtons, playerCount);
-                inputButtons = controller;
+                ControllerInput.Subscribe(this, inputButtons.allButtons, playerCount);
             }
             else
             {
+                BasicInput keys;
+
                 try
                 {
                     keys = inputOptions[playerCount];
@@ -70,15 +64,18 @@ namespace Game1
 
                 KeyboardInput.Subscribe(this, keys.allKeys);
                 inputKeys = keys;
+                acceleration = 8f;
             }
         
             playerCount++;
 
             CameraManager.RequestCamera(this);
             CollisionManager.subCollision(this);
-        }
-        
 
+            DrawPriority = 1f;
+        }
+
+        
         public void input(Keys key)
         {
             if (inputKeys.allKeys.Contains(key))
@@ -99,9 +96,19 @@ namespace Game1
                 {
                     Velocity = new Vector2(acceleration , 0);
                 }
+                else if(key == inputKeys.use)
+                {
+                    if(!abilityTimeout)
+                    {
+                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                        abilityTimeout = true;
+                    }
+                }
 
                 Position += Velocity;
             }
+
+            Velocity = new Vector2(0, 0);
         }
         
 
@@ -137,9 +144,21 @@ namespace Game1
 
             #endregion
 
+
+            if(abilityTimeout)
+            {
+                abilityTimer++;
+            }
+
+            if(abilityTimer >= 300)
+            {
+                abilityTimeout = false;
+                abilityTimer = 0;
+            }
+
         }
 
-        private void update2(Vector2 val)
+        private void Rotate(Vector2 val)
         {
             Rotation = val.X;
             // this rotation was testing
@@ -153,45 +172,45 @@ namespace Game1
             }
         }
 
-        public void gamePadInput(int playerIndex, Buttons gamePadButtons)
+        public void gamePadInput(Buttons gamePadButtons, GamePadThumbSticks thumbSticks)
         {
-            Vector2 vel = new Vector2(0, 0);
+            var leftThumbX = thumbSticks.Left.X * acceleration;
+            var leftThumbY = thumbSticks.Left.Y * -1 * acceleration;
 
-            if (inputButtons.allButtons.Contains(gamePadButtons))
+            Vector2 vel = new Vector2(leftThumbX, leftThumbY);
+            
+            if(sprintActive)
             {
-                if (gamePadButtons == Buttons.LeftThumbstickUp)
-                {
-                    vel = new Vector2(0, (-1 * acceleration));
-                }
-                else if (gamePadButtons == Buttons.LeftThumbstickDown)
-                {
-                    vel = new Vector2(0, (acceleration));
-                }
-                else if (gamePadButtons == Buttons.LeftThumbstickLeft)
-                {
-                    vel = new Vector2((-1 * acceleration), 0);
-                }
-                else if (gamePadButtons == Buttons.LeftThumbstickRight)
-                {
-                    vel = new Vector2((acceleration), 0);
-                }
-                // rotate
-                else if (gamePadButtons == Buttons.RightThumbstickRight)
-                {
-                    //Rotation -= MathHelper.ToRadians(rotationVel);
-                    //Vector2 direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
-
-                    update2(GamePad.GetState(playerIndex).ThumbSticks.Right);
-                }
-                else if (gamePadButtons == Buttons.RightThumbstickLeft)
-                {
-                    //Rotation += MathHelper.ToRadians(rotationVel);
-                    //Vector2 direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
-
-                    update2(GamePad.GetState(playerIndex).ThumbSticks.Right);
-                }
-                Position += vel;
+                vel = vel * 3;
             }
+
+            
+            if (gamePadButtons == inputButtons.rotateCW)
+            {
+                //Rotate(thumbSticks.Right);
+            }
+            else if (gamePadButtons == inputButtons.rotateACW)
+            {
+                //Rotate(thumbSticks.Right);
+            }
+            else if(gamePadButtons == inputButtons.sprint)
+            {
+                sprintActive = true;
+            }
+            else if(gamePadButtons == inputButtons.use)
+            {
+                if (!abilityTimeout)
+                {
+                    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                    abilityTimeout = true;
+                }
+            }
+            else
+            {
+                sprintActive = false;
+            }
+
+            Position += vel;
         }
     }
 }

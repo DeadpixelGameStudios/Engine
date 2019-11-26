@@ -9,11 +9,20 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game1.Engine.Entity
 {
+
     /// <summary>
     /// Abstraction for any game entity
     /// </summary>
     abstract class Entity : iEntity
     {
+        public event EventHandler<EntityRequestArgs> EntityRequested;
+
+        public virtual void OnEntityRequested(Vector2 pos, string texture, Type pType)
+        {
+            EntityRequested?.Invoke(this, new EntityRequestArgs() { Position = pos, Texture = texture, type = pType });
+        }
+
+
         #region Properties
 
         public Vector2 Position
@@ -33,7 +42,7 @@ namespace Game1.Engine.Entity
             get;
             set;
 
-        }
+        } = 0f;
 
         public Vector2 Origin
         {
@@ -94,6 +103,13 @@ namespace Game1.Engine.Entity
             get;
             set;
         }
+
+        public float DrawPriority
+        {
+            get;
+            set;
+        } = 0f;
+
         #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
         public bool isColliding
         {
@@ -113,17 +129,17 @@ namespace Game1.Engine.Entity
 
         public struct BasicInput
         {
-            public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pJump = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)
+            public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pSprint = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)
             {
                 up = pUp;
                 down = pDown;
                 left = pLeft;
                 right = pRight;
-                jump = pJump;
+                sprint = pSprint;
                 use = pUse;
                 rotate = pRotate;
 
-                allKeys = new List<Keys>(new Keys[] { up, down, left, right, jump, use, rotate });
+                allKeys = new List<Keys>(new Keys[] { up, down, left, right, sprint, use, rotate });
                 allKeys.RemoveAll((Keys key) => key == Keys.None);
             }
 
@@ -131,7 +147,7 @@ namespace Game1.Engine.Entity
             public Keys down;
             public Keys left;
             public Keys right;
-            public Keys jump;
+            public Keys sprint;
             public Keys use;
             public Keys rotate;
 
@@ -141,29 +157,21 @@ namespace Game1.Engine.Entity
 
         public struct GamePadInput
         {
-            public Buttons up;
-            public Buttons down;
-            public Buttons left;
-            public Buttons right;
-            public Buttons jump;
-            public Buttons use;
             public Buttons rotateCW;
             public Buttons rotateACW;
+            public Buttons sprint;
+            public Buttons use;
 
             public List<Buttons> allButtons;
 
-            public GamePadInput(Buttons pUp = 0, Buttons pDown = 0, Buttons pLeft = 0, Buttons pRight = 0, Buttons pRotateCW = 0, Buttons pRotateACW = 0, Buttons pJump = 0, Buttons pUse = 0)
+            public GamePadInput(Buttons pRotateCW = 0, Buttons pRotateACW = 0, Buttons pUse = 0, Buttons pSprint = 0)
             {
-                up = pUp;
-                down = pDown;
-                left = pLeft;
-                right = pRight;
-                jump = pJump;
-                use = pUse;
                 rotateCW = pRotateCW;
                 rotateACW = pRotateACW;
+                use = pUse;
+                sprint = pSprint;
 
-                allButtons = new List<Buttons>(new Buttons[] { up, down, left, right, rotateCW, rotateACW, jump, use });
+                allButtons = new List<Buttons>(new Buttons[] { rotateCW, rotateACW, use, sprint, });
                 allButtons.RemoveAll((Buttons key) => key == 0);
             }
         }

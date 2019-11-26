@@ -54,7 +54,7 @@ namespace Game1.Engine.Render
             {
                 graphDevice.Viewport = cam.viewPort;
 
-                spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, cam.transform);
+                spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, cam.transform);
                 drawEntities(entityList);
                 spriteBatch.End();
             }
@@ -71,20 +71,7 @@ namespace Game1.Engine.Render
         {
             foreach (var entity in drawList)
             {
-                //if (entity.Visible)
-               // {
-                    if (entity.UName.Contains("Player"))
-                    {
-                        spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2((int)entity.Texture.Width / 2, (int)entity.Texture.Height / 2), 1, SpriteEffects.None, 0);
-
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(entity.Texture, entity.Position, Color.White);
-
-                    }
-                //}
-
+                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
             }
         }
 

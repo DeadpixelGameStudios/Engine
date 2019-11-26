@@ -4,10 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Game1.Engine.Entity;
+using Game1.Engine.Managers;
 
 namespace Game1
 {
-    public class CollisionManager: iCollisionManager
+    public class CollisionManager: iCollisionManager, iManager
     {
 
         #region SHIT COLLISION TO BE DELETED WHEN EVENTS ARE IN
@@ -33,6 +34,14 @@ namespace Game1
         public void addCollidables(List<iEntity> entList)
         {
             UpdateCollidableList(entList);
+        }
+
+        public void addCollidable(iEntity ent)
+        {
+            if(ent is iCollidable)
+            {
+                Collidables.Add(ent);
+            }
         }
 
         public void CheckCollision()

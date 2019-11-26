@@ -43,9 +43,13 @@
   <ItemGroup>
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
-    <Compile Include="Engine\Input\ControllerInput.cs" />
-    <Compile Include="Engine\Input\iControllerObserver.cs" />
-    <Compile Include="Engine\Input\iControllerObserverable.cs" />
+    <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
+    <Compile Include="Engine\Input\Controller\ControllerInput.cs" />
+    <Compile Include="Engine\Input\Controller\iControllerObserver.cs" />
+    <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
+    <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
+    <Compile Include="Engine\Level\LevelManager.cs" />
+    <Compile Include="Engine\Managers\iManager.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />
     <Compile Include="Engine\Collision\CollisionMap.cs" />
@@ -59,13 +63,12 @@
     <Compile Include="Engine\Entity\GameEntity.cs" />
     <Compile Include="Engine\Entity\iEntity.cs" />
     <Compile Include="Engine\Entity\iEntityManager.cs" />
-    <Compile Include="Engine\Input\IMouseInputObserver.cs" />
-    <Compile Include="Engine\Input\IKeyboardInputObserver.cs" />
-    <Compile Include="Engine\Input\IMouseInputObserverable.cs" />
-    <Compile Include="Engine\Input\IKeyboardInputObserverable.cs" />
-    <Compile Include="Engine\Input\MouseInput.cs" />
-    <Compile Include="Engine\Input\KeyboardInput.cs" />
-    <Compile Include="Engine\LevelLoader\LevelLoader.cs" />
+    <Compile Include="Engine\Input\Mouse\IMouseInputObserver.cs" />
+    <Compile Include="Engine\Input\Keyboard\IKeyboardInputObserver.cs" />
+    <Compile Include="Engine\Input\Mouse\IMouseInputObserverable.cs" />
+    <Compile Include="Engine\Input\Keyboard\IKeyboardInputObserverable.cs" />
+    <Compile Include="Engine\Input\Mouse\MouseInput.cs" />
+    <Compile Include="Engine\Level\LevelLoader.cs" />
     <Compile Include="Engine\Misc\FPSCounter.cs" />
     <Compile Include="Engine\Scene\iSceneGraph.cs" />
     <Compile Include="Engine\Scene\iSceneManager.cs" />
@@ -165,71 +168,71 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Engine\LevelLoader\Levels\level1.tmx" />
-    <None Include="Engine\LevelLoader\Levels\level2.tmx" />
-    <None Include="Engine\LevelLoader\Levels\test-level.tmx">
+    <None Include="Engine\Level\LevelFiles\level1.tmx" />
+    <None Include="Engine\Level\LevelFiles\level2.tmx" />
+    <None Include="Engine\Level\LevelFiles\test-level.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Engine\LevelLoader\Levels\Tiles\player1.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\player1.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\player2.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\player2.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\player3.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\player3.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\player4.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\player4.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-bottom.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-bottom.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-closed.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-closed.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-corner-bottom-left.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-bottom-left.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-corner-bottom-right.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-bottom-right.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-corner-top-left.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-top-left.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-corner-top-right.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-top-right.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-left.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-left.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-middle.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-middle.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-open-bottom.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-bottom.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-open-left.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-left.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-open-right.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-right.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-open-top.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-top.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-right.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-right.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-top.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-top.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-tube-horizontal.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-tube-horizontal.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Engine\LevelLoader\Levels\Tiles\wall-tube-vertical.tsx">
+    <None Include="Engine\Level\LevelFiles\Tiles\wall-tube-vertical.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
