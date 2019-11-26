@@ -15,14 +15,6 @@ namespace Game1.Engine.Scene
     /// </summary>
     interface iSceneManager
     {
-        // Add something for input cause scene can have input would need
-        // to ensure the right scene has control over the right input?
-
-        // camera?
-
-        // if scene active? or nah
-        //? bool Active { get; set; }
-
         /// <summary>
         /// Record entity has been spawned
         /// </summary>
@@ -54,8 +46,7 @@ namespace Game1.Engine.Scene
         /// <summary>
         /// Load Resources
         /// </summary>
-        /// <param name="conManager">content manager</param>
-        void LoadResources(ContentManager conManager);
+        void LoadResources();
 
         /// <summary>
         /// The unload content ensures all content from the current scene is
@@ -65,9 +56,9 @@ namespace Game1.Engine.Scene
 
         void Update();
 
-        List<iEntity> GetAllEntities();
-
         void Draw();
+
+        void loadLevel(string level);
 
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Game1.Engine.Entity;
+using Game1.Engine.Input;
+using Game1.Engine.Managers;
 using Game1.Engine.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -16,13 +18,15 @@ namespace Game1.Engine.Scene
     /// </summary>
     class SceneManager : iSceneManager
     {
+
         #region Data Members
 
-        iSceneGraph sceneGraph;
-
-        Vector2 origin;
+        private iSceneGraph sceneGraph;
+        private Renderer renderMan;
+        private ContentManager contentMan;
 
         #endregion
+        
 
         #region Properites
 
@@ -30,16 +34,27 @@ namespace Game1.Engine.Scene
 
         #endregion
 
-        private Renderer renderMan;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public SceneManager(GraphicsDevice graph)
+        #region Managers
+        private iCollisionManager collManager = new CollisionManager();
+        private iEntityManager entityManager = new EntityManager();
+
+        private iManager inputMan = new KeyboardInput();
+        private iManager mouseInput = new MouseInput();
+        private iManager controllerMan = new ControllerInput();
+
+        private List<iManager> managerList;
+        #endregion
+
+
+        public SceneManager(GraphicsDevice graph, ContentManager content)
         {
             renderMan = new Renderer(graph);
+            contentMan = content;
+
             Initialize();
         }
+
 
         /// <summary>
         /// Setup of initial gameplay state
@@ -48,12 +63,40 @@ namespace Game1.Engine.Scene
         {
             sceneGraph = new SceneGraph();
             storeEntity = new List<iEntity>();
+
+            managerList = new List<iManager>()
+            {
+                inputMan,
+                mouseInput,
+                controllerMan,
+                (iManager)collManager
+            };
         }
+
+
+        public void loadLevel(string level)
+        {
+            int playerCount = 0;
+            foreach (var asset in entityManager.requestLevel(level))
+            {
+                Spawn(asset);
+
+                if (asset.UName.Contains("Player"))
+                {
+                    playerCount++;
+                }
+            }
+
+            string uiSeperator = "Walls/" + playerCount.ToString() + "player";
+            Spawn(entityManager.RequestInstanceAndSetup<UI>(uiSeperator, new Vector2(0, 0)));
+            
+        }
+
 
         /// <summary>
         /// Association of resources to entity
         /// </summary>
-        public void LoadResources(ContentManager Content)
+        public void LoadResources()
         {
             // Not sure how to do
             //Association should be performed through a method (e.g. LoadResources())
@@ -61,10 +104,17 @@ namespace Game1.Engine.Scene
             //• It is recommended to associate resources before other initialisation operations, which might require
             //(some of) the associated resources
 
-            sceneGraph.childNodes.ForEach(e => e.Texture = Content.Load<Texture2D>(e.TextureString));
+            sceneGraph.childNodes.ForEach(e => e.Texture = contentMan.Load<Texture2D>(e.TextureString));
 
             renderMan.Init();
         }
+
+
+        private void LoadResource(iEntity ent)
+        {
+            ent.Texture = contentMan.Load<Texture2D>(ent.TextureString);
+        }
+
 
         /// <summary>
         /// Spawn entity into scene
@@ -77,17 +127,28 @@ namespace Game1.Engine.Scene
                 // Insert entity into scene
                 sceneGraph.addEntity(entityInstance);
                 storeEntity.Add(entityInstance);
+                collManager.addCollidable(entityInstance);
 
-                if(entityInstance.UName.Contains("UI"))
+                if (entityInstance is UI)
                 {
                     renderMan.addUI(entityInstance);
                 }
                 else
                 {
                     renderMan.addEntity(entityInstance);
+                    entityInstance.EntityRequested += OnEntityRequested;
                 }
             }
         }
+
+
+        public void OnEntityRequested(object source, EntityRequestArgs args)
+        {
+            var newEnt = entityManager.RequestInstanceAndSetup<Wall>(args.Texture, args.Position);
+            LoadResource(newEnt);
+            Spawn(newEnt);
+        }
+        
 
         /// <summary>
         /// Entity Removal from scene
@@ -102,8 +163,7 @@ namespace Game1.Engine.Scene
             {
                 sceneGraph.removeEntity(uid, name);
 
-                storeEntity.RemoveAll(
-                    x => x.UID.Equals(uid) && x.UName.Equals(name));
+                storeEntity.RemoveAll(x => x.UID.Equals(uid) && x.UName.Equals(name));
 
                 // how do i set entity position to null?
             }
@@ -134,14 +194,6 @@ namespace Game1.Engine.Scene
             }
         }
 
-        public List<iEntity> GetAllEntities()
-        {
-
-            return storeEntity;
-
-
-        }
-
         /// <summary>
         /// The unload content ensures all content from the current scene is
         /// released before loading a new scene
@@ -151,10 +203,17 @@ namespace Game1.Engine.Scene
             sceneGraph.removeAll();
         }
 
+
         public void Update()
         {
             sceneGraph.childNodes.ForEach(entity => entity.Update());
+
+            foreach(var manager in managerList)
+            {
+                manager.Update();
+            }
         }
+
 
         public void Draw()
         {

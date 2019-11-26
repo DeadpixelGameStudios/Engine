@@ -26,22 +26,17 @@ namespace Game1
 
         bool paused = false;
 
-        // https://www.youtube.com/watch?v=9QYfcJBsy1k
-        iEntityManager entityManager = new EntityManager();
         iSceneManager sceneManager;
-        iCollisionManager collManager = new CollisionManager();
-        KeyboardInput inputMan = new KeyboardInput();
-        MouseInput mouseInput = new MouseInput();
-        ControllerInput controllerMan = new ControllerInput();
+        
 
         public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content/Resources";
-            
+
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1600;
-            
+
             this.IsMouseVisible = true;
 
             #region set screen to middle
@@ -65,7 +60,7 @@ namespace Game1
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
-            sceneManager = new SceneManager(GraphicsDevice);
+            sceneManager = new SceneManager(GraphicsDevice, Content);
 
             base.Initialize();
         }
@@ -76,23 +71,9 @@ namespace Game1
         /// </summary>
         protected override void LoadContent()
         {
-            int playerCount = 0;
-            foreach (var asset in entityManager.requestLevel("test-level.tmx"))
-            {
-                sceneManager.Spawn(asset);
-
-                if (asset.UName.Contains("Player"))
-                {
-                    playerCount++;
-                }
-            }
+            sceneManager.loadLevel("test-level.tmx");
             
-            string uiSeperator = "Walls/" + playerCount.ToString() + "player";
-            sceneManager.Spawn(entityManager.RequestInstanceAndSetup<UI>(uiSeperator, new Vector2(0, 0)));
-
-            collManager.addCollidables(sceneManager.GetAllEntities());
-
-            sceneManager.LoadResources(Content);
+            sceneManager.LoadResources();
         }
 
         /// <summary>
@@ -103,7 +84,6 @@ namespace Game1
         {
             // TODO: Unload any non ContentManager content here
             sceneManager.UnloadContent();
-
         }
 
         
@@ -119,25 +99,17 @@ namespace Game1
             {
                 Exit();
             }
-            else if(Keyboard.GetState().IsKeyDown(Keys.P))
+            else if(Keyboard.GetState().IsKeyDown(Keys.P) || GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
             {
                 paused = !paused;
             }
-                
 
-            // TODO: Add your update logic here
 
-            if(!paused)
+            if (!paused)
             {
                 sceneManager.Update();
-                collManager.Update();
-                inputMan.Update();
-                mouseInput.Update();
-                controllerMan.Update();
             }
 
-
-            //Ps4Input.Update();
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

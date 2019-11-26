@@ -10,6 +10,7 @@ namespace Game1
 
         void UpdateCollidableList(List<iEntity> entList);
         void addCollidables(List<iEntity> entList);
+        void addCollidable(iEntity ent);
         void CheckCollision();
         void Update();
 

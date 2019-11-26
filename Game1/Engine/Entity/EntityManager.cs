@@ -22,8 +22,7 @@ namespace Game1.Engine.Entity
         /// Store list of the entity names
         /// </summary>
         List<String> entityNames;
-
-        private ContentManager contentMan;
+        
         private LevelLoader levelLoader;
 
         #endregion
