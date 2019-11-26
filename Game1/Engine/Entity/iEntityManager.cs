@@ -27,10 +27,8 @@ namespace Game1.Engine.Entity
 
         T RequestInstanceAndSetup<T>(string texture, Vector2 postion) where T : iEntity, new();
 
-
         //request a level by string
         List<iEntity> requestLevel(string level);
-
 
         /// <summary>
         /// Get Entity from their ID and name

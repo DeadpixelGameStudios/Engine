@@ -17,6 +17,8 @@ namespace Game1.Engine.Entity
         String UName { get; set; }
         Vector2 Position { get; set; }
         Vector2 Velocity { get; set; }
+        float Rotation { get; set; }
+        Vector2 Origin { get; set; }
         Texture2D Texture { get; set; }
         string TextureString { get; set; }
         float currentHealth { get; set; }

@@ -20,6 +20,8 @@ namespace Game1.Engine.Scene
 
         iSceneGraph sceneGraph;
 
+        Vector2 origin;
+
         #endregion
 
         #region Properites

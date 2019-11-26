@@ -5,6 +5,7 @@ using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PS4Mono;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,16 +26,13 @@ namespace Game1
 
         bool paused = false;
 
+        // https://www.youtube.com/watch?v=9QYfcJBsy1k
         iEntityManager entityManager = new EntityManager();
         iSceneManager sceneManager;
         iCollisionManager collManager = new CollisionManager();
         KeyboardInput inputMan = new KeyboardInput();
         MouseInput mouseInput = new MouseInput();
-
-        //Look at this - he made an engine using mono game where u can drag drop stuff. engine got ui
-        // https://github.com/Memorix101/MonoGame_ComponentSystem
-
-        // https://www.youtube.com/watch?v=9QYfcJBsy1k
+        ControllerInput controllerMan = new ControllerInput();
 
         public Kernel()
         {
@@ -135,8 +133,11 @@ namespace Game1
                 collManager.Update();
                 inputMan.Update();
                 mouseInput.Update();
+                controllerMan.Update();
             }
 
+
+            //Ps4Input.Update();
 
             // Code for displaying FPS in output
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

@@ -18,7 +18,6 @@ namespace Game1.Engine.Input
         {
         }
 
-        
         public static void Subscribe(IMouseInputObserver sub)
         {
             m_subList.Add(sub);
