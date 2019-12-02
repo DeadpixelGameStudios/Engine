@@ -127,6 +127,8 @@ namespace Game1.Engine.Scene
                 // Insert entity into scene
                 sceneGraph.addEntity(entityInstance);
                 storeEntity.Add(entityInstance);
+
+                //commented out for line drawing
                 collManager.addCollidable(entityInstance);
 
                 if (entityInstance is UI)
@@ -146,7 +148,16 @@ namespace Game1.Engine.Scene
         {
             var newEnt = entityManager.RequestInstanceAndSetup<Wall>(args.Texture, args.Position);
             LoadResource(newEnt);
-            Spawn(newEnt);
+            //Spawn(newEnt);
+
+            //duplicated spawn stuff - remove
+            storeEntity.Add(newEnt);
+
+            //commented out for line drawing
+            //collManager.addCollidable(entityInstance);
+            renderMan.addEntity(newEnt);
+            newEnt.EntityRequested += OnEntityRequested;
+            
         }
         
 

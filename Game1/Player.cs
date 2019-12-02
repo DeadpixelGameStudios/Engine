@@ -12,7 +12,7 @@ using PS4Mono;
 
 namespace Game1
 {
-    
+
 
     class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable
     {
@@ -30,7 +30,7 @@ namespace Game1
         private BasicInput inputKeys;
         private static int playerCount = 0;
 
-        private float acceleration = 2f;
+        private float acceleration = 0.5f;
 
         private uint abilityTimer = 0;
         private bool abilityTimeout = false;
@@ -41,6 +41,9 @@ namespace Game1
 
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
+        private List<string> lineTextureList = new List<string> { "Walls/line-pink", "Walls/line-blue", "Walls/line-red", "Walls/line-green" };
+        private string setLine;
+
         #endregion
 
         
@@ -50,6 +53,7 @@ namespace Game1
             if (GamePad.GetCapabilities(playerCount).IsConnected)
             {
                 ControllerInput.Subscribe(this, inputButtons.allButtons, playerCount);
+                setLine = lineTextureList[playerCount];
             }
             else
             {
@@ -103,7 +107,7 @@ namespace Game1
                     if(!abilityTimeout)
                     {
                         OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
-                        abilityTimeout = true;
+                        //abilityTimeout = true;
                     }
                 }
 
@@ -169,6 +173,13 @@ namespace Game1
                 abilityTimer = 0;
             }
 
+            //drawing line behind player
+            //if(Velocity.X != 0 || Velocity.Y != 0)
+            //{
+                
+            //}
+            OnEntityRequested(new Vector2(Position.X, Position.Y), setLine, typeof(Artifact));
+
         }
 
         private void Rotate(Vector2 val)
@@ -215,7 +226,7 @@ namespace Game1
                 if (!abilityTimeout)
                 {
                     OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
-                    abilityTimeout = true;
+                    //abilityTimeout = true;
                 }
             }
             else
