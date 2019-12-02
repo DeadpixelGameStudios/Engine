@@ -71,7 +71,7 @@ namespace Game1.Engine.Render
         {
             foreach (var entity in drawList)
             {
-                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
+                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White * entity.Transparency, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
             }
         }
 

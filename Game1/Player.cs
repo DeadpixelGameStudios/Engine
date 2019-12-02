@@ -37,6 +37,8 @@ namespace Game1
 
         private bool sprintActive = false;
 
+        private bool hasArtifact = false;
+
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
         #endregion
@@ -120,6 +122,17 @@ namespace Game1
 
             if (isColliding)
             {
+                if(CollidingEntity is FinishLine && hasArtifact)
+                {
+                    Console.WriteLine("Woooo I Win - " + UName);
+                }
+
+                if(CollidingEntity is Artifact)
+                {
+                    hasArtifact = true;
+                    CollidingEntity.Transparency = 0f;
+                }
+
                 if (Position.X > CollidingEntity.Position.X)
                 {
                     vel = new Vector2(4, 0);

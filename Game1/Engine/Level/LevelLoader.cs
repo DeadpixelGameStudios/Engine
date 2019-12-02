@@ -79,7 +79,10 @@ public class LevelLoader
                 {
                     if (asset != "0" && !string.IsNullOrWhiteSpace(asset))
                     {
-                        levelAssetList.Add(new LevelAsset(new Vector2(columnNumber * tileWidth, rowNumber * tileHeight), assetDictionary[int.Parse(asset)]));
+                        if(int.Parse(asset) <= assetDictionary.Count)
+                        {
+                            levelAssetList.Add(new LevelAsset(new Vector2(columnNumber * tileWidth, rowNumber * tileHeight), assetDictionary[int.Parse(asset)]));
+                        }
                     }
                     columnNumber++;
                 }

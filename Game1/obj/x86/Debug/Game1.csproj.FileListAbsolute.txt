@@ -194,3 +194,7 @@ C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\wall-top.tsx
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\wall-tube-horizontal.tsx
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\wall-tube-vertical.tsx
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\artifact.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\finish.xnb
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\artifact.png
+C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\finish.png

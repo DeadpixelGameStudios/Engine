@@ -30,5 +30,7 @@
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/3player.png</File>
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/4player.png</File>
     <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/2player.png</File>
+    <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/artifact.png</File>
+    <File>C:/Code/GitHub/Engine/Game1/Content/Resources/Walls/finish.png</File>
   </SourceFiles>
 </SourceFileCollection>

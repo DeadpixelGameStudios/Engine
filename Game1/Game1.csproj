@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Artifact.cs" />
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Engine\Collision\CollisionMap.cs" />
     <Compile Include="Engine\Collision\iCollidable.cs" />
     <Compile Include="Engine\Collision\iCollisionManager.cs" />
+    <Compile Include="FinishLine.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Wall.cs" />
@@ -103,6 +105,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Resources\Walls\4player.png" />
+    <Content Include="Content\Resources\Walls\artifact.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resources\Walls\finish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Resources\Walls\player1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

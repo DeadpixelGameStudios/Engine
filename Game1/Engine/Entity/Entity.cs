@@ -110,6 +110,13 @@ namespace Game1.Engine.Entity
             set;
         } = 0f;
 
+        public float Transparency
+        {
+            get;
+            set;
+        } = 1f;
+
+
         #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
         public bool isColliding
         {

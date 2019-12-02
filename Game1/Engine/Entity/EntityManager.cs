@@ -94,6 +94,14 @@ namespace Game1.Engine.Entity
                         entity = CreateInstanceAndSetup<Player>(texture, position);
                         break;
 
+                    case "Artifact":
+                        entity = CreateInstanceAndSetup<Artifact>(texture, position);
+                        break;
+
+                    case "FinishLine":
+                        entity = CreateInstanceAndSetup<FinishLine>(texture, position);
+                        break;
+
                     default:
                         entity = CreateInstanceAndSetup<Wall>(texture, position);
                         break;
