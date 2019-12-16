@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,14 +23,14 @@ public class LevelLoader
 
     public struct AssetInfo
     {
-        public AssetInfo(string tex, string ty)
+        public AssetInfo(string tex, Type ty)
         {
             texture = tex;
             type = ty;
         }
 
         public string texture;
-        public string type;
+        public Type type;
     }
 
     private const string LevelPath = "Engine/Level/LevelFiles/";
@@ -107,15 +108,15 @@ public class LevelLoader
             asset = parser.DocumentElement.Attributes["name"].Value.Insert(0, "Walls/");
 
             string propertyName = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["name"].Value;
-            string type = "";
+
             if (propertyName == "class")
             {
-                type = parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value;
+                Type type = Type.GetType("Game1." + parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value);
+
+                AssetInfo newAsset = new AssetInfo(asset, type);
+
+                textureDict.Add(uid, newAsset);
             }
-
-            AssetInfo newAsset = new AssetInfo(asset, type);
-
-            textureDict.Add(uid, newAsset);
         }
 
         return textureDict;

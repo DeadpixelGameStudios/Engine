@@ -70,37 +70,9 @@ namespace Game1.Engine.Entity
 
             foreach(var asset in assets)
             {
-                var texture = asset.info.texture;
-                var position = asset.position;
-                var type = asset.info.type;
-
-                //Assembly t = typeof("Wall").Assembly;
-                //T test = objectFromVar<iEntity>(type);
-                //Type genericType = typeof(Wall).MakeGenericType(new Type[] { type });
-                //iEntity test = (iEntity)genericType;
-                //Setup(test, texture, position);
-
-                //I really, really hate this - going to try to look at a workaround but haven't found anything yet
-                //In the mean time, every time you add an texture in Tiled, a new case for the class will have to be added here
-                iEntity entity;
-
-                switch(type)
-                {
-                    case "Wall":
-                        entity = CreateInstanceAndSetup<Wall>(texture, position);
-                        break;
-
-                    case "Player":
-                        entity = CreateInstanceAndSetup<Player>(texture, position);
-                        break;
-
-                    default:
-                        entity = CreateInstanceAndSetup<Wall>(texture, position);
-                        break;
-                }
-
-
-                returnList.Add(entity);
+				var ent = (iEntity)Activator.CreateInstance(asset.info.type);
+                Setup(ent, asset.info.texture, asset.position);
+                returnList.Add(ent);
             }
 
             return returnList;
