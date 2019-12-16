@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game1.Engine.Entity;
+﻿using System.Collections.Generic;
 using Game1.Engine.Managers;
 using Microsoft.Xna.Framework.Input;
-using PS4Mono;
 
 namespace Game1.Engine.Input
 {
@@ -18,6 +12,9 @@ namespace Game1.Engine.Input
         private static Dictionary<int, iControllerObserver> playerDict = new Dictionary<int, iControllerObserver>();
         private const int maxControllers = 4;
 
+        /// <summary>
+        /// Struct containing list of buttons and the entities uid
+        /// </summary>
         private struct EntityButton
         {
             public int uid;
@@ -36,6 +33,12 @@ namespace Game1.Engine.Input
 
         }
 
+        /// <summary>
+        /// Subscribe to controller input events
+        /// </summary>
+        /// <param name="sub">The instance subscribing</param>
+        /// <param name="buttons">A list of buttons it cares about</param>
+        /// <param name="playerCount">The player number</param>
         public static void Subscribe(iControllerObserver sub, List<Buttons> buttons, int playerCount)
         {
             m_subList.Add(sub);
@@ -43,6 +46,9 @@ namespace Game1.Engine.Input
             playerDict.Add(playerCount, sub);
         }
 
+        /// <summary>
+        /// Polls connected controllers for input and notifies each subscriber of any changes
+        /// </summary>
         public void Update()
         {
             for (int i = 0; i < maxControllers; i++)
@@ -70,6 +76,12 @@ namespace Game1.Engine.Input
 
         }
 
+        /// <summary>
+        /// Notifies the subscriber to input
+        /// </summary>
+        /// <param name="playerIndex">The index of the player to alert</param>
+        /// <param name="gamePadButtons">The button state</param>
+        /// <param name="thumbSticks">The thumbstick properties for the controller</param>
         public void notifyGamePadInput(int playerIndex, Buttons gamePadButtons, GamePadThumbSticks thumbSticks)
         {
             if(playerIndex < playerDict.Count)

@@ -1,7 +1,6 @@
 ﻿using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace Game1
@@ -37,6 +36,9 @@ namespace Game1
         public static List<iEntity> subjectList = new List<iEntity>();
         private List<Camera> cameraList = new List<Camera>();
 
+        /// <summary>
+        /// Struct for storing cameras Viewport and transform matrix
+        /// </summary>
         public struct CameraView
         {
             public CameraView(Viewport view, Matrix tran)
@@ -55,12 +57,18 @@ namespace Game1
         }
 
 
+        /// <summary>
+        /// Request camera and pass entity to follow
+        /// </summary>
+        /// <param name="entity">The entity to follow</param>
         public static void RequestCamera(iEntity entity)
         {
             subjectList.Add(entity);
         }
 
-
+        /// <summary>
+        /// Adds camera for each entity that has requested one
+        /// </summary>
         public void AddCameras()
         {
             #region Makes me sick x2
@@ -84,13 +92,17 @@ namespace Game1
             int subjectCount = 0;
             foreach(var subject in subjectList)
             {
-                var camera = new Camera(subject, new Rectangle((int)viewPosList[subjectCount].X, (int)viewPosList[subjectCount].Y, (int)resolution.X / (subjectList.Count <= 2 ? 1 : 2), (int)resolution.Y / 2));
+                var camera = new Camera(subject, new Rectangle((int)viewPosList[subjectCount].X, (int)viewPosList[subjectCount].Y, 
+                                        (int)resolution.X / (subjectList.Count <= 2 ? 1 : 2), (int)resolution.Y / 2));
                 cameraList.Add(camera);
                 subjectCount++;
             }
         }
 
-
+        /// <summary>
+        /// Updates each of the cameras CameraView and returns a list
+        /// </summary>
+        /// <returns>List of CameraViews</returns>
         public List<CameraView> Update()
         {
             List<CameraView> camView = new List<CameraView>();

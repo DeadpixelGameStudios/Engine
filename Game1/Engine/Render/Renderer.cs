@@ -1,12 +1,7 @@
 ﻿using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game1.Engine.Render
 {
@@ -31,23 +26,36 @@ namespace Game1.Engine.Render
             uiList = new List<iEntity>();
         }
 
+        /// <summary>
+        /// Initialise the renderer and spawn camera manager
+        /// </summary>
         public void Init()
         {
             cameraMan = new CameraManager();
             cameraMan.AddCameras();
         }
 
+        /// <summary>
+        /// Add an entity to render list
+        /// </summary>
+        /// <param name="ent">The entity to add</param>
         public void addEntity(iEntity ent)
         {
             entityList.Add(ent);
         }
 
+        /// <summary>
+        /// Add UI element to be rendered
+        /// </summary>
+        /// <param name="ui">The UI element to draw</param>
         public void addUI(iEntity ui)
         {
             uiList.Add(ui);
         }
 
-
+        /// <summary>
+        /// Draws all entities to be rendered
+        /// </summary>
         public void Draw()
         {
             foreach (var cam in cameraMan.Update())
@@ -67,6 +75,10 @@ namespace Game1.Engine.Render
 
         }
 
+        /// <summary>
+        /// Takes a list of entities to draw with SpriteBatch
+        /// </summary>
+        /// <param name="drawList"></param>
         private void drawEntities(List<iEntity> drawList)
         {
             foreach (var entity in drawList)

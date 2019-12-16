@@ -1,11 +1,6 @@
-﻿using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 
 namespace Game1.Engine.Entity
@@ -48,21 +43,24 @@ namespace Game1.Engine.Entity
             levelLoader = new LevelLoader();
         }
 
+        
         /// <summary>
-        /// Request Instance of entity
+        /// Request instance and call Setup on the entity
         /// </summary>
-        /// <typeparam name="T">Generic</typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="texture">The texture string</param>
+        /// <param name="position">POsition of the entity</param>
         /// <returns></returns>
-        public T RequestInstance<T>() where T : iEntity, new()
-        {
-            return CreateInstance<T>();
-        }
-
         public T RequestInstanceAndSetup<T>(string texture, Vector2 position) where T : iEntity, new()
         {
             return CreateInstanceAndSetup<T>(texture, position);
         }
 
+        /// <summary>
+        /// Requests level by string
+        /// </summary>
+        /// <param name="level">Name of the level file</param>
+        /// <returns>List of initialised and setup iEntities</returns>
         public List<iEntity> requestLevel(string level)
         {
             var assets = levelLoader.requestLevel(level);
@@ -83,7 +81,6 @@ namespace Game1.Engine.Entity
         /// and gives its uname
         /// </summary>
         /// <typeparam name="T">Generic</typeparam>
-        /// <returns></returns>
         private T CreateInstance<T>() where T : iEntity, new()
         {
             T requestedEntity = new T();
@@ -95,6 +92,13 @@ namespace Game1.Engine.Entity
             return requestedEntity;
         }
 
+        /// <summary>
+        /// Creates the requested instance and sets it up
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="texture"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         private T CreateInstanceAndSetup<T>(string texture, Vector2 pos) where T : iEntity, new()
         {
             var requestedEntity = CreateInstance<T>();
@@ -103,12 +107,22 @@ namespace Game1.Engine.Entity
             return requestedEntity;
         }
 
+        /// <summary>
+        /// Sets up the entity
+        /// </summary>
+        /// <param name="entity">The entity to setup</param>
+        /// <param name="texture">The texture to set for that entity</param>
+        /// <param name="pos">The position of the entity</param>
         private void Setup(iEntity entity, string texture = "default", Vector2 pos = default(Vector2))
         {
             var id = Guid.NewGuid();
 
             entity.Setup(id, setEntityUName(entity.GetType().Name), texture, pos);
         }
+
+
+
+
 
         /// <summary>
         /// Give entity unique name by class and number
@@ -164,9 +178,6 @@ namespace Game1.Engine.Entity
                 //    Where(e => e.UID.Equals(UID) && e.UName.Equals(UName)).
                 //    Select(e => e).ToList()[0]);
             }
-
-            // Terminate();
-
         }
 
         #endregion
