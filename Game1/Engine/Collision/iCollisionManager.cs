@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Game1.Engine.Entity;
+
 namespace Game1
 {
     public interface iCollisionManager
@@ -13,11 +11,5 @@ namespace Game1
         void addCollidable(iEntity ent);
         void CheckCollision();
         void Update();
-
-
-
-
-
-
     }
 }

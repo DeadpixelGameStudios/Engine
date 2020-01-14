@@ -1,14 +1,8 @@
 ﻿using Game1.Engine.Entity;
 using Game1.Engine.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PS4Mono;
 
 namespace Game1
 {
@@ -44,7 +38,6 @@ namespace Game1
         
         public Player()
         {
-            
             if (GamePad.GetCapabilities(playerCount).IsConnected)
             {
                 ControllerInput.Subscribe(this, inputButtons.allButtons, playerCount);

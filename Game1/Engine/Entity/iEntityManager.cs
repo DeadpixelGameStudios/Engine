@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game1.Engine.Entity
 {
@@ -19,12 +15,12 @@ namespace Game1.Engine.Entity
         List<iEntity> storeEntity { get; set; }
 
         /// <summary>
-        /// Request to create a new Instance of Entity
+        /// Request to create a new Instance of Entity and set up
         /// </summary>
+        /// <param name="postion">The position to set the entity</param>
+        /// <param name="texture">The texture of the requested entity</param>
         /// <typeparam name="T">Generic</typeparam>
         /// <returns>Reference to EntityInstance</returns>
-        T RequestInstance<T>() where T : iEntity, new();
-
         T RequestInstanceAndSetup<T>(string texture, Vector2 postion) where T : iEntity, new();
 
         //request a level by string

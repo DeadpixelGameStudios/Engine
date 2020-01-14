@@ -1,15 +1,7 @@
-﻿using Game1.Engine.Entity;
-using Game1.Engine.Input;
-using Game1.Engine.Misc.FPSCounter;
-using Game1.Engine.Scene;
+﻿using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using PS4Mono;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace Game1
 {
@@ -19,13 +11,8 @@ namespace Game1
     public class Kernel : Game
     {
         GraphicsDeviceManager graphics;
-
         public static int ScreenWidth, ScreenHeight;
-
-        //private FrameCounter frameCounter = new FrameCounter();
-
         bool paused = false;
-
         iSceneManager sceneManager;
         
 
@@ -39,7 +26,7 @@ namespace Game1
 
             this.IsMouseVisible = true;
 
-            #region set screen to middle
+            #region Set screen to middle
             // Setting screen to middle
             //this.Window.Position = new Point(200, 50);
 
@@ -54,9 +41,9 @@ namespace Game1
 
         }
 
+
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
@@ -64,6 +51,7 @@ namespace Game1
 
             base.Initialize();
         }
+
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -76,16 +64,15 @@ namespace Game1
             sceneManager.LoadResources();
         }
 
+
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
             sceneManager.UnloadContent();
         }
-
         
 
         /// <summary>
@@ -109,9 +96,9 @@ namespace Game1
             {
                 sceneManager.Update();
             }
-
-
+            
             // Code for displaying FPS in output
+            //private FrameCounter frameCounter = new FrameCounter();
             //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             //frameCounter.Update(deltaTime);
             //var fps = string.Format("FPS: {0}", frameCounter.AverageFramesPerSecond);
@@ -119,6 +106,7 @@ namespace Game1
 
             base.Update(gameTime);
         }
+
 
         /// <summary>
         /// This is called when the game should draw itself.

@@ -8,8 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game1.Engine.Scene
 {
@@ -73,7 +71,10 @@ namespace Game1.Engine.Scene
             };
         }
 
-
+        /// <summary>
+        /// Loads level from level file name string
+        /// </summary>
+        /// <param name="level">The name of the file to load</param>
         public void loadLevel(string level)
         {
             int playerCount = 0;
@@ -109,7 +110,10 @@ namespace Game1.Engine.Scene
             renderMan.Init();
         }
 
-
+        /// <summary>
+        /// Loads a single iEntities resource into memory
+        /// </summary>
+        /// <param name="ent">The entity to load</param>
         private void LoadResource(iEntity ent)
         {
             ent.Texture = contentMan.Load<Texture2D>(ent.TextureString);
@@ -142,6 +146,11 @@ namespace Game1.Engine.Scene
         }
 
 
+        /// <summary>
+        /// Event handler for an entity being requsted
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="args"></param>
         public void OnEntityRequested(object source, EntityRequestArgs args)
         {
             var newEnt = entityManager.RequestInstanceAndSetup<Wall>(args.Texture, args.Position);
@@ -203,7 +212,9 @@ namespace Game1.Engine.Scene
             sceneGraph.removeAll();
         }
 
-
+        /// <summary>
+        /// Updates all
+        /// </summary>
         public void Update()
         {
             sceneGraph.childNodes.ForEach(entity => entity.Update());
@@ -214,7 +225,9 @@ namespace Game1.Engine.Scene
             }
         }
 
-
+        /// <summary>
+        /// Calls the renderers draw method
+        /// </summary>
         public void Draw()
         {
             renderMan.Draw();

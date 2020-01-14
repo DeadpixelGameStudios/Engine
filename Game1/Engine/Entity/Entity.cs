@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +14,12 @@ namespace Game1.Engine.Entity
     {
         public event EventHandler<EntityRequestArgs> EntityRequested;
 
+        /// <summary>
+        /// Event handler for requesting an entity
+        /// </summary>
+        /// <param name="pos">Position of the entity to add</param>
+        /// <param name="texture">Texture of the entity</param>
+        /// <param name="pType">The Type of entity to add</param>
         public virtual void OnEntityRequested(Vector2 pos, string texture, Type pType)
         {
             EntityRequested?.Invoke(this, new EntityRequestArgs() { Position = pos, Texture = texture, type = pType });
@@ -127,6 +130,9 @@ namespace Game1.Engine.Entity
 
         #region Input structs
 
+        /// <summary>
+        /// Basic keyboard input struct
+        /// </summary>
         public struct BasicInput
         {
             public BasicInput(Keys pUp = Keys.None, Keys pDown = Keys.None, Keys pLeft = Keys.None, Keys pRight = Keys.None, Keys pSprint = Keys.None, Keys pUse = Keys.None, Keys pRotate = Keys.None)
@@ -155,6 +161,9 @@ namespace Game1.Engine.Entity
 
         }
 
+        /// <summary>
+        /// Basic GamePadInput struct for managing assigned gamepad keys
+        /// </summary>
         public struct GamePadInput
         {
             public Buttons rotateCW;
@@ -208,7 +217,13 @@ namespace Game1.Engine.Entity
             UName = name;
         }
 
-        //Override
+        /// <summary>
+        /// Setup the entity and set properties
+        /// </summary>
+        /// <param name="id">The UID of the entity</param>
+        /// <param name="name">The UName of the entity</param>
+        /// <param name="tex">The texture of the entity</param>
+        /// <param name="pos">The starting postion of the entity</param>
         public void Setup(Guid id, string name, string tex, Vector2 pos)
         {
             UID = id;
@@ -224,7 +239,6 @@ namespace Game1.Engine.Entity
         /// </summary>
         public virtual void Update()
         {
-
         }
 
         #endregion

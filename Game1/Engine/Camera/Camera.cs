@@ -1,7 +1,6 @@
 ﻿using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Game1
 {
@@ -17,6 +16,9 @@ namespace Game1
             viewPort = new Viewport(cameraInfo);
         }
 
+        /// <summary>
+        /// Work out the transform required for the camera based on the cameras entity position
+        /// </summary>
         public void Update()
         {
             Vector2 centre = new Vector2(subject.Position.X - viewPort.Width / 2, subject.Position.Y - viewPort.Height / 2);
