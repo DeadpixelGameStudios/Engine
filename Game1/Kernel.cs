@@ -1,19 +1,23 @@
-﻿using Game1.Engine.Scene;
+﻿using Game1.Engine.Entity;
+using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Game1
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Kernel : Game
+    public class Kernel : Game, EngineAPI
     {
         GraphicsDeviceManager graphics;
         public static int ScreenWidth, ScreenHeight;
         bool paused = false;
         iSceneManager sceneManager;
+
+        private string toBeLoaded;
         
 
         public Kernel()
@@ -25,6 +29,15 @@ namespace Game1
             graphics.PreferredBackBufferWidth = 1600;
 
             this.IsMouseVisible = true;
+
+            //ScreenHeight = GraphicsDevice.Viewport.Height;
+            //ScreenWidth = GraphicsDevice.Viewport.Width;
+
+            ////sceneManager = new SceneManager(GraphicsDevice, Content);
+
+            //base.Initialize();
+
+            sceneManager = new SceneManager(GraphicsDevice, Content);
 
             #region Set screen to middle
             // Setting screen to middle
@@ -47,9 +60,19 @@ namespace Game1
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
-            sceneManager = new SceneManager(GraphicsDevice, Content);
+            //sceneManager = new SceneManager(GraphicsDevice, Content);
 
             base.Initialize();
+        }
+
+
+        public void LoadScene(string level)
+        {
+            //sceneManager.loadLevel(level);
+
+            //sceneManager.LoadResources();
+
+            toBeLoaded = level;
         }
 
 
@@ -59,8 +82,8 @@ namespace Game1
         /// </summary>
         protected override void LoadContent()
         {
-            sceneManager.loadLevel("test-level.tmx");
-            
+            sceneManager.loadLevel(toBeLoaded);
+
             sceneManager.LoadResources();
         }
 

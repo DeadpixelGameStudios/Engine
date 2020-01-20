@@ -9,7 +9,7 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Manages entities lifecycle
     /// </summary>
-    class EntityManager : iEntityManager
+    public class EntityManager : iEntityManager
     {
         #region Data Members
 

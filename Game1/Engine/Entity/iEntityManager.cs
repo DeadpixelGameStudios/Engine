@@ -7,7 +7,7 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Manages entities lifecycle
     /// </summary>
-    interface iEntityManager
+    public interface iEntityManager
     {
         /// <summary>
         /// Store a list of Entities
