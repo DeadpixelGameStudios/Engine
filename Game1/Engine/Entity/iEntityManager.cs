@@ -26,6 +26,9 @@ namespace Game1.Engine.Entity
         //request a level by string
         List<iEntity> requestLevel(string level);
 
+        //request a type
+        iEntity RequestFromTypeAndSetup(Type type, string texture, Vector2 position, Vector2 size = default(Vector2), string text = "", Color color = default(Color), Color altColor = default(Color));
+
         /// <summary>
         /// Get Entity from their ID and name
         /// </summary>

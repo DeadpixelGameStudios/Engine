@@ -205,31 +205,25 @@ namespace Game1.Engine.Entity
             Console.WriteLine("HAHAHA - I have destoryed the entity");
         }
 
-        /// <summary>
-        /// Used to set the entities 
-        /// UID and UName
-        /// </summary>
-        /// <param name="id">Unique Identifier</param>
-        /// <param name="name">Unique Name</param>
-        public void Setup(Guid id, string name)
-        {
-            UID = id;
-            UName = name;
-        }
 
         /// <summary>
         /// Setup the entity and set properties
         /// </summary>
-        /// <param name="id">The UID of the entity</param>
         /// <param name="name">The UName of the entity</param>
         /// <param name="tex">The texture of the entity</param>
         /// <param name="pos">The starting postion of the entity</param>
-        public void Setup(Guid id, string name, string tex, Vector2 pos)
+        public void Setup(string name, string tex, Vector2 pos, Vector2 size, string text, Color color, Color altColor)
         {
-            UID = id;
+            UID = Guid.NewGuid();
             UName = name;
             TextureString = tex;
             Position = pos;
+
+            //do setting here
+            if(size != default(Vector2))
+            {
+
+            }
         }
 
         /// <summary>

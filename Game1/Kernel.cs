@@ -8,7 +8,7 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Kernel : Game
+    public class Kernel : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         public static int ScreenWidth, ScreenHeight;

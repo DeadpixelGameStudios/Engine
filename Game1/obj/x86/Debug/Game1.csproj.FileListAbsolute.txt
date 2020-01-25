@@ -172,7 +172,6 @@ C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3playe
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\2player.xnb
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\3player.xnb
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Content\Resources\Walls\4player.xnb
-C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\PS4Mono.dll
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\test-level.tmx
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\player1.tsx
 C:\Code\GitHub\Engine\Game1\bin\Windows\x86\Debug\Engine\Level\LevelFiles\Tiles\player2.tsx

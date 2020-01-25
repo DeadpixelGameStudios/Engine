@@ -41,6 +41,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Engine\Collision\CollisionMap.cs" />
     <Compile Include="Engine\Collision\iCollidable.cs" />
     <Compile Include="Engine\Collision\iCollisionManager.cs" />
+    <Compile Include="GameStateManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Wall.cs" />

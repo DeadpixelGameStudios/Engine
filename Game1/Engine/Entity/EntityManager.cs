@@ -76,6 +76,13 @@ namespace Game1.Engine.Entity
             return returnList;
         }
 
+        public iEntity RequestFromTypeAndSetup(Type type, string texture, Vector2 position, Vector2 size = default(Vector2), string text = "", Color color = default(Color), Color altColor = default(Color))
+        {
+            var ent = (iEntity)Activator.CreateInstance(type);
+            Setup(ent, texture, position, size, text, color, altColor);
+            return ent;
+        }
+
         /// <summary>
         /// Create Instance, this is where it generates a id
         /// and gives its uname
@@ -113,11 +120,9 @@ namespace Game1.Engine.Entity
         /// <param name="entity">The entity to setup</param>
         /// <param name="texture">The texture to set for that entity</param>
         /// <param name="pos">The position of the entity</param>
-        private void Setup(iEntity entity, string texture = "default", Vector2 pos = default(Vector2))
+        private void Setup(iEntity entity, string texture = "default", Vector2 pos = default(Vector2), Vector2 size = default(Vector2), string text = "", Color color = default(Color), Color altColor = default(Color))
         {
-            var id = Guid.NewGuid();
-
-            entity.Setup(id, setEntityUName(entity.GetType().Name), texture, pos);
+            entity.Setup(setEntityUName(entity.GetType().Name), texture, pos, size, text, color, altColor);
         }
 
 
