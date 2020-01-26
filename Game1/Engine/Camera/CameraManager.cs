@@ -9,6 +9,11 @@ namespace Game1
     {
         #region Makes me sick
 
+        private List<Vector2> viewPortPos1 = new List<Vector2>()
+        {
+            new Vector2(0, 0)
+        };
+
         private List<Vector2> viewPortPos2 = new List<Vector2>()
         {
             new Vector2(0, 0),
@@ -61,7 +66,7 @@ namespace Game1
         /// Request camera and pass entity to follow
         /// </summary>
         /// <param name="entity">The entity to follow</param>
-        public static void RequestCamera(iEntity entity)
+        public void RequestCamera(iEntity entity)
         {
             subjectList.Add(entity);
         }
@@ -73,7 +78,11 @@ namespace Game1
         {
             #region Makes me sick x2
             List<Vector2> viewPosList;
-            if(subjectList.Count == 2)
+            if (subjectList.Count <= 1)
+            {
+                viewPosList = viewPortPos1;
+            }
+            else if (subjectList.Count == 2)
             {
                 viewPosList = viewPortPos2;
             }
@@ -87,13 +96,13 @@ namespace Game1
             }
             #endregion
 
-            var resolution = new Vector2(Kernel.ScreenWidth, Kernel.ScreenHeight);
+            var resolution = new Vector2(EngineMain.ScreenWidth, EngineMain.ScreenHeight);
 
             int subjectCount = 0;
             foreach(var subject in subjectList)
             {
                 var camera = new Camera(subject, new Rectangle((int)viewPosList[subjectCount].X, (int)viewPosList[subjectCount].Y, 
-                                        (int)resolution.X / (subjectList.Count <= 2 ? 1 : 2), (int)resolution.Y / 2));
+                                        (int)resolution.X / (subjectList.Count <= 2 ? 1 : 2), (int)resolution.Y / (subjectList.Count <= 1 ? 1 : 2)));
                 cameraList.Add(camera);
                 subjectCount++;
             }

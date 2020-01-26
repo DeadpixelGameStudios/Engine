@@ -18,8 +18,6 @@ namespace Game1.Engine.Entity
         /// </summary>
         List<String> entityNames;
         
-        private LevelLoader levelLoader;
-
         #endregion
 
         #region Properties
@@ -40,7 +38,6 @@ namespace Game1.Engine.Entity
         {
             storeEntity = new List<iEntity>();
             entityNames = new List<string>();
-            levelLoader = new LevelLoader();
         }
 
         
@@ -56,19 +53,19 @@ namespace Game1.Engine.Entity
             return CreateInstanceAndSetup<T>(texture, position);
         }
 
+
         /// <summary>
-        /// Requests level by string
+        /// Take level info and init all
         /// </summary>
-        /// <param name="level">Name of the level file</param>
-        /// <returns>List of initialised and setup iEntities</returns>
-        public List<iEntity> requestLevel(string level)
+        /// <param name="level">List of LevelInfo</param>
+        /// <returns>Returns the initialised IEntitites</returns>
+        public List<iEntity> CreateLevel(List<LevelInfo.LevelAsset> level)
         {
-            var assets = levelLoader.requestLevel(level);
             List<iEntity> returnList = new List<iEntity>();
 
-            foreach(var asset in assets)
+            foreach (var asset in level)
             {
-				var ent = (iEntity)Activator.CreateInstance(asset.info.type);
+                var ent = (iEntity)Activator.CreateInstance(asset.info.type);
                 Setup(ent, asset.info.texture, asset.position);
                 returnList.Add(ent);
             }
@@ -86,9 +83,7 @@ namespace Game1.Engine.Entity
             T requestedEntity = new T();
             
             storeEntity.Add(requestedEntity);
-            entityNames.Add(requestedEntity.GetType().Name);
-            Setup(requestedEntity);
-            
+
             return requestedEntity;
         }
 
@@ -131,6 +126,7 @@ namespace Game1.Engine.Entity
         /// <returns></returns>
         private string setEntityUName(string name)
         {
+            entityNames.Add(name);
             // return name with number of how many there are in the list -1 to give accurate number.
             return name + (entityNames.Select(n => n).Where(n => n == name).Count() - 1);
         }
@@ -152,7 +148,6 @@ namespace Game1.Engine.Entity
             {
                 return null;
             }
-
         }
 
         /// <summary>

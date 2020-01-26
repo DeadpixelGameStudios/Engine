@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{22419DF7-6807-4642-9734-AA6ED80C6C53}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game1</RootNamespace>
     <AssemblyName>Game1</AssemblyName>
@@ -37,28 +37,27 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EngineAPI.cs" />
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
+    <Compile Include="Engine\Camera\CameraSubject.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
+    <Compile Include="Engine\Entity\LevelAsset.cs" />
     <Compile Include="Engine\Input\Controller\ControllerInput.cs" />
     <Compile Include="Engine\Input\Controller\iControllerObserver.cs" />
     <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
     <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
-    <Compile Include="Engine\Level\LevelManager.cs" />
     <Compile Include="Engine\Managers\iManager.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />
     <Compile Include="Engine\Collision\CollisionMap.cs" />
     <Compile Include="Engine\Collision\iCollidable.cs" />
     <Compile Include="Engine\Collision\iCollisionManager.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="UI.cs" />
-    <Compile Include="Wall.cs" />
     <Compile Include="Engine\Entity\Entity.cs" />
     <Compile Include="Engine\Entity\EntityManager.cs" />
     <Compile Include="Engine\Entity\GameEntity.cs" />
@@ -69,14 +68,12 @@
     <Compile Include="Engine\Input\Mouse\IMouseInputObserverable.cs" />
     <Compile Include="Engine\Input\Keyboard\IKeyboardInputObserverable.cs" />
     <Compile Include="Engine\Input\Mouse\MouseInput.cs" />
-    <Compile Include="Engine\Level\LevelLoader.cs" />
     <Compile Include="Engine\Misc\FPSCounter.cs" />
     <Compile Include="Engine\Scene\iSceneGraph.cs" />
     <Compile Include="Engine\Scene\iSceneManager.cs" />
     <Compile Include="Engine\Scene\SceneGraph.cs" />
     <Compile Include="Engine\Scene\SceneManager.cs" />
-    <Compile Include="Kernel.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="EngineMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,151 +84,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Resources\ball.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\default.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\paddle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\3player.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\4player.png" />
-    <Content Include="Content\Resources\Walls\player1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\player2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\player3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\player4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-bottom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-closed.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-corner-bottom-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-corner-bottom-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-corner-top-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-corner-top-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-middle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-open-bottom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-open-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-open-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-open-top.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-top.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-tube-horizontal.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\Walls\wall-tube-vertical.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Engine\Level\LevelFiles\level1.tmx" />
-    <None Include="Engine\Level\LevelFiles\level2.tmx" />
-    <None Include="Engine\Level\LevelFiles\test-level.tmx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Engine\Level\LevelFiles\Tiles\player1.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\player2.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\player3.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\player4.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-bottom.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-closed.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-bottom-left.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-bottom-right.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-top-left.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-corner-top-right.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-left.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-middle.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-bottom.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-left.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-right.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-open-top.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-right.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-top.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-tube-horizontal.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Engine\Level\LevelFiles\Tiles\wall-tube-vertical.tsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -26,6 +26,7 @@ namespace Game1.Engine.Entity
         float DrawPriority { get; set; }
 
         event EventHandler<EntityRequestArgs> EntityRequested;
+        event EventHandler<EventArgs> LevelFinished;
 
         void Setup(Guid id, string name);
         void Setup(Guid id, string name, string texture, Vector2 position);

@@ -1,4 +1,13 @@
-﻿using System;
+﻿///
+/// Comment out whichever one you dont want
+///
+
+#define Game
+//#define Demo
+
+using System;
+using Game1;
+
 
 namespace GameCode
 {
@@ -11,11 +20,21 @@ namespace GameCode
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        //[STAThread]
         static void Main()
         {
-            var game = new GameMain();
-            game.Test();
+            var engine = new EngineMain();
+
+#if Game
+            var game = new GameMain(engine);
+            game.TestLevel();
+
+            using (engine)
+                engine.Run();
+#elif Demo
+            //write code for initing tech demo
+            engine.Run();
+#endif
         }
     }
 #endif

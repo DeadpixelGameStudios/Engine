@@ -2,7 +2,7 @@
 
 namespace Game1.Engine.Input
 {
-    interface iControllerObserverable
+    public interface iControllerObserverable
     {
         void notifyGamePadInput(int playerIndex, Buttons gamePadButtons, GamePadThumbSticks thumbSticks);
     }

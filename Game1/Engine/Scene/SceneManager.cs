@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Game1.Engine.Scene
 {
     /// <summary>
@@ -35,7 +36,6 @@ namespace Game1.Engine.Scene
 
         #region Managers
         private iCollisionManager collManager = new CollisionManager();
-        private iEntityManager entityManager = new EntityManager();
 
         private iManager inputMan = new KeyboardInput();
         private iManager mouseInput = new MouseInput();
@@ -45,22 +45,22 @@ namespace Game1.Engine.Scene
         #endregion
 
 
-        public SceneManager(GraphicsDevice graph, ContentManager content)
+        public SceneManager(ContentManager content)
         {
-            renderMan = new Renderer(graph);
+            renderMan = new Renderer();
             contentMan = content;
 
-            Initialize();
+            sceneGraph = new SceneGraph();
+            storeEntity = new List<iEntity>();
         }
 
 
         /// <summary>
         /// Setup of initial gameplay state
         /// </summary>
-        private void Initialize()
+        public void Initialize(GraphicsDevice graph)
         {
-            sceneGraph = new SceneGraph();
-            storeEntity = new List<iEntity>();
+            renderMan.Init(graph);
 
             managerList = new List<iManager>()
             {
@@ -69,28 +69,6 @@ namespace Game1.Engine.Scene
                 controllerMan,
                 (iManager)collManager
             };
-        }
-
-        /// <summary>
-        /// Loads level from level file name string
-        /// </summary>
-        /// <param name="level">The name of the file to load</param>
-        public void loadLevel(string level)
-        {
-            int playerCount = 0;
-            foreach (var asset in entityManager.requestLevel(level))
-            {
-                Spawn(asset);
-
-                if (asset.UName.Contains("Player"))
-                {
-                    playerCount++;
-                }
-            }
-
-            string uiSeperator = "Walls/" + playerCount.ToString() + "player";
-            Spawn(entityManager.RequestInstanceAndSetup<UI>(uiSeperator, new Vector2(0, 0)));
-            
         }
 
 
@@ -104,17 +82,15 @@ namespace Game1.Engine.Scene
             //separate from other initialisation operations
             //• It is recommended to associate resources before other initialisation operations, which might require
             //(some of) the associated resources
-
-            sceneGraph.childNodes.ForEach(e => e.Texture = contentMan.Load<Texture2D>(e.TextureString));
-
-            renderMan.Init();
+            
+            sceneGraph.childNodes.ForEach(e => LoadResource(e));
         }
 
         /// <summary>
         /// Loads a single iEntities resource into memory
         /// </summary>
         /// <param name="ent">The entity to load</param>
-        private void LoadResource(iEntity ent)
+        public void LoadResource(iEntity ent)
         {
             ent.Texture = contentMan.Load<Texture2D>(ent.TextureString);
         }
@@ -124,6 +100,7 @@ namespace Game1.Engine.Scene
         /// Spawn entity into scene
         /// </summary>
         /// <param name="entityInstance">Spawn Entity</param>
+        /// 
         public void Spawn(iEntity entityInstance)
         {
             if (!storeEntity.Contains(entityInstance))
@@ -133,29 +110,20 @@ namespace Game1.Engine.Scene
                 storeEntity.Add(entityInstance);
                 collManager.addCollidable(entityInstance);
 
-                if (entityInstance is UI)
-                {
-                    renderMan.addUI(entityInstance);
-                }
-                else
-                {
-                    renderMan.addEntity(entityInstance);
-                    entityInstance.EntityRequested += OnEntityRequested;
-                }
+                renderMan.addEntity(entityInstance);
             }
         }
 
 
         /// <summary>
-        /// Event handler for an entity being requsted
+        /// Spawns a UI iEntity
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="args"></param>
-        public void OnEntityRequested(object source, EntityRequestArgs args)
+        /// <param name="UI">The UI to spawn</param>
+        public void SpawnUI(iEntity UI)
         {
-            var newEnt = entityManager.RequestInstanceAndSetup<Wall>(args.Texture, args.Position);
-            LoadResource(newEnt);
-            Spawn(newEnt);
+            sceneGraph.addEntity(UI);
+            storeEntity.Add(UI);
+            renderMan.addUI(UI);
         }
         
 

@@ -1,4 +1,5 @@
-﻿using Game1.Engine.Entity;
+﻿using Game1.Engine.Camera;
+using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -10,18 +11,15 @@ namespace Game1.Engine.Render
         private List<iEntity> entityList;
         private List<iEntity> uiList;
 
-        private Viewport defaultView = new Viewport(0, 0, Kernel.ScreenWidth, Kernel.ScreenHeight);
+        private Viewport defaultView = new Viewport(0, 0, EngineMain.ScreenWidth, EngineMain.ScreenHeight);
 
         private SpriteBatch spriteBatch;
         private GraphicsDevice graphDevice;
 
         private CameraManager cameraMan;
 
-        public Renderer(GraphicsDevice graph)
+        public Renderer()
         {
-            graphDevice = graph;
-            spriteBatch = new SpriteBatch(graphDevice);
-
             entityList = new List<iEntity>();
             uiList = new List<iEntity>();
         }
@@ -29,9 +27,21 @@ namespace Game1.Engine.Render
         /// <summary>
         /// Initialise the renderer and spawn camera manager
         /// </summary>
-        public void Init()
+        public void Init(GraphicsDevice graph)
         {
+            graphDevice = graph;
+            spriteBatch = new SpriteBatch(graphDevice);
+
             cameraMan = new CameraManager();
+
+            foreach(var ent in entityList)
+            {
+                if(ent is ICameraSubject)
+                {
+                    cameraMan.RequestCamera(ent);
+                }
+            }
+
             cameraMan.AddCameras();
         }
 
