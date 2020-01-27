@@ -11,7 +11,6 @@ namespace GameCode.Entities
 {
     internal class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
     {
-
         #region Data Members
 
         private List<BasicInput> inputOptions = new List<BasicInput>
@@ -34,9 +33,17 @@ namespace GameCode.Entities
 
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
+        enum States
+        {
+            walkingState,
+            runningState,
+            attackState
+        };
+
+        private readonly States currentState;
+
         #endregion
 
-        
         public Player()
         {
             if (GamePad.GetCapabilities(playerCount).IsConnected)
@@ -60,15 +67,15 @@ namespace GameCode.Entities
                 inputKeys = keys;
                 acceleration = 8f;
             }
-        
+
             playerCount++;
-            
+
             CollisionManager.subCollision(this);
 
             DrawPriority = 1f;
+            currentState = States.walkingState;
         }
 
-        
         public void input(Keys key)
         {
             if (inputKeys.allKeys.Contains(key))
@@ -76,40 +83,54 @@ namespace GameCode.Entities
                 if (key == inputKeys.up)
                 {
                     Velocity = new Vector2(0, -1 * acceleration);
+                    Setstate(States.runningState, this);
                 }
                 else if (key == inputKeys.down)
                 {
                     Velocity = new Vector2(0, acceleration);
+                    Setstate(States.runningState, this);
                 }
                 else if (key == inputKeys.left)
                 {
                     Velocity = new Vector2(-1 * acceleration, 0);
+                    Setstate(States.runningState, this);
                 }
                 else if (key == inputKeys.right)
                 {
-                    Velocity = new Vector2(acceleration , 0);
+                    Velocity = new Vector2(acceleration, 0);
+                    Setstate(States.runningState, this);
                 }
-                else if(key == inputKeys.use)
+                else if (key == inputKeys.use)
                 {
-                    if(!abilityTimeout)
+                    if (!abilityTimeout)
                     {
                         OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
                         abilityTimeout = true;
                     }
                 }
-
-                Position += Velocity;
             }
 
             Velocity = new Vector2(0, 0);
+
         }
-        
+
+        private void Setstate(States movingright, iEntity player)
+        {
+            if (movingright == States.runningState)
+            {
+                player.Position += player.Velocity;
+            }
+            else if (movingright == States.walkingState)
+            {
+                player.Position += player.Velocity;
+            }
+        }
 
         public override void Update()
         {
             #region remove this dirty ass code after prototyping
 
-            Vector2 vel = new Vector2(0,0);
+            Vector2 vel = new Vector2(0, 0);
 
             if (isColliding)
             {
@@ -137,18 +158,16 @@ namespace GameCode.Entities
 
             #endregion
 
-
-            if(abilityTimeout)
+            if (abilityTimeout)
             {
                 abilityTimer++;
             }
 
-            if(abilityTimer >= 300)
+            if (abilityTimer >= 300)
             {
                 abilityTimeout = false;
                 abilityTimer = 0;
             }
-
         }
 
         private void Rotate(Vector2 val)
@@ -171,13 +190,13 @@ namespace GameCode.Entities
             var leftThumbY = thumbSticks.Left.Y * -1 * acceleration;
 
             Vector2 vel = new Vector2(leftThumbX, leftThumbY);
-            
-            if(sprintActive)
+
+            if (sprintActive)
             {
                 vel = vel * 3;
             }
 
-            
+
             if (gamePadButtons == inputButtons.rotateCW)
             {
                 //Rotate(thumbSticks.Right);
@@ -186,21 +205,25 @@ namespace GameCode.Entities
             {
                 //Rotate(thumbSticks.Right);
             }
-            else if(gamePadButtons == inputButtons.sprint)
+            else if (gamePadButtons == inputButtons.sprint)
             {
                 sprintActive = true;
+                //currentState = States.runningState;
             }
-            else if(gamePadButtons == inputButtons.use)
+            else if (gamePadButtons == inputButtons.use)
             {
                 if (!abilityTimeout)
                 {
                     OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                    //currentState = States.attackState;
                     abilityTimeout = true;
+                    //currentState = States.walkingState;
                 }
             }
             else
             {
                 sprintActive = false;
+                //currentState = States.walkingState;
             }
 
             Position += vel;
