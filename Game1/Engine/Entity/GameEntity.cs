@@ -3,7 +3,7 @@
     /// <summary>
     /// Abstraction for all entities in a specific game
     /// </summary>
-    abstract class GameEntity : Entity
+    public abstract class GameEntity : Entity
     {
         
     }

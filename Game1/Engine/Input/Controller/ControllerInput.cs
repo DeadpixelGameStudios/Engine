@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game1.Engine.Input
 {
-    class ControllerInput : iControllerObserverable, iManager
+    public class ControllerInput : iControllerObserverable, iManager
     {
         static List<EntityButton> m_entityButtonList = new List<EntityButton>();
         static List<iControllerObserver> m_subList = new List<iControllerObserver>();

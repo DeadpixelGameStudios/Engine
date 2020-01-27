@@ -24,8 +24,10 @@ namespace Game1.Engine.Entity
         iEntity CollidingEntity { get; set; }
         Rectangle HitBox { get; }
         float DrawPriority { get; set; }
+        float Transparency { get; set; }
 
         event EventHandler<EntityRequestArgs> EntityRequested;
+        event EventHandler<EventArgs> LevelFinished;
 
         void Setup(Guid id, string name);
         void Setup(Guid id, string name, string texture, Vector2 position);

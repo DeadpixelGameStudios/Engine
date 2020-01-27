@@ -1,4 +1,5 @@
 ﻿using Game1.Engine.Entity;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
@@ -21,6 +22,12 @@ namespace Game1.Engine.Scene
         void Spawn(iEntity entityInstance);
 
         /// <summary>
+        /// Spawns a UI iEntity
+        /// </summary>
+        /// <param name="UI">The UI to spawn</param>
+        void SpawnUI(iEntity UI);
+
+        /// <summary>
         /// Entity Removal from scene
         /// </summary>
         /// <typeparam name="T">Dynamic</typeparam>
@@ -38,21 +45,28 @@ namespace Game1.Engine.Scene
         iEntity GetEntity<T>(Guid id, string name) where T : iEntityManager;
 
         /// <summary>
-        /// Load Resources
+        /// Load Resources in SceneGraph
         /// </summary>
         void LoadResources();
+
+        /// <summary>
+        /// Loads a single resource
+        /// </summary>
+        /// <param name="ent">The entity to load</param>
+        void LoadResource(iEntity ent);
 
         /// <summary>
         /// The unload content ensures all content from the current scene is
         /// released before loading a new scene
         /// </summary>
         void UnloadContent();
-        
+
+        void Initialize(GraphicsDevice graph);
+
+
         void Update();
 
         void Draw();
-
-        void loadLevel(string level);
 
     }
 }

@@ -10,7 +10,7 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Abstraction for any game entity
     /// </summary>
-    abstract class Entity : iEntity
+    public abstract class Entity : iEntity
     {
         public event EventHandler<EntityRequestArgs> EntityRequested;
 
@@ -23,6 +23,13 @@ namespace Game1.Engine.Entity
         public virtual void OnEntityRequested(Vector2 pos, string texture, Type pType)
         {
             EntityRequested?.Invoke(this, new EntityRequestArgs() { Position = pos, Texture = texture, type = pType });
+        }
+
+        public event EventHandler<EventArgs> LevelFinished;
+
+        public virtual void OnLevelFinished()
+        {
+            LevelFinished?.Invoke(this, new EventArgs());
         }
 
 
@@ -86,13 +93,11 @@ namespace Game1.Engine.Entity
         public float currentHealth
         {
             get;
-
             set;
         }
 
         public Rectangle HitBox
         {
-            
             get
             {
                 return new Rectangle(
@@ -112,6 +117,12 @@ namespace Game1.Engine.Entity
             get;
             set;
         } = 0f;
+
+        public float Transparency
+        {
+            get;
+            set;
+        } = 1f;
 
         #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
         public bool isColliding

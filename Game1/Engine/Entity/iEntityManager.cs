@@ -7,7 +7,7 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Manages entities lifecycle
     /// </summary>
-    interface iEntityManager
+    public interface iEntityManager
     {
         /// <summary>
         /// Store a list of Entities
@@ -23,8 +23,12 @@ namespace Game1.Engine.Entity
         /// <returns>Reference to EntityInstance</returns>
         T RequestInstanceAndSetup<T>(string texture, Vector2 postion) where T : iEntity, new();
 
-        //request a level by string
-        List<iEntity> requestLevel(string level);
+        /// <summary>
+        /// Take level info and init all
+        /// </summary>
+        /// <param name="level">List of LevelInfo</param>
+        /// <returns>Returns the initialised IEntitites</returns>
+        List<iEntity> CreateLevel(List<LevelInfo.LevelAsset> level);
 
         /// <summary>
         /// Get Entity from their ID and name

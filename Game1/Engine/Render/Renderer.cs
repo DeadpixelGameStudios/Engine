@@ -1,4 +1,5 @@
-﻿using Game1.Engine.Entity;
+﻿using Game1.Engine.Camera;
+using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -10,29 +11,27 @@ namespace Game1.Engine.Render
         private List<iEntity> entityList;
         private List<iEntity> uiList;
 
-        private Viewport defaultView = new Viewport(0, 0, Kernel.ScreenWidth, Kernel.ScreenHeight);
+        private Viewport defaultView = new Viewport(0, 0, EngineMain.ScreenWidth, EngineMain.ScreenHeight);
 
         private SpriteBatch spriteBatch;
         private GraphicsDevice graphDevice;
 
         private CameraManager cameraMan;
 
-        public Renderer(GraphicsDevice graph)
+        public Renderer()
         {
-            graphDevice = graph;
-            spriteBatch = new SpriteBatch(graphDevice);
-
             entityList = new List<iEntity>();
             uiList = new List<iEntity>();
+            cameraMan = new CameraManager();
         }
 
         /// <summary>
         /// Initialise the renderer and spawn camera manager
         /// </summary>
-        public void Init()
+        public void Init(GraphicsDevice graph)
         {
-            cameraMan = new CameraManager();
-            cameraMan.AddCameras();
+            graphDevice = graph;
+            spriteBatch = new SpriteBatch(graphDevice);
         }
 
         /// <summary>
@@ -42,6 +41,12 @@ namespace Game1.Engine.Render
         public void addEntity(iEntity ent)
         {
             entityList.Add(ent);
+
+            if (ent is ICameraSubject)
+            {
+                cameraMan.RequestCamera(ent);
+                cameraMan.AddCameras();
+            }
         }
 
         /// <summary>
@@ -83,7 +88,7 @@ namespace Game1.Engine.Render
         {
             foreach (var entity in drawList)
             {
-                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
+                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White*entity.Transparency, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
             }
         }
 
