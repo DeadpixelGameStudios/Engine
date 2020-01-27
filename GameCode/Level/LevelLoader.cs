@@ -37,7 +37,7 @@ public partial class LevelLoader
         parser.Load(level.Insert(0, LevelPath));
 
 
-        Dictionary<int, LevelInfo.AssetInfo> assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset"));
+        Dictionary<int, LevelInfo.AssetInfo> assetDictionary = createAssetDictionary(parser.DocumentElement.SelectNodes("tileset")); 
 
 
         int tileHeight = int.Parse(parser.DocumentElement.Attributes["tileheight"].Value);

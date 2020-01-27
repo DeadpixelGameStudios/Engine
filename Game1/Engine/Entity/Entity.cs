@@ -93,13 +93,11 @@ namespace Game1.Engine.Entity
         public float currentHealth
         {
             get;
-
             set;
         }
 
         public Rectangle HitBox
         {
-            
             get
             {
                 return new Rectangle(
@@ -119,6 +117,12 @@ namespace Game1.Engine.Entity
             get;
             set;
         } = 0f;
+
+        public float Transparency
+        {
+            get;
+            set;
+        } = 1f;
 
         #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
         public bool isColliding

@@ -74,6 +74,9 @@
     <Compile Include="Engine\Scene\SceneGraph.cs" />
     <Compile Include="Engine\Scene\SceneManager.cs" />
     <Compile Include="EngineMain.cs" />
+    <Compile Include="Engine\UI\IInteractiveUI.cs" />
+    <Compile Include="Engine\UI\InteractiveUI.cs" />
+    <Compile Include="Engine\UI\IStaticUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

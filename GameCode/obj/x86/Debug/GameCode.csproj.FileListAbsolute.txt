@@ -192,3 +192,11 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall-tube-horizontal.tsx
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall-tube-vertical.tsx
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Game1.dll
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\start-button.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\start-button.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\2player-button.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\3player-button.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\4player-button.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\2player-button.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\3player-button.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\4player-button.png

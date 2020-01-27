@@ -2,6 +2,7 @@
 using Game1.Engine.Input;
 using Game1.Engine.Managers;
 using Game1.Engine.Render;
+using Game1.Engine.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -124,6 +125,11 @@ namespace Game1.Engine.Scene
             sceneGraph.addEntity(UI);
             storeEntity.Add(UI);
             renderMan.addUI(UI);
+
+            if(UI is IInteractiveUI)
+            {
+                MouseInput.Subscribe((IMouseInputObserver)UI);
+            }
         }
         
 

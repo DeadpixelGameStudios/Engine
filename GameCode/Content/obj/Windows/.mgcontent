@@ -28,5 +28,9 @@
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-tube-horizontal.png</File>
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-tube-vertical.png</File>
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/default.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/start-button.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/4player-button.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/3player-button.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/2player-button.png</File>
   </SourceFiles>
 </SourceFileCollection>

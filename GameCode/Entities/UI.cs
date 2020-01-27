@@ -1,19 +1,16 @@
-﻿using Game1.Engine.Entity;
+﻿using System;
+using Game1.Engine.Entity;
+using Game1.Engine.Input;
+using Game1.Engine.UI;
+using Microsoft.Xna.Framework;
 
 namespace GameCode.Entities
 {
     public class UI : GameEntity
     {
-
         public UI()
         {
-            //DrawPriority = 1f;
         }
-
-        //Might have mnore stuff at some  point, e.g. -
-        //OnClick() //what to do when clicked
-        //OnHover() // what to do when hoevered over
-
     }
 }
 

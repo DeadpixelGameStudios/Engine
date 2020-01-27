@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Game1.Engine.Managers;
+using System;
+using System.Linq;
+using Game1.Engine.Entity;
 
 namespace Game1.Engine.Input
 {
@@ -9,6 +12,7 @@ namespace Game1.Engine.Input
     {
         private static List<EntityKey> m_entityKeyList = new List<EntityKey>();
         private static List<IKeyboardInputObserver> m_subList = new List<IKeyboardInputObserver>();
+
 
         private struct EntityKey
         {
@@ -24,22 +28,22 @@ namespace Game1.Engine.Input
 
         public KeyboardInput()
         {
-
+            
         }
 
         public static void Subscribe(IKeyboardInputObserver sub, List<Keys> keys)
         {
-            m_subList.Add(sub);
             m_entityKeyList.Add(new EntityKey(0, keys));
+            m_subList.Add(sub);
         }
 
         public void Update()
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
-            foreach(var sub in m_entityKeyList)
+            foreach (var sub in m_entityKeyList.ToList())
             {
-                foreach(var key in sub.keys)
+                foreach(var key in sub.keys.ToList())
                 {
                     if (keyboardState.IsKeyDown(key))
                     {
@@ -51,7 +55,7 @@ namespace Game1.Engine.Input
 
         public void notifyInput(Keys key)
         {
-            foreach(var sub in m_subList)
+            foreach(var sub in m_subList.ToList())
             {
                 sub.input(key);
             }

@@ -22,6 +22,7 @@ namespace Game1.Engine.Render
         {
             entityList = new List<iEntity>();
             uiList = new List<iEntity>();
+            cameraMan = new CameraManager();
         }
 
         /// <summary>
@@ -31,18 +32,6 @@ namespace Game1.Engine.Render
         {
             graphDevice = graph;
             spriteBatch = new SpriteBatch(graphDevice);
-
-            cameraMan = new CameraManager();
-
-            foreach(var ent in entityList)
-            {
-                if(ent is ICameraSubject)
-                {
-                    cameraMan.RequestCamera(ent);
-                }
-            }
-
-            cameraMan.AddCameras();
         }
 
         /// <summary>
@@ -52,6 +41,12 @@ namespace Game1.Engine.Render
         public void addEntity(iEntity ent)
         {
             entityList.Add(ent);
+
+            if (ent is ICameraSubject)
+            {
+                cameraMan.RequestCamera(ent);
+                cameraMan.AddCameras();
+            }
         }
 
         /// <summary>
@@ -93,7 +88,7 @@ namespace Game1.Engine.Render
         {
             foreach (var entity in drawList)
             {
-                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
+                spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White*entity.Transparency, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
             }
         }
 

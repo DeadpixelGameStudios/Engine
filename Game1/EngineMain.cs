@@ -58,7 +58,13 @@ namespace Game1
             var entities = entityManager.CreateLevel(levelInfo);
             foreach(var ent in entities)
             {
+                if(GraphicsDevice != null)
+                {
+                    sceneManager.LoadResource(ent);
+                }
+
                 sceneManager.Spawn(ent);
+                
             }
 
             return entities;

@@ -27,7 +27,8 @@ namespace GameCode
 
 #if Game
             var game = new GameMain(engine);
-            game.TestLevel();
+            //game.Start();
+            game.TestLevel(3);
 
             using (engine)
                 engine.Run();

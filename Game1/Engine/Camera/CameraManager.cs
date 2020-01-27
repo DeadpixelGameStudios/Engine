@@ -96,6 +96,8 @@ namespace Game1
             }
             #endregion
 
+            cameraList.Clear();
+
             var resolution = new Vector2(EngineMain.ScreenWidth, EngineMain.ScreenHeight);
 
             int subjectCount = 0;
