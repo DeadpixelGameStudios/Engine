@@ -42,9 +42,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\DemoPlayer.cs" />
+    <Compile Include="Entities\DemoWall.cs" />
     <Compile Include="DemoMain.cs" />
+    <Compile Include="Entities\IShape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
