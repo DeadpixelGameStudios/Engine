@@ -20,10 +20,10 @@ namespace DemoCode
 
         public void DemoLevel()
         {
-            engine.LoadEntity<Player>("Walls/player1", new Vector2(100, 100));
-            engine.LoadEntity<Wall>("Walls/wall-closed", new Vector2(200, 200));
-            engine.LoadEntity<Wall>("Walls/wall-closed", new Vector2(300, 300));
-            engine.LoadEntity<Wall>("Walls/wall-closed", new Vector2(400, 400));
+            engine.LoadEntity<DemoPlayer>("Walls/player1", new Vector2(100, 100));
+            engine.LoadEntity<DemoWall>("Walls/wall-closed", new Vector2(200, 200));
+            engine.LoadEntity<DemoWall>("Walls/wall-closed", new Vector2(300, 300));
+            engine.LoadEntity<DemoWall>("Walls/wall-closed", new Vector2(400, 400));
         }
 
     }

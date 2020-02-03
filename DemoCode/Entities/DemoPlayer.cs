@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace DemoCode.Entities
 {
-    internal class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
+    internal class DemoPlayer : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
     {
 
         #region Data Members
@@ -38,7 +38,7 @@ namespace DemoCode.Entities
         #endregion
 
         
-        public Player()
+        public DemoPlayer()
         {
             if (GamePad.GetCapabilities(playerCount).IsConnected)
             {
@@ -94,7 +94,7 @@ namespace DemoCode.Entities
                 {
                     if(!abilityTimeout)
                     {
-                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(DemoWall));
                         abilityTimeout = true;
                     }
                 }
@@ -195,7 +195,7 @@ namespace DemoCode.Entities
             {
                 if (!abilityTimeout)
                 {
-                    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(DemoWall));
                     abilityTimeout = true;
                 }
             }
