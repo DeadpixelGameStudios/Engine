@@ -155,9 +155,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game1\Game1.csproj">
+    <ProjectReference Include="..\DemoCode\DemoCode.csproj">
+      <Project>{846c6d5a-b847-4233-b933-512c889c1dfa}</Project>
+      <Name>DemoCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game1\EngineCode.csproj">
       <Project>{22419df7-6807-4642-9734-aa6ed80c6c53}</Project>
-      <Name>Game1</Name>
+      <Name>EngineCode</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

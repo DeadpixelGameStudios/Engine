@@ -1,11 +1,9 @@
 ﻿///
-/// Comment out whichever one you dont want
+/// Comment out to run as Demo
 ///
+//#define Game
 
-#define Game
-//#define Demo
-
-using System;
+using DemoCode;
 using Game1;
 
 
@@ -26,16 +24,16 @@ namespace GameCode
             var engine = new EngineMain();
 
 #if Game
-            var game = new GameMain(engine);
-            //game.Start();
+            GameMain game = new GameMain(engine);
             game.TestLevel(3);
+#else
+            Demo demo = new Demo(engine);
+            demo.DemoLevel();
+#endif
 
             using (engine)
                 engine.Run();
-#elif Demo
-            //write code for initing tech demo
-            engine.Run();
-#endif
+
         }
     }
 #endif

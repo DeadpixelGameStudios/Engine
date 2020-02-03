@@ -3,14 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1.csproj", "{22419DF7-6807-4642-9734-AA6ED80C6C53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineCode", "Game1\EngineCode.csproj", "{22419DF7-6807-4642-9734-AA6ED80C6C53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCode", "GameCode\GameCode.csproj", "{40197012-451A-438D-8B5C-347A9419241E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8FE15C2-E6B0-45A0-9496-684DCCBE13CE}"
-	ProjectSection(SolutionItems) = preProject
-		Program.cs = Program.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCode", "DemoCode\DemoCode.csproj", "{846C6D5A-B847-4233-B933-512C889C1DFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +23,10 @@ Global
 		{40197012-451A-438D-8B5C-347A9419241E}.Debug|x86.Build.0 = Debug|x86
 		{40197012-451A-438D-8B5C-347A9419241E}.Release|x86.ActiveCfg = Release|x86
 		{40197012-451A-438D-8B5C-347A9419241E}.Release|x86.Build.0 = Release|x86
+		{846C6D5A-B847-4233-B933-512C889C1DFA}.Debug|x86.ActiveCfg = Debug|x86
+		{846C6D5A-B847-4233-B933-512C889C1DFA}.Debug|x86.Build.0 = Debug|x86
+		{846C6D5A-B847-4233-B933-512C889C1DFA}.Release|x86.ActiveCfg = Release|x86
+		{846C6D5A-B847-4233-B933-512C889C1DFA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
