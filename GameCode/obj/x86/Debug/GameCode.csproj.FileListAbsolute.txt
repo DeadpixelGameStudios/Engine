@@ -208,3 +208,7 @@ C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\L
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Game1.dll
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.dll
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.pdb
+F:\University\Games\Engine\GameCode\obj\x86\Debug\GameCode.csprojAssemblyReference.cache
+F:\University\Games\Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompileInputs.cache
+F:\University\Games\Engine\GameCode\obj\x86\Debug\GameCode.exe
+F:\University\Games\Engine\GameCode\obj\x86\Debug\GameCode.pdb

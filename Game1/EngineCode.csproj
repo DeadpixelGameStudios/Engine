@@ -46,6 +46,9 @@
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Camera\CameraSubject.cs" />
+    <Compile Include="Engine\Collision\Node.cs" />
+    <Compile Include="Engine\Collision\Quadrant.cs" />
+    <Compile Include="Engine\Collision\QuadTree.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
     <Compile Include="Engine\Entity\LevelAsset.cs" />
     <Compile Include="Engine\Input\Controller\ControllerInput.cs" />
