@@ -1,128 +1,184 @@
 ﻿using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+//Adapted from: https://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374
+
 
 namespace Game1.Engine.Collision
 {
-    class QuadTree <T>
+    class QuadTree
     {
-        Rectangle bounds; // overall bounds we are indexing.
-        Quadrant root;
-        IDictionary<T, Quadrant> table;
+        private int MAX_OBJECTS = 10;
+        private int MAX_LEVELS = 5;
 
+        private int level;
+        private List<iEntity> objects;
+        private Rectangle bounds;
+        private QuadTree[] nodes;
 
-
-        /// <summary>
-        /// This determines the overall quad-tree indexing strategy, changing this bounds
-        /// is expensive since it has to re-divide the entire thing - like a re-hash operation.
-        /// </summary>
-        public Rectangle Bounds
+        /*
+         * Constructor
+         */
+        public QuadTree(int pLevel, Rectangle pBounds)
         {
-            get { return this.bounds; }
-            set { this.bounds = value; ReIndex(); }
+            level = pLevel;
+            objects = new List<iEntity>();
+            bounds = pBounds;
+            nodes = new QuadTree[4];
+
+            
         }
 
-        /// <summary>
-        /// Insert a node with given bounds into this QuadTree.
-        /// </summary>
-        /// <param name="node">The node to insert</param>
-        /// <param name="bounds">The bounds of this node</param>
-        public void Insert(T node, Rectangle bounds)
+        /*
+        * Clears the quadtree
+        */
+        public void clear()
         {
-           
-            if (this.root == null)
+            objects.Clear();
+
+            for (int i = 0; i < nodes.Length; i++)
             {
-                this.root = new Quadrant(null, this.bounds);
-            }
-
-            Quadrant parent = this.root.Insert(node, bounds);
-
-            if (this.table == null)
-            {
-                this.table = new Dictionary<T, Quadrant>();
-            }
-            this.table[node] = parent;
-
-
-        }
-
-        /// <summary>
-        /// Get a list of the nodes that intersect the given bounds.
-        /// </summary>
-        /// <param name="bounds">The bounds to test</param>
-        /// <returns>List of zero or mode nodes found inside the given bounds</returns>
-        public IEnumerable<T> GetNodesInside(Rectangle bounds)
-        {
-            foreach (Node<T> n in GetNodes(bounds))
-            {
-                yield return n.NodeItem;
-            }
-        }
-
-        /// <summary>
-        /// Get a list of the nodes that intersect the given bounds.
-        /// </summary>
-        /// <param name="bounds">The bounds to test</param>
-        /// <returns>List of zero or mode nodes found inside the given bounds</returns>
-        public bool HasNodesInside(Rectangle bounds)
-        {
-            if (this.root == null)
-            {
-                return false;
-            }
-            return this.root.HasIntersectingNodes(bounds);
-        }
-
-        /// <summary>
-        /// Get list of nodes that intersect the given bounds.
-        /// </summary>
-        /// <param name="bounds">The bounds to test</param>
-        /// <returns>The list of nodes intersecting the given bounds</returns>
-        IEnumerable<Node<T>> GetNodes(Rectangle bounds)
-        {
-            List<Node<T>> result = new List<Node<T>>();
-            if (this.root != null)
-            {
-                this.root.GetIntersectingNodes(result, bounds);
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Remove the given node from this QuadTree.
-        /// </summary>
-        /// <param name="node">The node to remove</param>
-        /// <returns>True if the node was found and removed.</returns>
-        public bool Remove(T node)
-        {
-            if (this.table != null)
-            {
-                Quadrant parent = null;
-                if (this.table.TryGetValue(node, out parent))
+                if (nodes[i] != null)
                 {
-                    parent.RemoveNode(node);
-                    this.table.Remove(node);
-                    return true;
+                    nodes[i].clear();
+                    nodes[i] = null;
                 }
             }
-            return false;
         }
 
-        /// <summary>
-        /// Rebuild all the Quadrants according to the current QuadTree Bounds.
-        /// </summary>
-        void ReIndex()
+        /*
+        * Splits the node into 4 subnodes
+        */
+        private void split()
         {
-            this.root = null;
-            foreach (Node<T> n in GetNodes(this.bounds))
+            int subWidth = (int)(bounds.Width / 2);
+            int subHeight = (int)(bounds.Height / 2);
+            int x = (int)bounds.X;
+            int y = (int)bounds.Y;
+
+            nodes[0] = new QuadTree(level + 1, new Rectangle(x + subWidth, y, subWidth, subHeight));
+            nodes[1] = new QuadTree(level + 1, new Rectangle(x, y, subWidth, subHeight));
+            nodes[2] = new QuadTree(level + 1, new Rectangle(x, y + subHeight, subWidth, subHeight));
+            nodes[3] = new QuadTree(level + 1, new Rectangle(x + subWidth, y + subHeight, subWidth, subHeight));
+        }
+
+        /*
+        * Determine which node the object belongs to. -1 means
+        * object cannot completely fit within a child node and is part
+        * of the parent node
+        */
+        private int getIndex(iEntity pEnt)
+        {
+            int index = -1;
+            double verticalMidpoint = bounds.X + (bounds.Width / 2);
+            double horizontalMidpoint = bounds.Y + (bounds.Height / 2);
+
+            // Object can completely fit within the top quadrants
+            bool topQuadrant = (pEnt.Position.Y < horizontalMidpoint && pEnt.Position.Y + pEnt.HitBox.Height < horizontalMidpoint);
+            // Object can completely fit within the bottom quadrants
+            bool bottomQuadrant = (pEnt.Position.Y > horizontalMidpoint);
+
+            // Object can completely fit within the left quadrants
+            if (pEnt.Position.X < verticalMidpoint && pEnt.Position.X + pEnt.HitBox.Width < verticalMidpoint)
             {
-                Insert(n.NodeItem, n.Bounds);
+                if (topQuadrant)
+                {
+                    index = 1;
+                }
+                else if (bottomQuadrant)
+                {
+                    index = 2;
+                }
+            }
+            // Object can completely fit within the right quadrants
+            else if (pEnt.Position.X > verticalMidpoint)
+            {
+                if (topQuadrant)
+                {
+                    index = 0;
+                }
+                else if (bottomQuadrant)
+                {
+                    index = 3;
+                }
+            }
+
+            return index;
+        }
+
+
+        /*
+        * Insert the object into the quadtree. If the node
+        * exceeds the capacity, it will split and add all
+        * objects to their corresponding nodes.
+        */
+        public void insert(iEntity pEnt)
+        {
+            if (nodes[0] != null)
+            {
+                int index = getIndex(pEnt);
+
+                if (index != -1)
+                {
+                    nodes[index].insert(pEnt);
+
+                    return;
+                }
+            }
+
+            objects.Add(pEnt);
+
+            if (objects.Count > MAX_OBJECTS && level < MAX_LEVELS)
+            {
+                if (nodes[0] == null)
+                {
+                    split();
+                }
+                
+
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    int index = getIndex(objects[i]);
+                    iEntity Current = objects[i];
+
+                    if (index != -1)
+                    {
+                        objects.RemoveAt(i);
+                        nodes[index].insert(Current);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
             }
         }
 
+        /*
+        * Return all objects that could collide with the given object
+        */
+        public void retrieve(List<iEntity> returnObjects, iEntity pEnt)
+        {
+           
+                if (nodes[0] != null)
+                {
+                    var index = getIndex(pEnt);
+                    if (index != -1)
+                    {
+                        nodes[index].retrieve(returnObjects, pEnt);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < nodes.Length; i++)
+                        {
+                            nodes[i].retrieve(returnObjects, pEnt);
+                    }
+                    }
+                }
 
-
+                returnObjects.AddRange(objects);
+            }
+        }
 
     }
 
-}

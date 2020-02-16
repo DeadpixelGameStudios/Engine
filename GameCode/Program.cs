@@ -24,11 +24,13 @@ namespace GameCode
             var engine = new EngineMain();
 
 #if Game
+            
+#else
             GameMain game = new GameMain(engine);
             game.TestLevel(3);
-#else
-            Demo demo = new Demo(engine);
-            demo.DemoLevel();
+
+            //Demo demo = new Demo(engine);
+            //demo.DemoLevel();
 #endif
 
             using (engine)
