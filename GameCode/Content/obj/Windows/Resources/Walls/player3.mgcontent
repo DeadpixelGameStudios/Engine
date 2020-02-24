@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/warc2_16/Documents/GitHub/Engine/GameCode/Content/Resources/Walls/player3.png</SourceFile>
-  <SourceTime>2020-02-03T17:07:23.2563405+00:00</SourceTime>
-  <DestFile>C:/Users/warc2_16/Documents/GitHub/Engine/GameCode/Content/bin/Windows/Resources/Walls/player3.xnb</DestFile>
-  <DestTime>2020-02-03T17:12:26.3272281+00:00</DestTime>
+  <SourceFile>C:/Users/inam1_16/Documents/GitHub/Engine/GameCode/Content/Resources/Walls/player3.png</SourceFile>
+  <SourceTime>2020-02-24T15:09:21.2186269+00:00</SourceTime>
+  <DestFile>C:/Users/inam1_16/Documents/GitHub/Engine/GameCode/Content/bin/Windows/Resources/Walls/player3.xnb</DestFile>
+  <DestTime>2020-02-24T15:50:56.0060883+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
