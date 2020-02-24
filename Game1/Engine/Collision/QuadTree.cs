@@ -8,33 +8,54 @@ namespace Game1.Engine.Collision
 {
     class QuadTree
     {
-        private int MAX_OBJECTS = 10;
-        private int MAX_LEVELS = 5;
+        private int MaxObjects = 3;
+        private int MaxLevels = 5;
 
         private int level;
-        private List<iEntity> objects;
+        private List<iEntity> EntityList;
         private Rectangle bounds;
         private QuadTree[] nodes;
 
-        /*
-         * Constructor
-         */
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLevel"></param>
+        /// <param name="pBounds"></param>
         public QuadTree(int pLevel, Rectangle pBounds)
         {
             level = pLevel;
-            objects = new List<iEntity>();
+            EntityList = new List<iEntity>();
             bounds = pBounds;
             nodes = new QuadTree[4];
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLevel"></param>
+        /// <param name="pBounds"></param>
+        /// <param name="pMaxObjects"></param>
+        /// <param name="pMaxLevels"></param>
+        public QuadTree(int pLevel, Rectangle pBounds, int pMaxObjects, int pMaxLevels)
+        {
+            level = pLevel;
+            EntityList = new List<iEntity>();
+            bounds = pBounds;
+            nodes = new QuadTree[4];
+
+            MaxObjects = pMaxObjects;
+            MaxLevels = pMaxLevels;
             
         }
 
-        /*
-        * Clears the quadtree
-        */
+
+        /// <summary>
+        /// clears quad tree ready for reindexing
+        /// </summary>
         public void clear()
         {
-            objects.Clear();
+            EntityList.Clear();
 
             for (int i = 0; i < nodes.Length; i++)
             {
@@ -46,9 +67,11 @@ namespace Game1.Engine.Collision
             }
         }
 
-        /*
-        * Splits the node into 4 subnodes
-        */
+
+
+        /// <summary>
+        /// Split into 4 nodes
+        /// </summary>
         private void split()
         {
             int subWidth = (int)(bounds.Width / 2);
@@ -61,24 +84,26 @@ namespace Game1.Engine.Collision
             nodes[2] = new QuadTree(level + 1, new Rectangle(x, y + subHeight, subWidth, subHeight));
             nodes[3] = new QuadTree(level + 1, new Rectangle(x + subWidth, y + subHeight, subWidth, subHeight));
         }
-
-        /*
-        * Determine which node the object belongs to. -1 means
-        * object cannot completely fit within a child node and is part
-        * of the parent node
-        */
+        
+        /// <summary>
+        /// Finds the pEnts node , if the entity doesnt fit into one node it is placed in the parent node (index -1)
+        /// </summary>
+        /// <param name="pEnt">Entity to find index of</param>
+        /// <returns></returns>
         private int getIndex(iEntity pEnt)
         {
+
+            // look at storing in each node instead of -1
             int index = -1;
             double verticalMidpoint = bounds.X + (bounds.Width / 2);
             double horizontalMidpoint = bounds.Y + (bounds.Height / 2);
 
-            // Object can completely fit within the top quadrants
+            // entity fits into top quad
             bool topQuadrant = (pEnt.Position.Y < horizontalMidpoint && pEnt.Position.Y + pEnt.HitBox.Height < horizontalMidpoint);
-            // Object can completely fit within the bottom quadrants
+            // entity fits into bottom quad
             bool bottomQuadrant = (pEnt.Position.Y > horizontalMidpoint);
 
-            // Object can completely fit within the left quadrants
+            // entity fits into left quad
             if (pEnt.Position.X < verticalMidpoint && pEnt.Position.X + pEnt.HitBox.Width < verticalMidpoint)
             {
                 if (topQuadrant)
@@ -90,7 +115,7 @@ namespace Game1.Engine.Collision
                     index = 2;
                 }
             }
-            // Object can completely fit within the right quadrants
+            // entity fits into right quad
             else if (pEnt.Position.X > verticalMidpoint)
             {
                 if (topQuadrant)
@@ -105,13 +130,10 @@ namespace Game1.Engine.Collision
 
             return index;
         }
-
-
-        /*
-        * Insert the object into the quadtree. If the node
-        * exceeds the capacity, it will split and add all
-        * objects to their corresponding nodes.
-        */
+        /// <summary>
+        /// Insert object into qad tree, if the capacity is reached for the node it gets split
+        /// </summary>
+        /// <param name="pEnt">Entity to insert</param>
         public void insert(iEntity pEnt)
         {
             if (nodes[0] != null)
@@ -126,9 +148,9 @@ namespace Game1.Engine.Collision
                 }
             }
 
-            objects.Add(pEnt);
+            EntityList.Add(pEnt);
 
-            if (objects.Count > MAX_OBJECTS && level < MAX_LEVELS)
+            if (EntityList.Count > MaxObjects && level < MaxLevels)
             {
                 if (nodes[0] == null)
                 {
@@ -136,14 +158,14 @@ namespace Game1.Engine.Collision
                 }
                 
 
-                for (int i = 0; i < objects.Count; i++)
+                for (int i = 0; i < EntityList.Count; i++)
                 {
-                    int index = getIndex(objects[i]);
-                    iEntity Current = objects[i];
+                    int index = getIndex(EntityList[i]);
+                    iEntity Current = EntityList[i];
 
                     if (index != -1)
                     {
-                        objects.RemoveAt(i);
+                        EntityList.RemoveAt(i);
                         nodes[index].insert(Current);
                     }
                     else
@@ -154,15 +176,18 @@ namespace Game1.Engine.Collision
             }
         }
 
-        /*
-        * Return all objects that could collide with the given object
-        */
+        /// <summary>
+        /// Finds all entities that could collide with a specific entity
+        /// </summary>
+        /// <param name="returnObjects">List of objects that could collide</param>
+        /// <param name="pEnt">Entity to check for potential colliders</param>
         public void retrieve(List<iEntity> returnObjects, iEntity pEnt)
         {
-           
+                //if there has been a division
                 if (nodes[0] != null)
                 {
-                    var index = getIndex(pEnt);
+                    
+                    int index = getIndex(pEnt);
                     if (index != -1)
                     {
                         nodes[index].retrieve(returnObjects, pEnt);
@@ -176,7 +201,7 @@ namespace Game1.Engine.Collision
                     }
                 }
 
-                returnObjects.AddRange(objects);
+                returnObjects.AddRange(EntityList);
             }
         }
 
