@@ -1,8 +1,10 @@
 ﻿using Game1.Engine.Entity;
+using Game1.Engine.PathFinding;
 using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Game1
@@ -18,6 +20,8 @@ namespace Game1
 
         public static int ScreenWidth, ScreenHeight;
         bool paused = false;
+
+        IBinaryTree binaryTree;
 
         public EngineMain()
         {
@@ -44,6 +48,7 @@ namespace Game1
 
             sceneManager = new SceneManager(Content);
             entityManager = new EntityManager();
+            binaryTree = new BinaryTree();
         }
 
 
@@ -80,7 +85,11 @@ namespace Game1
             {
                 sceneManager.LoadResource(ent);
             }
-            
+
+            binaryTree.Root = new BinaryTreeNode(ent);
+
+            Console.WriteLine(binaryTree.Root);
+
             return ent;
         }
 

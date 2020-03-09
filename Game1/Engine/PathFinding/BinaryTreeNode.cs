@@ -11,23 +11,73 @@ namespace Game1.Engine.PathFinding
     {
         public IBinaryTreeNode Left
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get
+            {
+                if (Neighbours == null)
+                {
+                    return null;
+                }
+                return (IBinaryTreeNode) Neighbours[0];
+            }
+            set
+            {
+                if (Neighbours == null)
+                {
+                    Neighbours = new List<IPathFindingNode>();
+                    Neighbours.Add(new PathFindingNode());
+                    Neighbours.Add(new PathFindingNode());
+                }
+
+                Neighbours[0] = (IPathFindingNode)value;
+            }
         }
+
         public IBinaryTreeNode Right
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get
+            {
+                if (Neighbours == null)
+                {
+                    return null;
+                }
+                return (IBinaryTreeNode)Neighbours[1];
+            }
+            set
+            {
+                if (Neighbours == null)
+                {
+                    Neighbours = new List<IPathFindingNode>();
+                    Neighbours.Add(new PathFindingNode());
+                    Neighbours.Add(new PathFindingNode());
+                }
+
+                Neighbours[1] = (IPathFindingNode)value;
+            }
         }
 
         public BinaryTreeNode() { }
 
+        //public BinaryTreeNode(iEntity pNode, IList<IPathFindingNode> paths = default(IList<IPathFindingNode>))
+        //{
+
+        //}
+
+        public BinaryTreeNode(iEntity data): base(data, null) { }
+
         public BinaryTreeNode(iEntity path, IBinaryTreeNode pLeft, IBinaryTreeNode pRight)
         {
+            NodePath = path;
 
+            IList<IPathFindingNode> children = new List<IPathFindingNode>
+            {
+                (BinaryTreeNode)pLeft,
+                (BinaryTreeNode)pRight
+            };
+
+            Neighbours = children;
         }
 
-        //(iEntity pNode, IList<IPathFindingNode> paths = default(IList<IPathFindingNode>))
+
 
     }
 }

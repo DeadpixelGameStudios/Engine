@@ -55,8 +55,12 @@
     <Compile Include="Engine\Managers\iManager.cs" />
     <Compile Include="Engine\PathFinding\BinaryTree.cs" />
     <Compile Include="Engine\PathFinding\BinaryTreeNode.cs" />
+    <Compile Include="Engine\PathFinding\BreadthFirstSearch.cs" />
+    <Compile Include="Engine\PathFinding\DepthFirstSearch.cs" />
     <Compile Include="Engine\PathFinding\IBinaryTree.cs" />
     <Compile Include="Engine\PathFinding\IBinaryTreeNode.cs" />
+    <Compile Include="Engine\PathFinding\IBreadthFirstSearch.cs" />
+    <Compile Include="Engine\PathFinding\IDepthFirstSearch.cs" />
     <Compile Include="Engine\PathFinding\IPathFinding.cs" />
     <Compile Include="Engine\PathFinding\IPathFindingNode.cs" />
     <Compile Include="Engine\PathFinding\PathFinding.cs" />
