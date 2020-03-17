@@ -5,7 +5,6 @@ using Game1.Engine.Entity;
 using Game1.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 
 namespace DemoCode.Entities
@@ -17,9 +16,9 @@ namespace DemoCode.Entities
 
         private List<BasicInput> inputOptions = new List<BasicInput>
         {
+            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
             new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.None, Keys.E),
             new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.None, Keys.End),
-            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
             new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6, Keys.None, Keys.NumPad9)
         };
 
@@ -59,14 +58,16 @@ namespace DemoCode.Entities
 
                 KeyboardInput.Subscribe(this, keys.allKeys);
                 inputKeys = keys;
-                acceleration = 8f;
+                acceleration = 0.5f;
             }
         
             playerCount++;
             
-            CollisionManager.subCollision(this);
+            //CollisionManager.subCollision(this);
 
             DrawPriority = 1f;
+
+            listenToCollisions = true;
         }
 
         
@@ -92,6 +93,7 @@ namespace DemoCode.Entities
                 }
                 else if(key == inputKeys.use)
                 {
+                    Transparency = 1;
                     if(!abilityTimeout)
                     {
                         OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(DemoWall));

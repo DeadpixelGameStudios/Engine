@@ -63,7 +63,7 @@ namespace GameCode.Entities
         
             playerCount++;
             
-            CollisionManager.subCollision(this);
+            //CollisionManager.subCollision(this);
 
             DrawPriority = 1f;
         }

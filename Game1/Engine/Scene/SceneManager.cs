@@ -109,7 +109,8 @@ namespace Game1.Engine.Scene
                 // Insert entity into scene
                 sceneGraph.addEntity(entityInstance);
                 storeEntity.Add(entityInstance);
-                collManager.addCollidable(entityInstance);
+
+                collManager.AddCollidable(entityInstance);
 
                 renderMan.addEntity(entityInstance);
             }

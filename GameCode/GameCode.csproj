@@ -83,6 +83,9 @@
     <Content Include="Content\Resources\Walls\4player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\pent.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Resources\Walls\player1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

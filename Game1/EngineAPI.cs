@@ -20,7 +20,7 @@ namespace Game1
         /// <param name="texture">The texture of the requested entity</param>
         /// <typeparam name="T">Generic</typeparam>
         /// <returns>Reference to EntityInstance</returns>
-        T LoadEntity<T>(string texture, Vector2 postion) where T : iEntity, new();
+        T LoadEntity<T>(string texture, Vector2 postion, List<Vector2> verts = default(List<Vector2>)) where T : iEntity, new();
 
         /// <summary>
         /// Request to create a new Instance of UI

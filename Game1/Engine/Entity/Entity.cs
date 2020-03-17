@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game1.Engine.Shape;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,8 +11,9 @@ namespace Game1.Engine.Entity
     /// <summary>
     /// Abstraction for any game entity
     /// </summary>
-    public abstract class Entity : iEntity
+    public abstract class Entity : iEntity, IShape
     {
+        #region EventHandlers
         public event EventHandler<EntityRequestArgs> EntityRequested;
 
         /// <summary>
@@ -31,8 +33,8 @@ namespace Game1.Engine.Entity
         {
             LevelFinished?.Invoke(this, new EventArgs());
         }
-
-
+        #endregion
+        
         #region Properties
 
         public Vector2 Position
@@ -65,7 +67,7 @@ namespace Game1.Engine.Entity
             get;
             set;
         }
-        
+
         public string TextureString
         {
             get;
@@ -123,6 +125,8 @@ namespace Game1.Engine.Entity
             get;
             set;
         } = 1f;
+
+        
 
         #region TEMPORARY COLLISION VARS REMOVE THESE BASTARDS WHEN EVENTS ARE DONE
         public bool isColliding
@@ -235,12 +239,22 @@ namespace Game1.Engine.Entity
         /// <param name="name">The UName of the entity</param>
         /// <param name="tex">The texture of the entity</param>
         /// <param name="pos">The starting postion of the entity</param>
-        public void Setup(Guid id, string name, string tex, Vector2 pos)
+        public void Setup(Guid id, string name, string tex, Vector2 pos, List<Vector2> verts = default(List<Vector2>))
         {
             UID = id;
             UName = name;
             TextureString = tex;
             Position = pos;
+
+            if(verts != default(List<Vector2>))
+            {
+                Vertices = verts;
+            }
+            else
+            {
+                Vertices = new List<Vector2>() { new Vector2(0, 0), new Vector2(50, 0), new Vector2(50, 50), new Vector2(0, 50) };
+            }
+            
         }
 
         /// <summary>
@@ -252,6 +266,41 @@ namespace Game1.Engine.Entity
         {
         }
 
+
+
         #endregion
+
+        #region IShape
+
+        public List<Vector2> Vertices
+        {
+            get;
+            set;
+        }
+
+        public List<Vector2> GetVertices()
+        {
+            return Vertices;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return Position;
+        }
+
+        public Rectangle GetBoundingBox()
+        {
+            return HitBox;
+        }
+
+        protected bool listenToCollisions = false;
+
+        public bool IsCollisionListener()
+        {
+            return listenToCollisions;
+        }
+
+        #endregion
+
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Camera\CameraSubject.cs" />
+    <Compile Include="Engine\Collision\SAT.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
     <Compile Include="Engine\Entity\LevelAsset.cs" />
     <Compile Include="Engine\Input\Controller\ControllerInput.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
     <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
     <Compile Include="Engine\Managers\iManager.cs" />
+    <Compile Include="Engine\Misc\MathsHelper.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />
     <Compile Include="Engine\Collision\CollisionMap.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Engine\Scene\SceneGraph.cs" />
     <Compile Include="Engine\Scene\SceneManager.cs" />
     <Compile Include="EngineMain.cs" />
+    <Compile Include="Engine\Shape\IShape.cs" />
     <Compile Include="Engine\UI\IInteractiveUI.cs" />
     <Compile Include="Engine\UI\InteractiveUI.cs" />
     <Compile Include="Engine\UI\IStaticUI.cs" />

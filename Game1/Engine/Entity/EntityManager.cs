@@ -48,9 +48,9 @@ namespace Game1.Engine.Entity
         /// <param name="texture">The texture string</param>
         /// <param name="position">POsition of the entity</param>
         /// <returns></returns>
-        public T RequestInstanceAndSetup<T>(string texture, Vector2 position) where T : iEntity, new()
+        public T RequestInstanceAndSetup<T>(string texture, Vector2 position, List<Vector2> verts = default(List<Vector2>)) where T : iEntity, new()
         {
-            return CreateInstanceAndSetup<T>(texture, position);
+            return CreateInstanceAndSetup<T>(texture, position, verts);
         }
 
 
@@ -66,7 +66,7 @@ namespace Game1.Engine.Entity
             foreach (var asset in level)
             {
                 var ent = (iEntity)Activator.CreateInstance(asset.info.type);
-                Setup(ent, asset.info.texture, asset.position);
+                Setup(ent, asset.info.texture, asset.position, default(List<Vector2>));
                 returnList.Add(ent);
             }
 
@@ -94,10 +94,10 @@ namespace Game1.Engine.Entity
         /// <param name="texture"></param>
         /// <param name="pos"></param>
         /// <returns></returns>
-        private T CreateInstanceAndSetup<T>(string texture, Vector2 pos) where T : iEntity, new()
+        private T CreateInstanceAndSetup<T>(string texture, Vector2 pos, List<Vector2> verts) where T : iEntity, new()
         {
             var requestedEntity = CreateInstance<T>();
-            Setup(requestedEntity, texture, pos);
+            Setup(requestedEntity, texture, pos, verts);
 
             return requestedEntity;
         }
@@ -108,11 +108,11 @@ namespace Game1.Engine.Entity
         /// <param name="entity">The entity to setup</param>
         /// <param name="texture">The texture to set for that entity</param>
         /// <param name="pos">The position of the entity</param>
-        private void Setup(iEntity entity, string texture = "default", Vector2 pos = default(Vector2))
+        private void Setup(iEntity entity, string texture, Vector2 pos, List<Vector2> verts)
         {
             var id = Guid.NewGuid();
 
-            entity.Setup(id, setEntityUName(entity.GetType().Name), texture, pos);
+            entity.Setup(id, setEntityUName(entity.GetType().Name), texture, pos, verts);
         }
 
 
