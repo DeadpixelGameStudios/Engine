@@ -71,9 +71,9 @@ namespace Game1
         }
 
 
-        public T LoadEntity<T>(string texture, Vector2 position) where T : iEntity, new()
+        public T LoadEntity<T>(string texture, Vector2 position, List<Vector2> verts = default(List<Vector2>)) where T : iEntity, new()
         {
-            var ent = entityManager.RequestInstanceAndSetup<T>(texture, position);
+            var ent = entityManager.RequestInstanceAndSetup<T>(texture, position, verts);
             sceneManager.Spawn(ent);
 
             if(GraphicsDevice != null)

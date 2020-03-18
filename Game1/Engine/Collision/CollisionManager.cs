@@ -1,80 +1,117 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game1.Engine.Entity;
 using Game1.Engine.Managers;
+using Game1.Engine.Misc;
+using Game1.Engine.Shape;
+using Microsoft.Xna.Framework;
+using static Game1.Engine.Misc.MathsHelper;
+using static Game1.Engine.Collision.SAT;
 
 namespace Game1
 {
     public class CollisionManager: iCollisionManager, iManager
     {
+        private List<IShape> collidableList = new List<IShape>();
+        private List<IShape> collisionListeners = new List<IShape>();
 
-        #region SHIT COLLISION TO BE DELETED WHEN EVENTS ARE IN
 
-        List<iEntity> Collidables = new List<iEntity>();
-        public static List<iEntity> subList = new List<iEntity>();
-        
-
-        public void UpdateCollidableList(List<iEntity> pCollidables)
+        public void AddCollidable(IShape collidable)
         {
-            Collidables.Clear();
-            for (int i = 0; i < pCollidables.Count;i++)
+            //will have some logic to add things to quadtree
+            //do we still need to sort out scenegraph?
+
+            if (collidable.IsCollisionListener())
             {
-                if(pCollidables[i] is iCollidable)
-                {
-                    Collidables.Add(pCollidables[i]);
-                }
-                
+                collisionListeners.Add(collidable);
+                return;
             }
-             
+
+            collidableList.Add(collidable);
         }
 
-        public void addCollidables(List<iEntity> entList)
+        private List<IShape> BroadPhase(IShape shape)
         {
-            UpdateCollidableList(entList);
+            return collidableList;
         }
 
-        public void addCollidable(iEntity ent)
+
+        private void MidPhase(List<IShape> midList, IShape shape)
         {
-            if(ent is iCollidable)
+            foreach (IShape col in midList)
             {
-                Collidables.Add(ent);
-            }
-        }
-
-        public void CheckCollision()
-        {
-            checkCollidables();
-        }
-
-        public static void subCollision(iEntity ent)
-        {
-            subList.Add(ent);
-        }
-
-        private void checkCollidables()
-        {
-            foreach (var ent1 in subList)
-            {
-                foreach (var ent2 in Collidables)
+                if (col.GetBoundingBox().Intersects(shape.GetBoundingBox()))
                 {
-                    if(ent1.UName != ent2.UName)
+                    //Checks to see whether the vertices of the shape are the same as the bounding box
+                    if (!isSameAsBoundingBox(col) || !isSameAsBoundingBox(shape))
                     {
-                        if (ent1.HitBox.Intersects(ent2.HitBox))
-                        {
-                            ent1.isColliding = true;
-                            iEntity ColidedEntity = ent2;
-                            ent1.CollidingEntity = ColidedEntity;
-                        }
+                        //Go to narrow phase (SAT) if either shape isnt
+                        NarrowPhase(col, shape);
+                    }
+                    else
+                    {
+                        //collision alert - events or not? not sure yet, but probably
                     }
                 }
-            }
 
+            }
         }
 
+
+        private void NarrowPhase(IShape col1, IShape col2)
+        {
+            //Get list of each shapes vertices
+            List<Vector2> shape1Vertices = col1.GetVertices();
+            List<Vector2> shape2Vertices = col2.GetVertices();
+
+            //Add the shape position to each vertex
+            List<Vector2> shape1VertPosition = new List<Vector2>();
+            foreach(var vert in shape1Vertices)
+            {
+                shape1VertPosition.Add(col1.GetPosition() + vert);
+            }
+
+            List<Vector2> shape2VertPosition = new List<Vector2>();
+            foreach (var vert in shape2Vertices)
+            {
+                shape2VertPosition.Add(col2.GetPosition() + vert);
+            }
+
+            //Check for overlap
+            bool shape1Overlap = Overlapping(shape1VertPosition, shape2VertPosition);
+            bool shape2Overlap = Overlapping(shape2VertPosition, shape1VertPosition);
+
+            //Test code to add transparency if theres overlap
+            if(!shape1Overlap || !shape2Overlap)
+            {
+                //not colliding
+                iEntity ghj = (iEntity)col2;
+                ghj.Transparency = 1f;
+            }
+            else
+            {
+                //colliding
+                iEntity ghj = (iEntity)col2;
+                ghj.Transparency = 0.5f;
+            }
+        }
+
+        private void CollisionPhases()
+        {
+            foreach(IShape collisionListener in collisionListeners)
+            {
+                //List of shapes returned from the broad phase
+                List<IShape> broadPhase = BroadPhase(collisionListener);
+
+                //Mid phase basic AABB
+                MidPhase(broadPhase, collisionListener);
+            }
+        }
 
         public void Update()
         {
-            CheckCollision();
+            CollisionPhases();
         }
-        #endregion  
+
     }
 }

@@ -21,7 +21,7 @@ namespace Game1.Engine.Entity
         /// <param name="texture">The texture of the requested entity</param>
         /// <typeparam name="T">Generic</typeparam>
         /// <returns>Reference to EntityInstance</returns>
-        T RequestInstanceAndSetup<T>(string texture, Vector2 postion) where T : iEntity, new();
+        T RequestInstanceAndSetup<T>(string texture, Vector2 postion, List<Vector2> verts = default(List<Vector2>)) where T : iEntity, new();
 
         /// <summary>
         /// Take level info and init all

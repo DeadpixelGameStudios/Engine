@@ -71,7 +71,6 @@ C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csproj
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.exe
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.pdb
 C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csprojAssemblyReference.cache
-C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompileInputs.cache
 C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.exe
 C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.pdb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\default.png
@@ -208,3 +207,11 @@ C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\L
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Game1.dll
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.dll
 C:\Users\warc2_16\Documents\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.pdb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.dll
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.pdb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pent.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pent.xnb
+C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompileInputs.cache
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pentagon.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\random hex.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\reg-hex.xnb
