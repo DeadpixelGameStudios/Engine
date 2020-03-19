@@ -52,3 +52,30 @@ C:\Users\inam1_16\Documents\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX
 C:\Users\inam1_16\Documents\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\inam1_16\Documents\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\inam1_16\Documents\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CopyComplete
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\DemoCode.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\DemoCode.pdb
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\Game1.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\Game1.pdb
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Zaib\Documents\Game Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Zaib\Documents\Game Engine\DemoCode\obj\x86\Debug\DemoCode.csprojAssemblyReference.cache
+D:\Zaib\Documents\Game Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CoreCompileInputs.cache
+D:\Zaib\Documents\Game Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CopyComplete
+D:\Zaib\Documents\Game Engine\DemoCode\obj\x86\Debug\DemoCode.dll
+D:\Zaib\Documents\Game Engine\DemoCode\obj\x86\Debug\DemoCode.pdb

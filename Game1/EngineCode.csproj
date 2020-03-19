@@ -53,6 +53,13 @@
     <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
     <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
     <Compile Include="Engine\Managers\iManager.cs" />
+    <Compile Include="Engine\Pathfinding2\BinaryTree.cs" />
+    <Compile Include="Engine\Pathfinding2\BinaryTreeNode.cs" />
+    <Compile Include="Engine\Pathfinding2\Grid.cs" />
+    <Compile Include="Engine\Pathfinding2\IBinaryTree.cs" />
+    <Compile Include="Engine\Pathfinding2\IBinaryTreeNode.cs" />
+    <Compile Include="Engine\Pathfinding2\INode.cs" />
+    <Compile Include="Engine\Pathfinding2\Node.cs" />
     <Compile Include="Engine\PathFinding\BinaryTree.cs" />
     <Compile Include="Engine\PathFinding\BinaryTreeNode.cs" />
     <Compile Include="Engine\PathFinding\BreadthFirstSearch.cs" />
@@ -61,9 +68,7 @@
     <Compile Include="Engine\PathFinding\IBinaryTreeNode.cs" />
     <Compile Include="Engine\PathFinding\IBreadthFirstSearch.cs" />
     <Compile Include="Engine\PathFinding\IDepthFirstSearch.cs" />
-    <Compile Include="Engine\PathFinding\IPathFinding.cs" />
     <Compile Include="Engine\PathFinding\IPathFindingNode.cs" />
-    <Compile Include="Engine\PathFinding\PathFinding.cs" />
     <Compile Include="Engine\PathFinding\PathFindingNode.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />

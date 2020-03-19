@@ -45,6 +45,7 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="DemoMain.cs" />
+    <Compile Include="DemoLevel\DemoLevelLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

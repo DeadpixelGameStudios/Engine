@@ -25,10 +25,10 @@ namespace GameCode
 
 #if Game
             GameMain game = new GameMain(engine);
-            game.TestLevel(3);
+            game.TestLevel(1);
 #else
             Demo demo = new Demo(engine);
-            demo.DemoLevel();
+            demo.DemoLevel(1);
 #endif
 
             using (engine)

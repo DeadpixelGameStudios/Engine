@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/inam1_16/Documents/GitHub/Engine/GameCode/Content/Resources/2player-button.png</SourceFile>
-  <SourceTime>2020-03-09T15:12:52.661096+00:00</SourceTime>
-  <DestFile>C:/Users/inam1_16/Documents/GitHub/Engine/GameCode/Content/bin/Windows/Resources/2player-button.xnb</DestFile>
-  <DestTime>2020-03-09T15:25:21.1732873+00:00</DestTime>
+  <SourceFile>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/2player-button.png</SourceFile>
+  <SourceTime>2020-03-17T16:54:54.4627036+00:00</SourceTime>
+  <DestFile>D:/Zaib/Documents/Game Engine/GameCode/Content/bin/Windows/Resources/2player-button.xnb</DestFile>
+  <DestTime>2020-03-17T18:09:18.7002203+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -1,5 +1,6 @@
 ﻿using Game1.Engine.Entity;
 using Game1.Engine.PathFinding;
+using Game1.Engine.Pathfinding2;
 using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,7 +22,10 @@ namespace Game1
         public static int ScreenWidth, ScreenHeight;
         bool paused = false;
 
-        IBinaryTree binaryTree;
+        //IBinaryTree binaryTree;
+
+
+        Grid grid;
 
         public EngineMain()
         {
@@ -48,7 +52,6 @@ namespace Game1
 
             sceneManager = new SceneManager(Content);
             entityManager = new EntityManager();
-            binaryTree = new BinaryTree();
         }
 
 
@@ -75,6 +78,22 @@ namespace Game1
             return entities;
         }
 
+        public void SetPathFindingGrid(int pMapWidth, int pMapHeight)
+        {
+            grid = new Grid(pMapWidth, pMapHeight, 50);
+
+            //binaryTree.Root = new BinaryTreeNode(ent);
+
+            //Console.WriteLine(binaryTree.Root);
+
+            //Graph[,] graph = new Graph[ScreenWidth, ScreenHeight];
+
+            //for (int i = 0; i < ScreenHeight; i++)
+            //{
+
+            //}
+        }
+
 
         public T LoadEntity<T>(string texture, Vector2 position) where T : iEntity, new()
         {
@@ -84,11 +103,7 @@ namespace Game1
             if(GraphicsDevice != null)
             {
                 sceneManager.LoadResource(ent);
-            }
-
-            binaryTree.Root = new BinaryTreeNode(ent);
-
-            Console.WriteLine(binaryTree.Root);
+            }            
 
             return ent;
         }

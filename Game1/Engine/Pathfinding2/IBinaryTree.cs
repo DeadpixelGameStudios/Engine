@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.Engine.PathFinding
+namespace Game1.Engine.Pathfinding2
 {
-    interface IPathFinding
+    public interface IBinaryTree
     {
-
+        IBinaryTreeNode Root { get; set; }
+        void Clear();
     }
 }
