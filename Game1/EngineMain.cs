@@ -78,9 +78,26 @@ namespace Game1
             return entities;
         }
 
-        public void SetPathFindingGrid(int pMapWidth, int pMapHeight)
+        public void SetPathFindingGrid(int pMapWidth, int pMapHeight, bool showGrid)
         {
             grid = new Grid(pMapWidth, pMapHeight, 50);
+
+            if(showGrid)
+            {
+                for (int row = 0; row < grid.getGridXLength; row++)
+                {
+                    for (int column = 0; column < grid.getGridYLength; column++)
+                    {
+                        sceneManager.Spawn((iEntity)grid.grid[row, column]);
+
+                        if (GraphicsDevice != null)
+                        {
+                            sceneManager.LoadResource((iEntity)grid.grid[row, column]);
+                        }
+                    }
+                }
+            }
+            
 
             //binaryTree.Root = new BinaryTreeNode(ent);
 

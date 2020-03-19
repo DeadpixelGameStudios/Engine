@@ -53,7 +53,13 @@ namespace DemoCode
                 ent.EntityRequested += OnEntityRequested;
             }
 
-            engine.SetPathFindingGrid(levelLoader.levelWidth, levelLoader.levelHeight);
+            if (playerCount > 1)
+            {
+                string uiSeperator = "Walls/" + playerCount.ToString() + "player";
+                engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
+            }
+
+            engine.SetPathFindingGrid(levelLoader.levelWidth, levelLoader.levelHeight, true);
         }
 
         private void OnEntityRequested(object sender, EntityRequestArgs e)

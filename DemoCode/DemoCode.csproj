@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\UI.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="DemoMain.cs" />
     <Compile Include="DemoLevel\DemoLevelLoader.cs" />

@@ -31,7 +31,7 @@ namespace Game1.Engine.Pathfinding2
             {
                 for (int y = 0; y < grid.GetLength(1); y++)
                 {
-                    grid[x, y] = new Node(new Vector2(x,y));
+                    grid[x, y] = new Node(new Vector2(x * cellSize, y * cellSize));
                 }
             }
 

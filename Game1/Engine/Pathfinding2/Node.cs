@@ -51,10 +51,17 @@ namespace Game1.Engine.Pathfinding2
         /// </summary>
         public int FCost => GCost + HCost;
 
+        //public Vector2 Position { get; set; }
+
+        //public string Texture { get; set; }
+
         public Node(Vector2 pPosition)
         {
             //Walkable = pWalkable;
             Position = pPosition;
+            TextureString = "Walls/node";
+            //Transparency = 0.1f;
+            DrawPriority = 10;
         }
 
         public Node()

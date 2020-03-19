@@ -420,3 +420,6 @@ D:\Zaib\Documents\Game Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompile
 D:\Zaib\Documents\Game Engine\GameCode\obj\x86\Debug\GameCode.csproj.CopyComplete
 D:\Zaib\Documents\Game Engine\GameCode\obj\x86\Debug\GameCode.exe
 D:\Zaib\Documents\Game Engine\GameCode\obj\x86\Debug\GameCode.pdb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.dll
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.pdb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\node.xnb

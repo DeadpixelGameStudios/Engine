@@ -38,6 +38,6 @@ namespace Game1
         /// <param name="ent">The entity to unload</param>
         void UnLoad(iEntity ent);
 
-        void SetPathFindingGrid(int pMapWidth, int pMapHeight);
+        void SetPathFindingGrid(int pMapWidth, int pMapHeight, bool showGrid = false);
     }
 }
