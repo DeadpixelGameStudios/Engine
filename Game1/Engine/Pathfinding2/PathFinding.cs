@@ -46,8 +46,17 @@ namespace Game1.Engine.Pathfinding2
 
             while (openNodes.Count != 0)
             {
+                INode node = openNodes[0];
+                for (int i = 0; i < openNodes.Count; i++)
+                {
+                    if (openNodes[i].FCost < currentNode.FCost || openNodes[i].FCost == currentNode.FCost && openNodes[i].HCost< currentNode.HCost)
+                    {
+                        currentNode = openNodes[i];
+                    }
+                }
                 openNodes.Remove(currentNode);
                 currentNode.Visited = true;
+                closeNodes.Add(currentNode);
 
                 if (currentNode == targetNode)
                 {
@@ -59,7 +68,6 @@ namespace Game1.Engine.Pathfinding2
                     if (neighbour.Walkable)
                     {
                         startNode.HCost = EstimateHCost(startNode, targetNode);
-
                         int movementCost = currentNode.GCost + EstimateHCost(currentNode, neighbour);
 
                         if (movementCost < neighbour.GCost || !openNodes.Contains(neighbour))
