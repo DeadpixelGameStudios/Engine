@@ -9,8 +9,8 @@
     <ProjectGuid>{22419DF7-6807-4642-9734-AA6ED80C6C53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game1</RootNamespace>
-    <AssemblyName>Game1</AssemblyName>
+    <RootNamespace>Engine</RootNamespace>
+    <AssemblyName>Engine</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -46,6 +46,7 @@
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Camera\CameraSubject.cs" />
+    <Compile Include="Engine\Collision\QuadTree.cs" />
     <Compile Include="Engine\Collision\SAT.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
     <Compile Include="Engine\Entity\LevelAsset.cs" />

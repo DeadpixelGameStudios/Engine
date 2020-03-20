@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Game1;
-using Game1.Engine.Entity;
-using Game1.Engine.Shape;
+using Engine;
+using Engine.Collision;
+using Engine.Entity;
+using Engine.Shape;
 using Microsoft.Xna.Framework;
 //using Game1.Engine.Shape;
 

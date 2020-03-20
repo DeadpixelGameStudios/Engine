@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.Engine.Camera
+namespace Engine.Camera
 {
     public interface ICameraSubject
     {

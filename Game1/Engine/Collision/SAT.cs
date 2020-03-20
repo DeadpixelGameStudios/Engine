@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Game1.Engine.Misc.MathsHelper;
+using static Engine.Misc.MathsHelper;
 
-namespace Game1.Engine.Collision
+namespace Engine.Collision
 {
     /// <summary>
     /// Class with methods for seperating axis theorem

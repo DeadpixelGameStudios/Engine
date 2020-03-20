@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using Game1.Engine.Managers;
+using Engine.Managers;
 using System;
 using System.Linq;
-using Game1.Engine.Entity;
 
-namespace Game1.Engine.Input
+namespace Engine.Input
 {
     public class KeyboardInput : IKeyboardInputObserverable, iManager
     {

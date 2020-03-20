@@ -1,10 +1,10 @@
-﻿using Game1.Engine.Shape;
+﻿using Engine.Shape;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace Game1.Engine.Entity
+namespace Engine.Entity
 {
     /// <summary>
     /// Contract for any game entity

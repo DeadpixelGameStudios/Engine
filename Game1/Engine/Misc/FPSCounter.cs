@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Game1.Engine.Misc.FPSCounter
+namespace Engine.Misc.FPSCounter
 {
     public class FrameCounter
     {

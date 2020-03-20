@@ -1,8 +1,4 @@
-﻿using System;
-using Game1.Engine.Entity;
-using Game1.Engine.Input;
-using Game1.Engine.UI;
-using Microsoft.Xna.Framework;
+﻿using Engine.Entity;
 
 namespace GameCode.Entities
 {

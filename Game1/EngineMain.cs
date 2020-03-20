@@ -1,11 +1,11 @@
-﻿using Game1.Engine.Entity;
-using Game1.Engine.Scene;
+﻿using Engine.Entity;
+using Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace Game1
+namespace Engine
 {
     /// <summary>
     /// This is the main type for your game.

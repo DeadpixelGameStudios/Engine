@@ -1,11 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using Game1;
-using Game1.Engine.Entity;
+using Engine;
+using Engine.Entity;
 using GameCode.Entities;
-using Game1.Engine.UI;
 using System.Linq;
 
 namespace GameCode

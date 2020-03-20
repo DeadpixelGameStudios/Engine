@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Game1.Engine.Entity
+namespace Engine.Entity
 {
     /// <summary>
     /// Class for custom EntityRequestArgs

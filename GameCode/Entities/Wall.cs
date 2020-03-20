@@ -1,5 +1,6 @@
-﻿using Game1;
-using Game1.Engine.Entity;
+﻿using Engine;
+using Engine.Collision;
+using Engine.Entity;
 
 namespace GameCode.Entities
 {

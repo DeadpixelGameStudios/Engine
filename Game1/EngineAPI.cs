@@ -1,8 +1,8 @@
-﻿using Game1.Engine.Entity;
+﻿using Engine.Entity;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace Game1
+namespace Engine
 {
     public interface IEngineAPI
     {

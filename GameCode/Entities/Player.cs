@@ -1,7 +1,7 @@
-﻿using Game1;
-using Game1.Engine.Camera;
-using Game1.Engine.Entity;
-using Game1.Engine.Input;
+﻿using Engine.Camera;
+using Engine.Collision;
+using Engine.Entity;
+using Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -33,6 +33,8 @@ namespace GameCode.Entities
         private bool sprintActive = false;
 
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
+
+       
 
         #endregion
 
@@ -66,6 +68,8 @@ namespace GameCode.Entities
             //CollisionManager.subCollision(this);
 
             DrawPriority = 1f;
+
+            listenToCollisions = true;
         }
 
         
@@ -107,7 +111,7 @@ namespace GameCode.Entities
 
         public override void Update()
         {
-            #region remove this dirty ass code after prototyping
+            #region remove this dirty  code after prototyping
 
             Vector2 vel = new Vector2(0,0);
 

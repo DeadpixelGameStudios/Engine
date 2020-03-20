@@ -1,8 +1,8 @@
-﻿using Game1.Engine.Entity;
+﻿using Engine.Entity;
 using System;
 using System.Collections.Generic;
 
-namespace Game1.Engine.Scene
+namespace Engine.Scene
 {
     /// <summary>
     /// Implements database representing the state

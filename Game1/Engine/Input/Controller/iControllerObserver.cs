@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace Game1.Engine.Input
+namespace Engine.Input
 {
     public interface iControllerObserver
     {

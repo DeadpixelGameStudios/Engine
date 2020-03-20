@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 
-namespace Game1.Engine.Entity
+namespace Engine.Entity
 {
     //[Serializable]
     /// <summary>

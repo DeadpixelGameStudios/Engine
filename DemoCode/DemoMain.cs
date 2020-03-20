@@ -1,8 +1,6 @@
 ﻿using DemoCode.Entities;
-using Game1;
+using Engine;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace DemoCode

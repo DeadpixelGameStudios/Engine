@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Game1
+namespace Engine.Collision
 {
     public interface iCollidable
     {

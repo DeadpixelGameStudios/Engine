@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Game1.Engine.Entity;
-using Game1.Engine.Managers;
+using Engine.Entity;
+using Engine.Managers;
 
-namespace Game1.Engine.Input
+namespace Engine.Input
 {
     public class MouseInput : IMouseInputObservable, iManager
     {

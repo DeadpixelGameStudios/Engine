@@ -1,4 +1,4 @@
-﻿using Game1.Engine.Shape;
+﻿using Engine.Shape;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.Engine.Misc
+namespace Engine.Misc
 {
     class MathsHelper
     {

@@ -1,8 +1,9 @@
-﻿using Game1.Engine.Entity;
-using Game1.Engine.Input;
-using Game1.Engine.Managers;
-using Game1.Engine.Render;
-using Game1.Engine.UI;
+﻿using Engine.Collision;
+using Engine.Entity;
+using Engine.Input;
+using Engine.Managers;
+using Engine.Render;
+using Engine.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Game1.Engine.Scene
+namespace Engine.Scene
 {
     /// <summary>
     /// Manages gameplay scene

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Game1.Engine.Managers;
+using Engine.Managers;
 using Microsoft.Xna.Framework.Input;
 
-namespace Game1.Engine.Input
+namespace Engine.Input
 {
     public class ControllerInput : iControllerObserverable, iManager
     {

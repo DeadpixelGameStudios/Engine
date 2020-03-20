@@ -1,8 +1,9 @@
 ﻿using DemoCode.Entities;
-using Game1;
-using Game1.Engine.Camera;
-using Game1.Engine.Entity;
-using Game1.Engine.Input;
+using Engine;
+using Engine.Camera;
+using Engine.Collision;
+using Engine.Entity;
+using Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;

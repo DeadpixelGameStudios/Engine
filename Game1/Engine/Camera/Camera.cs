@@ -1,8 +1,8 @@
-﻿using Game1.Engine.Entity;
+﻿using Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game1
+namespace Engine.Camera
 {
     public class Camera
     {

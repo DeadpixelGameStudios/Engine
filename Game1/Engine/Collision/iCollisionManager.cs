@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Game1.Engine.Entity;
-using Game1.Engine.Shape;
+using Engine.Entity;
+using Engine.Shape;
 
-namespace Game1
+namespace Engine.Collision
 {
     public interface iCollisionManager
     {

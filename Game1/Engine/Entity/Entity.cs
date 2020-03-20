@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game1.Engine.Shape;
+using Engine.Shape;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Game1.Engine.Entity
+namespace Engine.Entity
 {
 
     /// <summary>

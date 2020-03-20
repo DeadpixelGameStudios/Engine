@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Game1.Engine.Entity
+namespace Engine.Entity
 {
     /// <summary>
     /// Manages entities lifecycle

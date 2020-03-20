@@ -4,37 +4,37 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/2player.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/3player.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/4player.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player1.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player2.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player3.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player4.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-bottom.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-closed.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-corner-bottom-left.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-corner-bottom-right.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-corner-top-left.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-corner-top-right.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-left.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-middle.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-open-bottom.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-open-left.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-open-right.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-open-top.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-right.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-top.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-tube-horizontal.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-tube-vertical.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/default.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/start-button.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/4player-button.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/3player-button.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/2player-button.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/pent.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/pentagon.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/random hex.png</File>
-    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/reg-hex.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/2player.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/3player.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/4player.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/player1.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/player2.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/player3.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/player4.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-bottom.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-closed.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-corner-bottom-left.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-corner-bottom-right.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-corner-top-left.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-corner-top-right.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-left.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-middle.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-open-bottom.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-open-left.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-open-right.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-open-top.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-right.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-top.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-tube-horizontal.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/wall-tube-vertical.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/default.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/start-button.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/4player-button.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/3player-button.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/2player-button.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/pent.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/pentagon.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/random hex.png</File>
+    <File>F:/University/Games/Engine/GameCode/Content/Resources/Walls/reg-hex.png</File>
   </SourceFiles>
 </SourceFileCollection>

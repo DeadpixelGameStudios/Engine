@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Game1.Engine.Entity;
-using Game1.Engine.Managers;
-using Game1.Engine.Misc;
-using Game1.Engine.Shape;
+using Engine.Entity;
+using Engine.Managers;
+using Engine.Shape;
 using Microsoft.Xna.Framework;
-using static Game1.Engine.Misc.MathsHelper;
-using static Game1.Engine.Collision.SAT;
+using static Engine.Misc.MathsHelper;
+using static Engine.Collision.SAT;
 
-namespace Game1
+namespace Engine.Collision
 {
     public class CollisionManager: iCollisionManager, iManager
     {
         private List<IShape> collidableList = new List<IShape>();
         private List<IShape> collisionListeners = new List<IShape>();
+        private List<IShape> PotentialCollisions = new List<IShape>();
+        private QuadTree qTree = new QuadTree(1, new Rectangle(0, 0, EngineMain.ScreenWidth, EngineMain.ScreenHeight));
 
+       
 
         public void AddCollidable(IShape collidable)
         {
@@ -30,18 +31,53 @@ namespace Game1
             collidableList.Add(collidable);
         }
 
-        private List<IShape> BroadPhase(IShape shape)
+        private void AddToQuadTree()
         {
-            return collidableList;
+            if (collidableList != null)
+            {
+                foreach (IShape collidable in collidableList)
+                {
+                    qTree.insert(collidable);
+                }
+            }
+           
         }
 
+        private void QuadTreeUpdate()
+        {
+            
+            qTree.clear();
+            AddToQuadTree();
+            
+        }
+
+        private List<IShape> BroadPhase(IShape shape)
+        {
+            QuadTreeUpdate();
+
+            qTree.retrieve(PotentialCollisions, shape);
+
+            foreach (IShape ent in PotentialCollisions)
+            {
+                //potential colliders
+
+                iEntity potEnt = (iEntity)ent;
+                potEnt.Transparency = 0.5f;
+                
+            }
+            return PotentialCollisions;
+        }
 
         private void MidPhase(List<IShape> midList, IShape shape)
         {
             foreach (IShape col in midList)
             {
+                iEntity Collider = (iEntity)shape;
+                
                 if (col.GetBoundingBox().Intersects(shape.GetBoundingBox()))
                 {
+                    Collider.CollidingEntity = (iEntity)col;
+                    Collider.isColliding = true;
                     //Checks to see whether the vertices of the shape are the same as the bounding box
                     if (!isSameAsBoundingBox(col) || !isSameAsBoundingBox(shape))
                     {
@@ -56,8 +92,7 @@ namespace Game1
 
             }
         }
-
-
+        
         private void NarrowPhase(IShape col1, IShape col2)
         {
             //Get list of each shapes vertices
@@ -95,10 +130,12 @@ namespace Game1
                 ghj.Transparency = 0.5f;
             }
         }
-
+        
         private void CollisionPhases()
         {
-            foreach(IShape collisionListener in collisionListeners)
+            PotentialCollisions.Clear();
+
+            foreach (IShape collisionListener in collisionListeners)
             {
                 //List of shapes returned from the broad phase
                 List<IShape> broadPhase = BroadPhase(collisionListener);
@@ -110,6 +147,15 @@ namespace Game1
 
         public void Update()
         {
+            foreach (IShape ent in collidableList)
+            {
+                if (!PotentialCollisions.Contains((iEntity)ent))
+                {
+                    iEntity tmp = (iEntity)ent;
+                    tmp.Transparency = 1f;
+                }
+            }
+
             CollisionPhases();
         }
 
