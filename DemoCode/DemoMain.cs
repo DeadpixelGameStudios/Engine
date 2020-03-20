@@ -1,6 +1,7 @@
 ﻿using DemoCode.Entities;
 using Game1;
 using Game1.Engine.Entity;
+using Game1.Engine.Pathfinding2;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -59,7 +60,12 @@ namespace DemoCode
                 engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
             }
 
-            engine.SetPathFindingGrid(levelLoader.levelWidth, levelLoader.levelHeight, true);
+            engine.SetPathFindingGrid(levelLoader.grid, true);
+
+            IPathFinding p = new PathFinding(levelLoader.grid);
+            var path = p.FindPath(new Vector2(1, 1), new Vector2(8, 8));
+
+
         }
 
         private void OnEntityRequested(object sender, EntityRequestArgs e)

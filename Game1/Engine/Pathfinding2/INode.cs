@@ -14,7 +14,8 @@ namespace Game1.Engine.Pathfinding2
         bool Visited { get; set; }
         bool Diagonal { get; set; }
         bool Walkable { get; set; }
-        Vector2 Position { get; set; }        
+        Vector2 Position { get; set; }  
+        Vector2 gridPos { get; set; }
 
         /// <summary>
         /// Movement cost from start node to current node

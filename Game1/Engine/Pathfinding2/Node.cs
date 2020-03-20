@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Game1.Engine.Pathfinding2
 {
-    public class Node : GameEntity, INode
+    public class Node : Entity.Entity, INode
     {
         /// <summary>
         /// https://www.youtube.com/watch?v=JGgSEVzneM4&list=PLD2t5VOqzPm_wAGD0D5vNf-Jd8DyO1thG&index=19&t=244s
@@ -34,7 +34,7 @@ namespace Game1.Engine.Pathfinding2
 
         public bool Diagonal { get; set; }
 
-        public bool Walkable { get; set; }
+        public bool Walkable { get; set; } = true;
 
         /// <summary>
         /// Movement cost from start node to current node
@@ -51,17 +51,20 @@ namespace Game1.Engine.Pathfinding2
         /// </summary>
         public int FCost => GCost + HCost;
 
-        //public Vector2 Position { get; set; }
+        public Vector2 gridPos { get; set; }
+
+        //public Vector2 mPosition { get; set; }
 
         //public string Texture { get; set; }
 
-        public Node(Vector2 pPosition)
+        public Node(Vector2 pPosition, Vector2 pGridPos)
         {
             //Walkable = pWalkable;
             Position = pPosition;
             TextureString = "Walls/node";
             //Transparency = 0.1f;
             DrawPriority = 10;
+            gridPos = pGridPos;
         }
 
         public Node()

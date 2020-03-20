@@ -1,4 +1,5 @@
 ﻿using Game1.Engine.Entity;
+using Game1.Engine.Pathfinding2;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -38,6 +39,6 @@ namespace Game1
         /// <param name="ent">The entity to unload</param>
         void UnLoad(iEntity ent);
 
-        void SetPathFindingGrid(int pMapWidth, int pMapHeight, bool showGrid = false);
+        void SetPathFindingGrid(IGrid mGrid, bool showGrid = false);
     }
 }

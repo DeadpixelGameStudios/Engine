@@ -58,8 +58,11 @@
     <Compile Include="Engine\Pathfinding2\Grid.cs" />
     <Compile Include="Engine\Pathfinding2\IBinaryTree.cs" />
     <Compile Include="Engine\Pathfinding2\IBinaryTreeNode.cs" />
+    <Compile Include="Engine\Pathfinding2\IGrid.cs" />
     <Compile Include="Engine\Pathfinding2\INode.cs" />
+    <Compile Include="Engine\Pathfinding2\IPathFinding.cs" />
     <Compile Include="Engine\Pathfinding2\Node.cs" />
+    <Compile Include="Engine\Pathfinding2\PathFinding.cs" />
     <Compile Include="Engine\PathFinding\BinaryTree.cs" />
     <Compile Include="Engine\PathFinding\BinaryTreeNode.cs" />
     <Compile Include="Engine\PathFinding\BreadthFirstSearch.cs" />

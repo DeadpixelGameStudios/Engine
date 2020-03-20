@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.Engine.Pathfinding2;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -14,8 +15,7 @@ public partial class DemoLevelLoader
     public int tileHeight { get; private set; }
     public int tileWidth { get; private set; }
 
-
-
+    public IGrid grid { get; private set; }
 
     /// <summary>
     /// Class for loading levels
@@ -24,6 +24,7 @@ public partial class DemoLevelLoader
     /// </summary>
     public DemoLevelLoader()
     {
+
     }
 
     /// <summary>
@@ -55,28 +56,36 @@ public partial class DemoLevelLoader
         levelHeight = int.Parse(parser.DocumentElement.Attributes["height"].Value);
         levelWidth = int.Parse(parser.DocumentElement.Attributes["width"].Value);
 
+        grid = new Grid(levelWidth, levelHeight, tileWidth, tileHeight);
+
         string levelData = parser.DocumentElement.SelectNodes("layer")[0].SelectSingleNode("data").InnerText;
         string[] lines = levelData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
         List<LevelInfo.LevelAsset> levelAssetList = new List<LevelInfo.LevelAsset>();
 
-        int rowNumber = 0;
+        int columnNumber = 0;
         foreach (string line in lines)
         {
             if (!string.IsNullOrWhiteSpace(line))
             {
                 string[] splitLine = line.Split(new[] { "," }, StringSplitOptions.None);
 
-                int columnNumber = 0;
+                int rowNumber = 0;
                 foreach (string asset in splitLine)
                 {
                     if (asset != "0" && !string.IsNullOrWhiteSpace(asset))
                     {
-                        levelAssetList.Add(new LevelInfo.LevelAsset(new Vector2(columnNumber * tileWidth, rowNumber * tileHeight), assetDictionary[int.Parse(asset)]));
+                        var levelAssests = new LevelInfo.LevelAsset(new Vector2(rowNumber * tileWidth, columnNumber * tileHeight), assetDictionary[int.Parse(asset)]);
+
+                        if (!levelAssests.info.texture.Contains("player"))
+                        {
+                            grid.grid[rowNumber, columnNumber].Walkable = false;
+                        }
+                        levelAssetList.Add(levelAssests);
                     }
-                    columnNumber++;
+                    rowNumber++;
                 }
-                rowNumber++;
+                columnNumber++;
             }
         }
 

@@ -25,7 +25,7 @@ namespace Game1
         //IBinaryTree binaryTree;
 
 
-        Grid grid;
+        IPathFinding pathFind;
 
         public EngineMain()
         {
@@ -78,37 +78,25 @@ namespace Game1
             return entities;
         }
 
-        public void SetPathFindingGrid(int pMapWidth, int pMapHeight, bool showGrid)
+        public void SetPathFindingGrid(IGrid pGrid, bool showGrid)
         {
-            grid = new Grid(pMapWidth, pMapHeight, 50);
+            pathFind = new PathFinding(pGrid);
 
             if(showGrid)
             {
-                for (int row = 0; row < grid.getGridXLength; row++)
+                for (int row = 0; row < pGrid.grid.GetLength(0); row++)
                 {
-                    for (int column = 0; column < grid.getGridYLength; column++)
+                    for (int column = 0; column < pGrid.grid.GetLength(1); column++)
                     {
-                        sceneManager.Spawn((iEntity)grid.grid[row, column]);
+                        sceneManager.Spawn((iEntity)pathFind.mGrid.grid[row, column]);
 
                         if (GraphicsDevice != null)
                         {
-                            sceneManager.LoadResource((iEntity)grid.grid[row, column]);
+                            sceneManager.LoadResource((iEntity)pathFind.mGrid.grid[row, column]);
                         }
                     }
                 }
             }
-            
-
-            //binaryTree.Root = new BinaryTreeNode(ent);
-
-            //Console.WriteLine(binaryTree.Root);
-
-            //Graph[,] graph = new Graph[ScreenWidth, ScreenHeight];
-
-            //for (int i = 0; i < ScreenHeight; i++)
-            //{
-
-            //}
         }
 
 
