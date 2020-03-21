@@ -117,8 +117,6 @@ public partial class DemoLevelLoader
 
             if (propertyName == "class")
             {
-                Console.WriteLine("type - " + "DemoCode.Entities." + parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value);
-
                 Type type = Type.GetType("DemoCode.Entities." + parser.DocumentElement.SelectNodes("properties")[0].SelectSingleNode("property").Attributes["value"].Value);
 
                 LevelInfo.AssetInfo newAsset = new LevelInfo.AssetInfo(asset, type);

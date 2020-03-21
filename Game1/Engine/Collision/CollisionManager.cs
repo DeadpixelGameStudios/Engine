@@ -61,8 +61,8 @@ namespace Engine.Collision
             {
                 //potential colliders
 
-                iEntity potEnt = (iEntity)ent;
-                potEnt.Transparency = 0.5f;
+                //iEntity potEnt = (iEntity)ent;
+                //potEnt.Transparency = 0.5f;
                 
             }
             return PotentialCollisions;
@@ -76,8 +76,8 @@ namespace Engine.Collision
                 
                 if (col.GetBoundingBox().Intersects(shape.GetBoundingBox()))
                 {
-                    Collider.CollidingEntity = (iEntity)col;
-                    Collider.isColliding = true;
+                    
+
                     //Checks to see whether the vertices of the shape are the same as the bounding box
                     if (!isSameAsBoundingBox(col) || !isSameAsBoundingBox(shape))
                     {
@@ -87,6 +87,8 @@ namespace Engine.Collision
                     else
                     {
                         //collision alert - events or not? not sure yet, but probably
+                        Collider.CollidingEntity = (iEntity)col;
+                        Collider.isColliding = true;
                     }
                 }
 

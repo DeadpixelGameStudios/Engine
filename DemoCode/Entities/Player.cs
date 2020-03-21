@@ -19,8 +19,8 @@ namespace DemoCode.Entities
 
         private List<BasicInput> inputOptions = new List<BasicInput>
         {
+            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.LeftShift, Keys.E),
             new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
-            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.None, Keys.E),
             new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.None, Keys.End),
             new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6, Keys.None, Keys.NumPad9)
         };
@@ -32,6 +32,9 @@ namespace DemoCode.Entities
 
         private uint abilityTimer = 0;
         private bool abilityTimeout = false;
+
+        private uint walkTimer = 0;
+        private bool walkTimeout = false;
 
         private bool sprintActive = false;
 
@@ -65,7 +68,7 @@ namespace DemoCode.Entities
 
                 KeyboardInput.Subscribe(this, keys.allKeys);
                 inputKeys = keys;
-                acceleration = 0.5f;
+                acceleration = 8f;
             }
 
             playerCount++;
@@ -76,7 +79,6 @@ namespace DemoCode.Entities
 
             listenToCollisions = true;
         }
-
 
         public void input(Keys key)
         {
@@ -108,8 +110,25 @@ namespace DemoCode.Entities
                     }
 
                 }
+                else if(key == inputKeys.sprint)
+                {
+                    if (!walkTimeout)
+                    {
+                        walkTimeout = true;
+
+                        if (acceleration == 0.5f)
+                        {
+                            acceleration = 8f;
+                        }
+                        else if(acceleration == 8f)
+                        {
+                            acceleration = 0.5f;
+                        }
+                    }
+                }
 
                 Position += Velocity;
+                
             }
 
             Velocity = new Vector2(0, 0);
@@ -191,6 +210,17 @@ namespace DemoCode.Entities
             {
                 abilityTimeout = false;
                 abilityTimer = 0;
+            }
+
+            if (walkTimeout)
+            {
+                walkTimer++;
+            }
+
+            if (walkTimer >= 100)
+            {
+                walkTimeout = false;
+                walkTimer = 0;
             }
 
         }
