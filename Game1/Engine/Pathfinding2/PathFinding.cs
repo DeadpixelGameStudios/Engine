@@ -37,7 +37,7 @@ namespace Game1.Engine.Pathfinding2
             // Get target node grid position
             INode targetNode = mGrid.GetNodePosition(pTargetPos);
             // The current node is the start node
-            INode currentNode = startNode;
+            INode currentNode = null;// startNode;
 
             // keep track of the 'ring'
             var frontier = new Queue<INode>();
@@ -45,26 +45,45 @@ namespace Game1.Engine.Pathfinding2
             // add it to the queue
             frontier.Enqueue(startNode);
             // we say its been visited
-            startNode.Visited = true;
+            startNode.Visited = true;            
 
             while (frontier.Count > 0)
             {
-                var current = frontier.Dequeue();
+                currentNode = frontier.Dequeue();
+                currentNode.Visited = true;
+                closeNodes.Add(currentNode);
 
-                Console.WriteLine("Visiting {0}", current.gridPos);
+                Console.WriteLine("Visiting {0}", currentNode.gridPos);
 
-                if (current == targetNode)
+                if (currentNode == targetNode)
                 {
-                    return GetFinalPath(startNode, targetNode, current);
+                    return GetFinalPath(startNode, targetNode);
                 }
 
-                foreach (var next in mGrid.GetNeighbourNodes(current))
+                foreach (var neighbour in mGrid.GetNeighbourNodes(currentNode))
                 {
-                    if (next != current)
+                    //neighbour.Parent = currentNode;
+
+                    if (!closeNodes.Contains(neighbour))
                     {
-                        frontier.Enqueue(next);
-                        next.Visited = true;
-                        currentNode = current;
+                        startNode.HCost = EstimateHCost(startNode, targetNode);
+                        int movementCost = currentNode.GCost + EstimateHCost(currentNode, neighbour);
+
+                        if (movementCost < neighbour.GCost || !frontier.Contains(neighbour))
+                        {
+                            neighbour.GCost = movementCost;
+                            neighbour.HCost = EstimateHCost(neighbour, targetNode);
+                            neighbour.Parent = currentNode;
+
+                            if (!frontier.Contains(neighbour))
+                            {
+                                frontier.Enqueue(neighbour);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        closeNodes.Add(neighbour);
                     }
                 }
             }
@@ -147,7 +166,7 @@ namespace Game1.Engine.Pathfinding2
         /// </summary>
         /// <param name="startNode"></param>
         /// <param name="targetNode"></param>
-        private IList<Vector2> GetFinalPath(INode startNode, INode targetNode, INode cameFrom)
+        private IList<Vector2> GetFinalPath(INode startNode, INode targetNode)
         {
             //IList<INode> path = new List<INode>();
             IList<Vector2> path = new List<Vector2>();
@@ -165,8 +184,8 @@ namespace Game1.Engine.Pathfinding2
 
         public int EstimateHCost(INode pStartNode, INode pTargetNode)
         {
-            int distanceX = (int)Math.Abs(pStartNode.Position.X - pTargetNode.Position.X);
-            int distanceY = (int)Math.Abs(pStartNode.Position.Y - pTargetNode.Position.Y);
+            int distanceX = (int)Math.Abs(pStartNode.gridPos.X - pTargetNode.gridPos.X);
+            int distanceY = (int)Math.Abs(pStartNode.gridPos.Y - pTargetNode.gridPos.Y);
             
             if (distanceX > distanceY)
             {

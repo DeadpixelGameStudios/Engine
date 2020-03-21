@@ -63,7 +63,7 @@ namespace DemoCode
             engine.SetPathFindingGrid(levelLoader.grid, true);
 
             IPathFinding p = new PathFinding(levelLoader.grid);
-            var path = p.FindPath(new Vector2(1, 1), new Vector2(4,2));
+            var path = p.FindPath(new Vector2(1, 1), new Vector2(30,16));
 
 
         }
