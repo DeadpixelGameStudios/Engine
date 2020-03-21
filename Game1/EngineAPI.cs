@@ -1,5 +1,5 @@
 ﻿using Game1.Engine.Entity;
-using Game1.Engine.Pathfinding2;
+using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 

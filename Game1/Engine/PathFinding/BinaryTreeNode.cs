@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Game1.Engine.Entity;
 
-namespace Game1.Engine.PathFinding
+namespace Game1.Engine.Pathfinding
 {
-    class BinaryTreeNode : PathFindingNode, IBinaryTreeNode
+    public class BinaryTreeNode : Node, IBinaryTreeNode
     {
         public IBinaryTreeNode Left
         {
@@ -17,18 +16,18 @@ namespace Game1.Engine.PathFinding
                 {
                     return null;
                 }
-                return (IBinaryTreeNode) Neighbours[0];
+                return (IBinaryTreeNode)Neighbours[0];
             }
             set
             {
                 if (Neighbours == null)
                 {
-                    Neighbours = new List<IPathFindingNode>();
-                    Neighbours.Add(new PathFindingNode());
-                    Neighbours.Add(new PathFindingNode());
+                    Neighbours = new List<INode>();
+                    Neighbours.Add(new Node());
+                    Neighbours.Add(new Node());
                 }
 
-                Neighbours[0] = (IPathFindingNode)value;
+                Neighbours[0] = (INode)value;
             }
         }
 
@@ -46,38 +45,29 @@ namespace Game1.Engine.PathFinding
             {
                 if (Neighbours == null)
                 {
-                    Neighbours = new List<IPathFindingNode>();
-                    Neighbours.Add(new PathFindingNode());
-                    Neighbours.Add(new PathFindingNode());
+                    Neighbours = new List<INode>();
+                    Neighbours.Add(new Node());
+                    Neighbours.Add(new Node());
                 }
 
-                Neighbours[1] = (IPathFindingNode)value;
+                Neighbours[1] = (INode)value;
             }
         }
 
         public BinaryTreeNode() { }
 
-        //public BinaryTreeNode(iEntity pNode, IList<IPathFindingNode> paths = default(IList<IPathFindingNode>))
-        //{
+        public BinaryTreeNode(INode pParent) : base(pParent, null) { }
 
-        //}
-
-        public BinaryTreeNode(iEntity data): base(data, null) { }
-
-        public BinaryTreeNode(iEntity path, IBinaryTreeNode pLeft, IBinaryTreeNode pRight)
+        public BinaryTreeNode(INode pParent, IBinaryTreeNode pLeft, IBinaryTreeNode pRight)
         {
-            NodePath = path;
-
-            IList<IPathFindingNode> children = new List<IPathFindingNode>
+            Parent = pParent;
+            IList<INode> children = new List<INode>
             {
                 (BinaryTreeNode)pLeft,
                 (BinaryTreeNode)pRight
             };
 
-            Neighbours = children;
+                Neighbours = children;
         }
-
-
-
     }
 }

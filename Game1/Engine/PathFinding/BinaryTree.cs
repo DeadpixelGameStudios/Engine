@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game1.Engine.PathFinding
+﻿namespace Game1.Engine.Pathfinding
 {
-    class BinaryTree : IBinaryTree
+    public class BinaryTree : IBinaryTree
     {
         public IBinaryTreeNode Root { get; set; }
 

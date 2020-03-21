@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Game1.Engine.Pathfinding2
+namespace Game1.Engine.Pathfinding
 {
     public class PathFinding : IPathFinding
     {
@@ -159,6 +159,14 @@ namespace Game1.Engine.Pathfinding2
             #endregion
         }
 
+        public IList<Vector2> FindPathWorld(Vector2 pStartWorldPos, Vector2 pTargetWorldPos)
+        {
+            var roundedNode = new Vector2((int)Math.Round(pStartWorldPos.X/50), (int)Math.Round(pStartWorldPos.Y/50));
+            var roundedNode2 = new Vector2((int)Math.Round(pTargetWorldPos.X/50), (int)Math.Round(pTargetWorldPos.Y/50));
+
+            return FindPath(roundedNode, roundedNode2);
+
+        }
 
 
         /// <summary>
@@ -175,7 +183,7 @@ namespace Game1.Engine.Pathfinding2
 
             while (currentNode != startNode)
             {
-                path.Add(currentNode.gridPos);
+                path.Add(currentNode.Position);
                 currentNode = currentNode.Parent;
             }
 

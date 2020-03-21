@@ -1,6 +1,5 @@
 ﻿using Game1.Engine.Entity;
-using Game1.Engine.PathFinding;
-using Game1.Engine.Pathfinding2;
+using Game1.Engine.Pathfinding;
 using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

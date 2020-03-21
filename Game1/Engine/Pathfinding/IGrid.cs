@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.Engine.Pathfinding2
+namespace Game1.Engine.Pathfinding
 {
     public interface IGrid
     {

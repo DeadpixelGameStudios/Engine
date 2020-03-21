@@ -1,7 +1,7 @@
 ﻿using DemoCode.Entities;
 using Game1;
 using Game1.Engine.Entity;
-using Game1.Engine.Pathfinding2;
+using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,8 +29,13 @@ namespace DemoCode
 
         public void DemoLevel(int playerNum)
         {
+            
+
             levelLoader = new DemoLevelLoader();
             var level = levelLoader.requestLevel("test-level.tmx");
+
+            IPathFinding path = new PathFinding(levelLoader.grid);
+            engine.SetPathFindingGrid(levelLoader.grid, true);
 
             int playerCount = 0;
             foreach (var asset in level.ToList())
@@ -52,6 +57,12 @@ namespace DemoCode
             {
                 ent.LevelFinished += OnLevelFinished;
                 ent.EntityRequested += OnEntityRequested;
+
+                if (ent is Player)
+                {
+                    Player player = (Player)ent;
+                    player.injectPathFinding(path);
+                }
             }
 
             if (playerCount > 1)
@@ -60,10 +71,8 @@ namespace DemoCode
                 engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
             }
 
-            engine.SetPathFindingGrid(levelLoader.grid, true);
-
-            IPathFinding p = new PathFinding(levelLoader.grid);
-            var path = p.FindPath(new Vector2(1, 1), new Vector2(30,16));
+            
+            //var path = p.FindPath(new Vector2(1, 1), new Vector2(30,16));
 
 
         }

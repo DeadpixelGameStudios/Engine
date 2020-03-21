@@ -3,6 +3,7 @@ using Game1;
 using Game1.Engine.Camera;
 using Game1.Engine.Entity;
 using Game1.Engine.Input;
+using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -37,7 +38,8 @@ namespace DemoCode.Entities
 
         #endregion
 
-        
+        IPathFinding pathFinder;
+
         public Player()
         {
             if (GamePad.GetCapabilities(playerCount).IsConnected)
@@ -92,11 +94,18 @@ namespace DemoCode.Entities
                 }
                 else if(key == inputKeys.use)
                 {
-                    if(!abilityTimeout)
+                    //if(!abilityTimeout)
+                    //{
+                    //    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                    //    abilityTimeout = true;
+                    //}
+                    var pos = pathFinder.FindPathWorld(Position, new Vector2(1469, 69));
+
+                    foreach (var step in pos)
                     {
-                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
-                        abilityTimeout = true;
+                        Position += step;
                     }
+
                 }
 
                 Position += Velocity;
@@ -205,6 +214,12 @@ namespace DemoCode.Entities
             }
 
             Position += vel;
+        }
+
+
+        public void injectPathFinding(IPathFinding pPathFinder)
+        {
+            pathFinder = pPathFinder;
         }
     }
 }

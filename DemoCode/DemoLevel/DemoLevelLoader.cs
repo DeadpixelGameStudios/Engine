@@ -1,4 +1,4 @@
-﻿using Game1.Engine.Pathfinding2;
+﻿using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;

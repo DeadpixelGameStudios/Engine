@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Game1.Engine.Pathfinding2
+namespace Game1.Engine.Pathfinding
 {
     public class Grid : IGrid
     {

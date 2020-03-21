@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Game1.Engine.Entity;
 using Microsoft.Xna.Framework;
 
-namespace Game1.Engine.Pathfinding2
+namespace Game1.Engine.Pathfinding
 {
     public class Node : Entity.Entity, INode
     {
