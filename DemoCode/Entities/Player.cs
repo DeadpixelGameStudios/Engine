@@ -77,7 +77,6 @@ namespace DemoCode.Entities
         {
             if (inputKeys.allKeys.Contains(key))
             {
-                Console.WriteLine(Position);
                 if (key == inputKeys.up)
                 {
                     Velocity = new Vector2(0, -1 * acceleration);
