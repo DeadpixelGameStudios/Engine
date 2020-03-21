@@ -350,6 +350,7 @@
 /build:Resources/2player-button.png
 
 #begin Resources/Walls/pent.png
+#begin Resources/Walls/node.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -362,6 +363,9 @@
 /build:Resources/Walls/pent.png
 
 #begin Resources/Walls/pentagon.png
+/build:Resources/Walls/node.png
+
+#begin Resources/Walls/BrownPath.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -374,6 +378,9 @@
 /build:Resources/Walls/pentagon.png
 
 #begin Resources/Walls/random hex.png
+/build:Resources/Walls/BrownPath.png
+
+#begin Resources/Walls/Star.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -386,6 +393,9 @@
 /build:Resources/Walls/random hex.png
 
 #begin Resources/Walls/reg-hex.png
+/build:Resources/Walls/Star.png
+
+#begin Resources/help-me.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -396,4 +406,5 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Resources/Walls/reg-hex.png
+/build:Resources/help-me.png
 

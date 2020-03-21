@@ -56,6 +56,12 @@
     <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
     <Compile Include="Engine\Managers\iManager.cs" />
     <Compile Include="Engine\Misc\MathsHelper.cs" />
+    <Compile Include="Engine\Pathfinding\Grid.cs" />
+    <Compile Include="Engine\Pathfinding\IGrid.cs" />
+    <Compile Include="Engine\Pathfinding\INode.cs" />
+    <Compile Include="Engine\Pathfinding\IPathFinding.cs" />
+    <Compile Include="Engine\Pathfinding\Node.cs" />
+    <Compile Include="Engine\Pathfinding\PathFinding.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
     <Compile Include="Engine\Collision\CollisionManager.cs" />
     <Compile Include="Engine\Collision\CollisionMap.cs" />
@@ -97,6 +103,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

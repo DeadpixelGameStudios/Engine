@@ -1,8 +1,12 @@
 ﻿using Engine.Entity;
 using Engine.Scene;
+﻿using Game1.Engine.Entity;
+using Game1.Engine.Pathfinding;
+using Game1.Engine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Engine
@@ -18,6 +22,11 @@ namespace Engine
 
         public static int ScreenWidth, ScreenHeight;
         bool paused = false;
+
+        //IBinaryTree binaryTree;
+
+
+        IPathFinding pathFind;
 
         public EngineMain()
         {
@@ -70,6 +79,27 @@ namespace Engine
             return entities;
         }
 
+        public void SetPathFindingGrid(IGrid pGrid, bool showGrid)
+        {
+            pathFind = new PathFinding(pGrid);
+
+            if(showGrid)
+            {
+                for (int row = 0; row < pGrid.grid.GetLength(0); row++)
+                {
+                    for (int column = 0; column < pGrid.grid.GetLength(1); column++)
+                    {
+                        sceneManager.Spawn((iEntity)pathFind.mGrid.grid[row, column]);
+
+                        if (GraphicsDevice != null)
+                        {
+                            sceneManager.LoadResource((iEntity)pathFind.mGrid.grid[row, column]);
+                        }
+                    }
+                }
+            }
+        }
+
 
         public T LoadEntity<T>(string texture, Vector2 position, List<Vector2> verts = default(List<Vector2>)) where T : iEntity, new()
         {
@@ -79,8 +109,8 @@ namespace Engine
             if(GraphicsDevice != null)
             {
                 sceneManager.LoadResource(ent);
-            }
-            
+            }            
+
             return ent;
         }
 

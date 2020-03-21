@@ -4,6 +4,10 @@
   <SourceTime>2020-01-26T14:24:32.7990635+00:00</SourceTime>
   <DestFile>F:/University/Games/Engine/GameCode/Content/bin/Windows/Resources/default.xnb</DestFile>
   <DestTime>2020-03-20T13:34:21.2914088+00:00</DestTime>
+  <SourceFile>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/default.png</SourceFile>
+  <SourceTime>2020-03-17T16:54:54.4736743+00:00</SourceTime>
+  <DestFile>D:/Zaib/Documents/Game Engine/GameCode/Content/bin/Windows/Resources/default.xnb</DestFile>
+  <DestTime>2020-03-19T19:04:31.7785724+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -111,7 +111,12 @@ namespace Engine.Scene
                 sceneGraph.addEntity(entityInstance);
                 storeEntity.Add(entityInstance);
 
-                collManager.AddCollidable(entityInstance);
+                if (entityInstance is iCollidable)
+                {
+                    collManager.AddCollidable(entityInstance);
+                }
+                
+                
 
                 renderMan.addEntity(entityInstance);
             }

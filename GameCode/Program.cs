@@ -28,7 +28,7 @@ namespace GameCode
             game.TestLevel(1);
 #else
             Demo demo = new Demo(engine);
-            demo.DemoLevel();
+            demo.DemoLevel(1);
 #endif
 
             using (engine)

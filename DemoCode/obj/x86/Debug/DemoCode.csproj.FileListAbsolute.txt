@@ -79,3 +79,8 @@ F:\University\Games\Engine\DemoCode\obj\x86\Debug\DemoCode.dll
 F:\University\Games\Engine\DemoCode\obj\x86\Debug\DemoCode.pdb
 F:\University\Games\Engine\DemoCode\bin\Windows\x86\Debug\Engine.dll
 F:\University\Games\Engine\DemoCode\bin\Windows\x86\Debug\Engine.pdb
+C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csprojAssemblyReference.cache
+C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CoreCompileInputs.cache
+C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CopyComplete
+C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.dll
+C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.pdb

@@ -1,9 +1,14 @@
-﻿using DemoCode.Entities;
+﻿﻿using DemoCode.Entities;
 using Engine;
 using Engine.Camera;
 using Engine.Collision;
 using Engine.Entity;
 using Engine.Input;
+﻿using Game1;
+using Game1.Engine.Camera;
+using Game1.Engine.Entity;
+using Game1.Engine.Input;
+using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -38,6 +43,10 @@ namespace DemoCode.Entities
         #endregion
 
         
+        IPathFinding pathFinder;
+
+        iEntity Star;
+
         public DemoPlayer()
         {
             if (GamePad.GetCapabilities(playerCount).IsConnected)
@@ -61,7 +70,7 @@ namespace DemoCode.Entities
                 inputKeys = keys;
                 acceleration = 0.5f;
             }
-        
+
             playerCount++;
             
             //CollisionManager.subCollision(this);
@@ -71,7 +80,7 @@ namespace DemoCode.Entities
             listenToCollisions = true;
         }
 
-        
+
         public void input(Keys key)
         {
             if (inputKeys.allKeys.Contains(key))
@@ -90,16 +99,17 @@ namespace DemoCode.Entities
                 }
                 else if (key == inputKeys.right)
                 {
-                    Velocity = new Vector2(acceleration , 0);
+                    Velocity = new Vector2(acceleration, 0);
                 }
-                else if(key == inputKeys.use)
+                else if (key == inputKeys.use)
                 {
-                    Transparency = 1;
-                    if(!abilityTimeout)
+                    if (!abilityTimeout)
                     {
-                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(DemoWall));
-                        abilityTimeout = true;
+                        var pos = pathFinder.FindPathWorld(Position, Star.Position);
+
+                        FollowPath(pos);
                     }
+
                 }
 
                 Position += Velocity;
@@ -107,13 +117,46 @@ namespace DemoCode.Entities
 
             Velocity = new Vector2(0, 0);
         }
-        
+
+        void FollowPath(IList<Vector2> pos)
+        {
+            bool reach = false;
+            int WayPointIndex = 0;
+
+            if (pos.Count > 0)
+            {
+                if (!reach)
+                {
+                    float Distance = Vector2.Distance(Position, pos[WayPointIndex]);
+                    Vector2 Direction = pos[WayPointIndex] - Position;
+                    Direction.Normalize();
+
+                    OnEntityRequested(Position, "Walls/BrownPath", typeof(BrownPath));
+
+                    if (Distance > Direction.Length())
+                        Position += Direction * (acceleration);
+                    else
+                    {
+                        if (WayPointIndex >= pos.Count - 1)
+                        {
+                            Position += Direction;
+                            reach = true;
+                        }
+                        else
+                            WayPointIndex++;
+                    }
+
+                }
+            }
+
+        }
+
 
         public override void Update()
         {
             #region remove this dirty ass code after prototyping
 
-            Vector2 vel = new Vector2(0,0);
+            Vector2 vel = new Vector2(0, 0);
 
             if (isColliding)
             {
@@ -142,12 +185,12 @@ namespace DemoCode.Entities
             #endregion
 
 
-            if(abilityTimeout)
+            if (abilityTimeout)
             {
                 abilityTimer++;
             }
 
-            if(abilityTimer >= 300)
+            if (abilityTimer >= 300)
             {
                 abilityTimeout = false;
                 abilityTimer = 0;
@@ -175,13 +218,13 @@ namespace DemoCode.Entities
             var leftThumbY = thumbSticks.Left.Y * -1 * acceleration;
 
             Vector2 vel = new Vector2(leftThumbX, leftThumbY);
-            
-            if(sprintActive)
+
+            if (sprintActive)
             {
                 vel = vel * 3;
             }
 
-            
+
             if (gamePadButtons == inputButtons.rotateCW)
             {
                 //Rotate(thumbSticks.Right);
@@ -190,11 +233,11 @@ namespace DemoCode.Entities
             {
                 //Rotate(thumbSticks.Right);
             }
-            else if(gamePadButtons == inputButtons.sprint)
+            else if (gamePadButtons == inputButtons.sprint)
             {
                 sprintActive = true;
             }
-            else if(gamePadButtons == inputButtons.use)
+            else if (gamePadButtons == inputButtons.use)
             {
                 if (!abilityTimeout)
                 {
@@ -208,6 +251,13 @@ namespace DemoCode.Entities
             }
 
             Position += vel;
+        }
+
+
+        public void injectPathFinding(IPathFinding pPathFinder, iEntity pStar)
+        {
+            pathFinder = pPathFinder;
+            Star = pStar;
         }
     }
 }
