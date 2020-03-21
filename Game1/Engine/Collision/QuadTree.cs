@@ -114,7 +114,7 @@ namespace Engine.Collision
             // entity fits into top quad
             bool topQuadrant = (entPos.Y < horizontalMidpoint && entPos.Y + hitBox.Height < horizontalMidpoint);
             // entity fits into bottom quad
-            //bool bottomQuadrant = (pEnt.Position.Y > horizontalMidpoint);
+            bool bottomQuadrant = (entPos.Y > horizontalMidpoint);
 
             // entity fits into left quad
             if (entPos.X < verticalMidpoint && entPos.X + hitBox.Width < verticalMidpoint)
@@ -123,7 +123,7 @@ namespace Engine.Collision
                 {
                     index = 1;
                 }
-                else if (!topQuadrant)
+                else if (bottomQuadrant)
                 {
                     index = 2;
                 }
@@ -135,7 +135,7 @@ namespace Engine.Collision
                 {
                     index = 0;
                 }
-                else if (!topQuadrant)
+                else if (bottomQuadrant)
                 {
                     index = 3;
                 }

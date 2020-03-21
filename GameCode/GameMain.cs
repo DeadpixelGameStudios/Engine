@@ -4,6 +4,7 @@ using Engine;
 using Engine.Entity;
 using GameCode.Entities;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace GameCode
 {
@@ -53,6 +54,10 @@ namespace GameCode
                 string uiSeperator = "Walls/" + playerCount.ToString() + "player";
                 engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
             }
+
+            List<Vector2> verts = new List<Vector2> { new Vector2(0, 20), new Vector2(25, 0), new Vector2(50, 20), new Vector2(40, 50), new Vector2(10, 50) };
+            engine.LoadEntity<DemoWall>("Walls/pentagon", new Vector2(400, 400), verts);
+
         }
         
 

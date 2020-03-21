@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Entities\DemoWall.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Button.cs" />
     <Compile Include="Entities\UI.cs" />
