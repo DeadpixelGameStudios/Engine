@@ -52,7 +52,7 @@ namespace Game1.Engine.Pathfinding2
             neighbour.Add(isReal((int)pNode.gridPos.X, (int)pNode.gridPos.Y - 1)); //7                          
             neighbour.Add(isReal((int)pNode.gridPos.X + 1, (int)pNode.gridPos.Y - 1)); //8
 
-            IList<INode> actualList = neighbour.Where(x => x != null).ToList();
+            IList<INode> actualList = neighbour.Where(x => x != null && x.Walkable).ToList();
 
             return actualList;
         }
