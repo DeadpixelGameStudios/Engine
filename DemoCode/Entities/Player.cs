@@ -5,9 +5,6 @@ using Engine.Collision;
 using Engine.Entity;
 using Engine.Input;
 ﻿using Game1;
-using Game1.Engine.Camera;
-using Game1.Engine.Entity;
-using Game1.Engine.Input;
 using Game1.Engine.Pathfinding;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -15,7 +12,7 @@ using System.Collections.Generic;
 
 namespace DemoCode.Entities
 {
-    internal class DemoPlayer : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
+    internal class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
     {
 
         #region Data Members
@@ -47,7 +44,7 @@ namespace DemoCode.Entities
 
         iEntity Star;
 
-        public DemoPlayer()
+        public Player()
         {
             if (GamePad.GetCapabilities(playerCount).IsConnected)
             {
@@ -241,7 +238,7 @@ namespace DemoCode.Entities
             {
                 if (!abilityTimeout)
                 {
-                    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(DemoWall));
+                    OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
                     abilityTimeout = true;
                 }
             }

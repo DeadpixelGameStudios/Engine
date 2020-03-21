@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Game1.Engine.Entity;
+using Engine.Entity;
 using Microsoft.Xna.Framework;
 
 namespace Game1.Engine.Pathfinding
 {
-    public class Node : Entity.Entity, INode
+    public class Node : Entity, INode
     {                         
 
         public INode Parent { get; set; }

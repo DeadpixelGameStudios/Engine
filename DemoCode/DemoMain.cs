@@ -3,15 +3,13 @@ using Engine;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Game1;
-using Game1.Engine.Entity;
 using Game1.Engine.Pathfinding;
 using GameCode.Entities;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Engine.Entity;
 
 namespace DemoCode
 {
@@ -46,6 +44,7 @@ namespace DemoCode
             foreach (var asset in level.ToList())
             {
                 if (asset.info.type.Equals(typeof(Player)))
+                //if (asset.info.type is Player)
                 {
                     playerCount++;
                     if (playerCount > playerNum)
@@ -65,7 +64,7 @@ namespace DemoCode
 
                 if (ent is Player)
                 {
-                    
+
                     Player player = (Player)ent;
                     player.injectPathFinding(path, star);
                     ent.EntityRequested += OnEntityRequested;

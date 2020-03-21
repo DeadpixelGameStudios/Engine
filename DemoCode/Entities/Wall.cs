@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace DemoCode.Entities
 {
-    class DemoWall : GameEntity, iCollidable
+    class Wall : GameEntity, iCollidable
     {
-        public DemoWall()
+        public Wall()
         {
         }
     }

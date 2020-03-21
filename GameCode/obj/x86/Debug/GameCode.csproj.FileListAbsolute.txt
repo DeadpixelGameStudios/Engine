@@ -130,7 +130,6 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.XInput.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
-C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Game1.pdb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\MonoGame.Framework.xml
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\SharpDX.xml
@@ -164,7 +163,6 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall-top.tsx
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall-tube-horizontal.tsx
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Level\LevelFiles\Tiles\wall-tube-vertical.tsx
-C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Game1.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\start-button.xnb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\start-button.png
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\2player-button.xnb
@@ -426,3 +424,14 @@ D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\W
 D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\BrownPath.xnb
 D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\Star.xnb
 D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\help-me.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pent.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\help-me.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\BrownPath.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pent.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\pentagon.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\random hex.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\reg-hex.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\Star.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Engine.dll
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Engine.pdb
+C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompileInputs.cache

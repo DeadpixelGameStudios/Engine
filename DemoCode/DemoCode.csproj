@@ -42,14 +42,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Entities\DemoPlayer.cs" />
-    <Compile Include="Entities\DemoWall.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Wall.cs" />
     <Compile Include="Entities\BrownPath.cs" />
     <Compile Include="Entities\HelpMe.cs" />
-    <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Star.cs" />
     <Compile Include="Entities\UI.cs" />
-    <Compile Include="Entities\Wall.cs" />
     <Compile Include="DemoMain.cs" />
     <Compile Include="DemoLevel\DemoLevelLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

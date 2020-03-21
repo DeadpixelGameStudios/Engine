@@ -1,7 +1,7 @@
 ﻿///
 /// Comment out to run as Demo
 ///
-#define Game
+//#define Game
 
 using DemoCode;
 using Engine;

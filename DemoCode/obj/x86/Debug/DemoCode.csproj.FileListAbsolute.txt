@@ -30,7 +30,6 @@ C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.dll
 C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.pdb
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\DemoCode.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\DemoCode.pdb
-C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\Game1.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\MonoGame.Framework.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.dll
@@ -40,7 +39,6 @@ C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.XInput.dll
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
-C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\Game1.pdb
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\MonoGame.Framework.xml
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
 C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\SharpDX.xml
@@ -79,8 +77,5 @@ F:\University\Games\Engine\DemoCode\obj\x86\Debug\DemoCode.dll
 F:\University\Games\Engine\DemoCode\obj\x86\Debug\DemoCode.pdb
 F:\University\Games\Engine\DemoCode\bin\Windows\x86\Debug\Engine.dll
 F:\University\Games\Engine\DemoCode\bin\Windows\x86\Debug\Engine.pdb
-C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csprojAssemblyReference.cache
-C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CoreCompileInputs.cache
-C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.csproj.CopyComplete
-C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.dll
-C:\Code\GitHub\Engine\DemoCode\obj\x86\Debug\DemoCode.pdb
+C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\Engine.dll
+C:\Code\GitHub\Engine\DemoCode\bin\Windows\x86\Debug\Engine.pdb
