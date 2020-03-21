@@ -2,23 +2,30 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
+//------------------------------------------------------------------------------------------------------------------------------------------
+//Reference:     
 //Adapted from: https://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374
-
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace Engine.Collision
 {
     class QuadTree
     {
+        // Max entities in a node before splitting
         private int MaxObjects = 3;
+        // maximum number of splits that can happen
         private int MaxLevels = 3;
-
+        //Current level of node
         private int level;
+        //List of entities in current node
         private List<IShape> EntityList;
+        //Boundary of current node
         private Rectangle bounds;
+        //list of subnodes for if the node splits into 4
         private QuadTree[] nodes;
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         /// <param name="pLevel"></param>
         /// <param name="pBounds"></param>
@@ -32,7 +39,7 @@ namespace Engine.Collision
         }
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         /// <param name="pLevel"></param>
         /// <param name="pBounds"></param>
@@ -54,7 +61,7 @@ namespace Engine.Collision
         /// <summary>
         /// clears quad tree ready for reindexing
         /// </summary>
-        public void clear()
+        public void Clear()
         {
             //Clear ent list of current node
             EntityList.Clear();
@@ -64,7 +71,7 @@ namespace Engine.Collision
                 //Call clear on all child nodes
                 if (nodes[i] != null)
                 {
-                    nodes[i].clear();
+                    nodes[i].Clear();
                     //Once cleared dispose of the node
                     nodes[i] = null;
                 }
@@ -74,7 +81,7 @@ namespace Engine.Collision
         /// <summary>
         /// Split into 4 nodes
         /// </summary>
-        private void split()
+        private void Split()
         {
             // Half width of boundary
             int subWidth = (int)(bounds.Width / 2);
@@ -95,7 +102,7 @@ namespace Engine.Collision
         /// </summary>
         /// <param name="pEnt">Entity to find index of</param>
         /// <returns></returns>
-        private int getIndex(IShape pEnt)
+        private int GetIndex(IShape pEnt)
         {
             Vector2 entPos = pEnt.GetPosition();
             Rectangle hitBox = pEnt.GetBoundingBox();
@@ -116,7 +123,7 @@ namespace Engine.Collision
                 {
                     index = 1;
                 }
-                else if (topQuadrant == false)
+                else if (!topQuadrant)
                 {
                     index = 2;
                 }
@@ -128,7 +135,7 @@ namespace Engine.Collision
                 {
                     index = 0;
                 }
-                else if (topQuadrant == false)
+                else if (!topQuadrant)
                 {
                     index = 3;
                 }
@@ -136,92 +143,49 @@ namespace Engine.Collision
 
             return index;
         }
-        
+
         /// <summary>
         /// Insert object into qad tree, if the capacity is reached for the node it gets split
         /// </summary>
         /// <param name="pEnt">Entity to insert</param>
-        public void insert(IShape pEnt)
+        public void Insert(IShape pEnt)
         {
             #region method 2
 
-            int index = getIndex(pEnt);
-
-            if (index >= 0) // pRect should always go in a child if possible
+            int index = GetIndex(pEnt);
+            // Check to see if entity can fit in a child node first (index not -1)
+            if (index >= 0)
             {
-                if (nodes[0] != null) // we have children
-                    nodes[index].insert(pEnt); // so put pRect into the child
-                else // we don't have children
+
+                if (nodes[0] != null)
                 {
+                    // if child nodes exist then insert entity into child node
+                    nodes[index].Insert(pEnt); 
+                }
+                // No child nodes have been created 
+                else
+                {
+                    //if the max level hasnt been reached
                     if (level < MaxLevels)
                     {
-                        split(); // so we make children if possible
-                        nodes[index].insert(pEnt); // and put pRect into the child
+                        //Split the current node
+                        Split();
+                        // Insert entity into new child node
+                        nodes[index].Insert(pEnt);
                     }
-                    else // node can't split any more so put it here
+                    else
+                        //Max level has been reached so add entity to current node instead
                         EntityList.Add(pEnt);
                 }
             }
+            //The index is -1 so add it to this node
             else
-                EntityList.Add(pEnt); // index == -1 so add here
+            {
+                EntityList.Add(pEnt);
+            }
+              
 
             #endregion
-
-            #region Method 1 working
-            ////Check nodes are created
-            //if (nodes[0] != null)
-            //{
-            //    //Sets index  from -1 to 3 depending on the entities location eg top left quadrant would be 1. 
-            //    int index = getIndex(pEnt);
-
-            //    //If the entity doesnt go into the parent node
-            //    if (index != -1)
-            //    {
-            //        //insert entity into either top left/right or bottom left/right node depending on its found index
-            //        nodes[index].insert(pEnt);
-
-            //        return;
-            //    }
-            //}
-            ////Add entity to entity list for current node
-            //EntityList.Add(pEnt);
-
-            ////if the number of entities in the current node exceeds the maxObjects then split the current node into four seperate ones
-            //if (EntityList.Count > MaxObjects && level < MaxLevels)
-            //{
-            //    //if the child nodes havent already been created
-            //    if (nodes[0] == null)
-            //    {
-            //        //call split to create the 4 child nodes
-            //        split();
-            //    }
-                
-            //    //loop through the entity list
-            //    for (int i = 0; i < EntityList.Count; i++)
-            //    {
-            //        //Get the current entities index (top left etc)
-            //        int index = getIndex(EntityList[i]);
-            //        IShape Current = EntityList[i];
-
-            //        //if the entities found index doesnt overlap with any of the child nodes
-            //        if (index != -1)
-            //        {
-            //            //remove the entity from this quad node
-            //            EntityList.RemoveAt(i);
-            //            //reinsert the just removed entity into the new child node based on its index value                    
-            //            nodes[index].insert(Current);
-            //        }
-            //        else
-            //        {
-            //            //increment if the entity index is -1
-            //            i++;
-            //        }
-            //    }
-            //}
-
-            #endregion
-
-
 
         }
 
@@ -230,23 +194,24 @@ namespace Engine.Collision
         /// </summary>
         /// <param name="returnObjects">List of objects that could collide</param>
         /// <param name="pEnt">Entity to check for potential colliders</param>
-        public void retrieve(List<IShape> returnObjects, IShape pEnt)
+        public void FindPossibleCollisions(List<IShape> returnObjects, IShape pEnt)
         {
                 //if there has been a division
                 if (nodes[0] != null)
                 {
                     
-                    int index = getIndex(pEnt);
+                    int index = GetIndex(pEnt);
                     //If the index of the entity to check doesnt overlap with any nodes only check the one index and its children
                     if (index != -1)
                     {
-                        nodes[index].retrieve(returnObjects, pEnt);
+                    //will recursively check down through the indicated node and its children and return then as potential collisions
+                        nodes[index].FindPossibleCollisions(returnObjects, pEnt);
                     }
-                    else // if the entity overlaps nodes then run through all the child nodes to make sure collisions arent missed
+                    else // if the entity overlaps nodes then run through all the child nodes to make sure collisions arent missed, this will show up all 
                     {
                         for (int i = 0; i < nodes.Length; i++)
                         {
-                            nodes[i].retrieve(returnObjects, pEnt);
+                            nodes[i].FindPossibleCollisions(returnObjects, pEnt);
                     }
                     }
                 }

@@ -37,7 +37,7 @@ namespace Engine.Collision
             {
                 foreach (IShape collidable in collidableList)
                 {
-                    qTree.insert(collidable);
+                    qTree.Insert(collidable);
                 }
             }
            
@@ -46,7 +46,7 @@ namespace Engine.Collision
         private void QuadTreeUpdate()
         {
             
-            qTree.clear();
+            qTree.Clear();
             AddToQuadTree();
             
         }
@@ -55,7 +55,7 @@ namespace Engine.Collision
         {
             QuadTreeUpdate();
 
-            qTree.retrieve(PotentialCollisions, shape);
+            qTree.FindPossibleCollisions(PotentialCollisions, shape);
 
             foreach (IShape ent in PotentialCollisions)
             {
