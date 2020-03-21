@@ -7,10 +7,14 @@ namespace Game1.Engine.Pathfinding
     public class Grid : IGrid
     {
         public INode[,] grid { get; private set; }
-        float tileSizeWidth, tileSizeHeight;
+
+        // get access to tilesize and width
+        public float tileSizeWidth { get; private set; }
+        public float tileSizeHeight { get; private set; }
 
         public Grid(int pMapWidth, int pMapHeight, float pTileSizeWidth, float pTileSizeHeight)
         {
+            // initaliz grid node
             grid = new Node[pMapWidth, pMapHeight];
             tileSizeWidth = pTileSizeWidth;
             tileSizeHeight = pTileSizeHeight;
@@ -18,17 +22,26 @@ namespace Game1.Engine.Pathfinding
             CreateGrid();
         }
 
+        /// <summary>
+        /// Create the 2D array Grid
+        /// </summary>
         void CreateGrid()
         {
             for (int x = 0; x < grid.GetLength(0); x++)
             {
                 for (int y = 0; y < grid.GetLength(1); y++)
                 {
-                    grid[x, y] = new Node(new Vector2(x * tileSizeWidth, y * tileSizeHeight), new Vector2(x,y));
+                    // create node pass the world pos and grid pos
+                    grid[x, y] = new Node(new Vector2(x * tileSizeWidth, y * tileSizeHeight), new Vector2(x, y));
                 }
             }
         }
 
+        /// <summary>
+        /// Gets node postion in grid
+        /// </summary>
+        /// <param name="pPos"></param>
+        /// <returns></returns>
         public INode GetNodePosition(Vector2 pPos)
         {
             // Checking to see its not out of grid.
@@ -39,6 +52,11 @@ namespace Game1.Engine.Pathfinding
             return null;
         }
 
+        /// <summary>
+        /// Get the neighbour node of the node passed in
+        /// </summary>
+        /// <param name="pNode">current node</param>
+        /// <returns></returns>
         public IList<INode> GetNeighbourNodes(INode pNode)
         {
             IList<INode> neighbour = new List<INode>();
@@ -57,9 +75,15 @@ namespace Game1.Engine.Pathfinding
             return actualList;
         }
 
+        /// <summary>
+        /// Make sure the node grid is in the grid and not out
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public INode isReal(int row, int column)
         {
-            if (row >= 0 && row <= grid.GetLength(0) && column >= 0 && column <= grid.GetLength(1))
+            if (row >= 0 && row < grid.GetLength(0) && column >= 0 && column < grid.GetLength(1))
             {
                 return grid[row, column];
             }

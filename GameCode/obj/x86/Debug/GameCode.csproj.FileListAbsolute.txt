@@ -424,3 +424,6 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\DemoCode.pdb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\node.xnb
 D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\node.xnb
+D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\BrownPath.xnb
+D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\Star.xnb
+D:\Zaib\Documents\Game Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\help-me.xnb

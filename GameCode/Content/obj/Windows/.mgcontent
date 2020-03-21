@@ -33,5 +33,8 @@
     <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/3player-button.png</File>
     <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/2player-button.png</File>
     <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/Walls/node.png</File>
+    <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/Walls/BrownPath.png</File>
+    <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/Walls/Star.png</File>
+    <File>D:/Zaib/Documents/Game Engine/GameCode/Content/Resources/help-me.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -2,6 +2,7 @@
 using Game1;
 using Game1.Engine.Entity;
 using Game1.Engine.Pathfinding;
+using GameCode.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,13 +30,14 @@ namespace DemoCode
 
         public void DemoLevel(int playerNum)
         {
-            
-
             levelLoader = new DemoLevelLoader();
             var level = levelLoader.requestLevel("test-level.tmx");
 
             IPathFinding path = new PathFinding(levelLoader.grid);
             engine.SetPathFindingGrid(levelLoader.grid, true);
+
+
+            var star = engine.LoadEntity<Star>("Walls/Star", new Vector2(1500, 100));
 
             int playerCount = 0;
             foreach (var asset in level.ToList())
@@ -60,8 +62,10 @@ namespace DemoCode
 
                 if (ent is Player)
                 {
+                    
                     Player player = (Player)ent;
-                    player.injectPathFinding(path);
+                    player.injectPathFinding(path, star);
+                    ent.EntityRequested += OnEntityRequested;
                 }
             }
 
@@ -72,14 +76,13 @@ namespace DemoCode
             }
 
             
-            //var path = p.FindPath(new Vector2(1, 1), new Vector2(30,16));
-
-
+            engine.LoadUI<HelpMe>("help-me", new Vector2(0,0));
+            
         }
 
         private void OnEntityRequested(object sender, EntityRequestArgs e)
         {
-            engine.LoadEntity<Wall>(e.Texture, e.Position);
+            engine.LoadEntity<BrownPath>(e.Texture, e.Position);
         }
 
         private void OnLevelFinished(object sender, EventArgs e)

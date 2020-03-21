@@ -53,11 +53,7 @@
     <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
     <Compile Include="Engine\Input\Keyboard\KeyboardInput.cs" />
     <Compile Include="Engine\Managers\iManager.cs" />
-    <Compile Include="Engine\Pathfinding\BinaryTree.cs" />
-    <Compile Include="Engine\Pathfinding\BinaryTreeNode.cs" />
     <Compile Include="Engine\Pathfinding\Grid.cs" />
-    <Compile Include="Engine\Pathfinding\IBinaryTree.cs" />
-    <Compile Include="Engine\Pathfinding\IBinaryTreeNode.cs" />
     <Compile Include="Engine\Pathfinding\IGrid.cs" />
     <Compile Include="Engine\Pathfinding\INode.cs" />
     <Compile Include="Engine\Pathfinding\IPathFinding.cs" />

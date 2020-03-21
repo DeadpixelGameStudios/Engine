@@ -12,5 +12,7 @@ namespace Game1.Engine.Pathfinding
         INode[,] grid { get; }
         INode GetNodePosition(Vector2 pPos);
         IList<INode> GetNeighbourNodes(INode pNode);
+        float tileSizeWidth { get; }
+        float tileSizeHeight { get; }
     }
 }
