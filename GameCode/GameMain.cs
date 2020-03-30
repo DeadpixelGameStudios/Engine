@@ -5,6 +5,8 @@ using Engine.Entity;
 using GameCode.Entities;
 using System.Linq;
 using System.Collections.Generic;
+using Engine.UI;
+using Engine.Engine.Collision;
 
 namespace GameCode
 {
@@ -14,13 +16,30 @@ namespace GameCode
     public class GameMain
     {
         private IEngineAPI engine;
-        
-        
+
+        private IInteractiveUI Button2Players;
+        private IInteractiveUI Button3Players;
+        private IInteractiveUI Button4Players;
+
+
         public GameMain(IEngineAPI pEngine)
         {
             engine = pEngine;
         }
+
         
+        public void Start()
+        {
+            Button2Players = engine.LoadUI<Button>("2player-button", new Vector2(200, 400));
+            Button2Players.OnClick += Button2Players_OnClick;
+            
+            Button3Players = engine.LoadUI<Button>("3player-button", new Vector2(700, 400));
+            Button3Players.OnClick += Button3Players_OnClick;
+
+            Button4Players = engine.LoadUI<Button>("4player-button", new Vector2(1200, 400));
+            Button4Players.OnClick += Button4Players_OnClick;
+        }
+
 
         public void TestLevel(int playerNum)
         {
@@ -55,11 +74,17 @@ namespace GameCode
                 engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
             }
 
-            List<Vector2> verts = new List<Vector2> { new Vector2(0, 20), new Vector2(25, 0), new Vector2(50, 20), new Vector2(40, 50), new Vector2(10, 50) };
-            engine.LoadEntity<DemoWall>("Walls/pentagon", new Vector2(400, 400), verts);
+            var pauseButton = engine.LoadUI<Button>("pause", new Vector2(1550, 0));
 
+            //List<Vector2> vertsHex = new List<Vector2> { new Vector2(100, 0), new Vector2(200, 48), new Vector2(200, 129), new Vector2(100, 200), new Vector2(0, 128), new Vector2(0, 48) };
+            //engine.LoadEntity<Wall>("Walls/reg-hex", new Vector2(1050, 450), vertsHex);
+
+            //List<Vector2> verts = new List<Vector2> { new Vector2(0, 20), new Vector2(25, 0), new Vector2(50, 20), new Vector2(40, 50), new Vector2(10, 50) };
+            //engine.LoadEntity<Wall>("Walls/pentagon", new Vector2(400, 400), verts);
         }
         
+
+
 
         private void OnEntityRequested(object sender, EntityRequestArgs e)
         {
@@ -72,57 +97,43 @@ namespace GameCode
         }
 
 
-        #region UI Testing
-        //private IInteractiveUI startButton;
-        //private IInteractiveUI Button2Players;
-        //private IInteractiveUI Button3Players;
-        //private IInteractiveUI Button4Players;
+        #region UI Events
+        private void Button4Players_OnClick(object sender, EventArgs e)
+        {
+            TestLevel(4);
+            Button4Players.OnClick -= Button4Players_OnClick;
+            Button3Players.OnClick -= Button3Players_OnClick;
+            Button2Players.OnClick -= Button2Players_OnClick;
 
-        //public void Start()
-        //{
-        //    //startButton = engine.LoadUI<Button>("start-button", new Vector2(700, 400));
-        //    //startButton.OnClick += StartButton_OnClick;
+            removeButtons();
+        }
 
-        //    Button2Players = engine.LoadUI<Button>("2player-button", new Vector2(200, 400));
-        //    Button2Players.OnClick += Button2Players_OnClick;
+        private void Button3Players_OnClick(object sender, EventArgs e)
+        {
+            TestLevel(3);
+            Button4Players.OnClick -= Button4Players_OnClick;
+            Button3Players.OnClick -= Button3Players_OnClick;
+            Button2Players.OnClick -= Button2Players_OnClick;
 
-        //    Button3Players = engine.LoadUI<Button>("3player-button", new Vector2(700, 400));
-        //    Button3Players.OnClick += Button3Players_OnClick;
+            removeButtons();
+        }
 
-        //    Button4Players = engine.LoadUI<Button>("4player-button", new Vector2(1200, 400));
-        //    Button4Players.OnClick += Button4Players_OnClick;
-        //}
+        private void Button2Players_OnClick(object sender, EventArgs e)
+        {
+            TestLevel(2);
+            Button4Players.OnClick -= Button4Players_OnClick;
+            Button3Players.OnClick -= Button3Players_OnClick;
+            Button2Players.OnClick -= Button2Players_OnClick;
 
-        //private void Button4Players_OnClick(object sender, EventArgs e)
-        //{
-        //    TestLevel(4);
-        //    Button4Players.OnClick -= Button4Players_OnClick;
-        //    Button3Players.OnClick -= Button3Players_OnClick;
-        //    Button2Players.OnClick -= Button2Players_OnClick;
-        //}
+            removeButtons();
+        }
 
-        //private void Button3Players_OnClick(object sender, EventArgs e)
-        //{
-        //    TestLevel(3);
-        //    Button4Players.OnClick -= Button4Players_OnClick;
-        //    Button3Players.OnClick -= Button3Players_OnClick;
-        //    Button2Players.OnClick -= Button2Players_OnClick;
-        //}
-
-        //private void Button2Players_OnClick(object sender, EventArgs e)
-        //{
-        //    TestLevel(2);
-        //    Button4Players.OnClick -= Button4Players_OnClick;
-        //    Button3Players.OnClick -= Button3Players_OnClick;
-        //    Button2Players.OnClick -= Button2Players_OnClick;
-        //}
-
-        //private void StartButton_OnClick(object sender, EventArgs e)
-        //{
-        //    TestLevel(3);
-        //    startButton.OnClick -= StartButton_OnClick;
-
-        //}
+        private void removeButtons()
+        {
+            engine.UnLoad((iEntity)Button4Players);
+            engine.UnLoad((iEntity)Button3Players);
+            engine.UnLoad((iEntity)Button2Players);
+        }
         #endregion
 
 

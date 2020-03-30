@@ -1,7 +1,7 @@
 ﻿///
 /// Comment out to run as Demo
 ///
-//#define Game
+#define Game
 
 using DemoCode;
 using Engine;
@@ -25,7 +25,7 @@ namespace GameCode
 
 #if Game
             GameMain game = new GameMain(engine);
-            game.TestLevel(1);
+            game.Start();
 #else
             Demo demo = new Demo(engine);
             demo.DemoLevel(1);

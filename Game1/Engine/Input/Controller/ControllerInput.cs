@@ -47,6 +47,19 @@ namespace Engine.Input
         }
 
         /// <summary>
+        /// Subscribe to controller input events
+        /// </summary>
+        /// <param name="sub">The instance subscribing</param>
+        /// <param name="buttons">A list of buttons it cares about</param>
+        /// <param name="playerCount">The player number</param>
+        public static void UnSubscribe(iControllerObserver sub, List<Buttons> buttons, int playerCount)
+        {
+            //m_subList.Remove(sub);
+            //m_entityButtonList.Remove(new EntityButton(0, buttons));
+            //playerDict.Remove(playerCount);
+        }
+
+        /// <summary>
         /// Polls connected controllers for input and notifies each subscriber of any changes
         /// </summary>
         public void Update()

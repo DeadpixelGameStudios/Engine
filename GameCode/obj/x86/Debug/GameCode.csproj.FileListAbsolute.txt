@@ -435,3 +435,5 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\Walls\Sta
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Engine.dll
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Engine.pdb
 C:\Code\GitHub\Engine\GameCode\obj\x86\Debug\GameCode.csproj.CoreCompileInputs.cache
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\help-me.png
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\pause.xnb

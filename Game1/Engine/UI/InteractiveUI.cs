@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Engine.Entity;
+using System;
 
 namespace Engine.UI
 {
-    public abstract class InteractiveUI : IInteractiveUI
+    public abstract class InteractiveUI : GameEntity, IInteractiveUI
     {
         public event EventHandler<EventArgs> OnClick;
         public event EventHandler<EventArgs> OnHover;

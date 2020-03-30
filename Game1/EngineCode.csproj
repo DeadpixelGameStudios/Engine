@@ -46,6 +46,8 @@
     <Compile Include="Engine\Camera\CameraManager.cs" />
     <Compile Include="Engine\Camera\Camera.cs" />
     <Compile Include="Engine\Camera\CameraSubject.cs" />
+    <Compile Include="Engine\Collision\CollisionDetails.cs" />
+    <Compile Include="Engine\Collision\ICollisionListener.cs" />
     <Compile Include="Engine\Collision\QuadTree.cs" />
     <Compile Include="Engine\Collision\SAT.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />

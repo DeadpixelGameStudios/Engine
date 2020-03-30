@@ -212,6 +212,10 @@ namespace Engine.Entity
 
         }
 
+        public virtual void Dispose()
+        {
+        }
+
         /// <summary>
         /// Destructor
         /// </summary>
@@ -252,6 +256,7 @@ namespace Engine.Entity
             }
             else
             {
+                //Vertices = new List<Vector2>();
                 Vertices = new List<Vector2>() { new Vector2(0, 0), new Vector2(50, 0), new Vector2(50, 50), new Vector2(0, 50) };
             }
             
@@ -291,13 +296,6 @@ namespace Engine.Entity
         public Rectangle GetBoundingBox()
         {
             return HitBox;
-        }
-
-        protected bool listenToCollisions = false;
-
-        public bool IsCollisionListener()
-        {
-            return listenToCollisions;
         }
 
         #endregion

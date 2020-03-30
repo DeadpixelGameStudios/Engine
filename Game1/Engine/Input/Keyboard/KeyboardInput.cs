@@ -36,6 +36,11 @@ namespace Engine.Input
             m_subList.Add(sub);
         }
 
+        public static void UnSubscribe(IKeyboardInputObserver sub)
+        {
+            m_subList.Remove(sub);
+        }
+
         public void Update()
         {
             KeyboardState keyboardState = Keyboard.GetState();

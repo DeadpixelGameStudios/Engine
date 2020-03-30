@@ -58,6 +58,12 @@ namespace Engine.Render
             uiList.Add(ui);
         }
 
+        public void Remove(iEntity ent)
+        {
+            entityList.Remove(ent);
+            uiList.Remove(ent);
+        }
+
         /// <summary>
         /// Draws all entities to be rendered
         /// </summary>

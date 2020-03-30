@@ -129,8 +129,7 @@ namespace Engine
 
         public void UnLoad(iEntity ent)
         {
-            //not sure what this implementation looks like yet really
-            throw new System.NotImplementedException();
+            sceneManager.Remove(ent);
         }
 
 

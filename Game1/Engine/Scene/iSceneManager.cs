@@ -33,7 +33,7 @@ namespace Engine.Scene
         /// <typeparam name="T">Dynamic</typeparam>
         /// <param name="uid">Unique ID</param>
         /// <param name="uname">Unique Name</param>
-        void Remove<T>(Guid uid, string uname) where T : iEntity;
+        void Remove<T>(T ent) where T : iEntity;
 
         /// <summary>
         /// Retrieval of reference to spawned entity

@@ -350,7 +350,6 @@
 /build:Resources/2player-button.png
 
 #begin Resources/Walls/pent.png
-#begin Resources/Walls/node.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -362,10 +361,19 @@
 /processorParam:TextureFormat=Color
 /build:Resources/Walls/pent.png
 
-#begin Resources/Walls/pentagon.png
+#begin Resources/Walls/node.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:Resources/Walls/node.png
 
-#begin Resources/Walls/BrownPath.png
+#begin Resources/Walls/pentagon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -377,10 +385,19 @@
 /processorParam:TextureFormat=Color
 /build:Resources/Walls/pentagon.png
 
-#begin Resources/Walls/random hex.png
+#begin Resources/Walls/BrownPath.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:Resources/Walls/BrownPath.png
 
-#begin Resources/Walls/Star.png
+#begin Resources/Walls/random hex.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -392,8 +409,29 @@
 /processorParam:TextureFormat=Color
 /build:Resources/Walls/random hex.png
 
-#begin Resources/Walls/reg-hex.png
+#begin Resources/Walls/Star.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:Resources/Walls/Star.png
+
+#begin Resources/Walls/reg-hex.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Resources/Walls/reg-hex.png
 
 #begin Resources/help-me.png
 /importer:TextureImporter
@@ -405,6 +443,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Resources/Walls/reg-hex.png
 /build:Resources/help-me.png
+
+#begin Resources/pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Resources/pause.png
 

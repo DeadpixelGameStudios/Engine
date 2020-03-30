@@ -72,6 +72,9 @@
     <Content Include="Content\Resources\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\help-me.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Resources\start-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

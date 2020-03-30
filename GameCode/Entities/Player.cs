@@ -1,15 +1,17 @@
 ﻿using Engine.Camera;
 using Engine.Collision;
+using Engine.Engine.Collision;
 using Engine.Entity;
 using Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using static Engine.Collision.SAT;
 
 namespace GameCode.Entities
 {
-    internal class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject
+    internal class Player : GameEntity, IKeyboardInputObserver, iControllerObserver, iCollidable, ICameraSubject, ICollisionListener
     {
 
         #region Data Members
@@ -64,12 +66,15 @@ namespace GameCode.Entities
             }
         
             playerCount++;
-            
-            //CollisionManager.subCollision(this);
 
             DrawPriority = 1f;
+        }
 
-            listenToCollisions = true;
+        public override void Dispose()
+        {
+            //unsubscribe to keyboard input
+            KeyboardInput.UnSubscribe(this);
+            //Unsubscribe to controller input
         }
 
         
@@ -97,7 +102,14 @@ namespace GameCode.Entities
                 {
                     if(!abilityTimeout)
                     {
-                        OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                        //OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                        var vect = new Vector2(48, -100) - new Vector2(-48, 100);
+                        vect.Normalize();
+
+                        Position += vect * -15;
+
+                        Console.WriteLine("pushed");
+
                         abilityTimeout = true;
                     }
                 }
@@ -111,37 +123,6 @@ namespace GameCode.Entities
 
         public override void Update()
         {
-            #region remove this dirty  code after prototyping
-
-            Vector2 vel = new Vector2(0,0);
-
-            if (isColliding)
-            {
-                if (Position.X > CollidingEntity.Position.X)
-                {
-                    vel = new Vector2(4, 0);
-                }
-                else
-                {
-                    vel = new Vector2(-4, 0);
-                }
-
-                if (Position.Y > CollidingEntity.Position.Y)
-                {
-                    vel = new Vector2(0, 4);
-                }
-                else
-                {
-                    vel = new Vector2(0, -4);
-                }
-            }
-            isColliding = false;
-
-            Position += vel;
-
-            #endregion
-
-
             if(abilityTimeout)
             {
                 abilityTimer++;
@@ -208,6 +189,14 @@ namespace GameCode.Entities
             }
 
             Position += vel;
+        }
+
+        public void Collision(object sender, CollisionDetails colDetails)
+        {
+            if(colDetails.ColliderUname == UName)
+            {
+                Position += colDetails.mtv;
+            }
         }
     }
 }

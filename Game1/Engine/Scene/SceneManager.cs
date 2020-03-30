@@ -1,4 +1,5 @@
 ﻿using Engine.Collision;
+using Engine.Engine.Collision;
 using Engine.Entity;
 using Engine.Input;
 using Engine.Managers;
@@ -115,8 +116,14 @@ namespace Engine.Scene
                 {
                     collManager.AddCollidable(entityInstance);
                 }
-                
-                
+
+                if (entityInstance is ICollisionListener)
+                {
+                    var colEnt = (ICollisionListener)entityInstance;
+                    collManager.RaiseCollision += colEnt.Collision;
+
+                    collManager.AddCollisionListener(entityInstance);
+                }
 
                 renderMan.addEntity(entityInstance);
             }
@@ -133,10 +140,10 @@ namespace Engine.Scene
             storeEntity.Add(UI);
             renderMan.addUI(UI);
 
-            if(UI is IInteractiveUI)
-            {
-                MouseInput.Subscribe((IMouseInputObserver)UI);
-            }
+            //if(UI is IInteractiveUI)
+            //{
+            //    //MouseInput.Subscribe((IMouseInputObserver)UI);
+            //}
         }
         
 
@@ -146,17 +153,24 @@ namespace Engine.Scene
         /// <typeparam name="T">Dynamic</typeparam>
         /// <param name="uid">Unique ID</param>
         /// <param name="uname">Unique Name</param>
-        public void Remove<T>(Guid uid, string name) where T : iEntity
+        public void Remove<T>(T ent) where T : iEntity
         {
-            if (storeEntity.AsEnumerable().Select(x => x).
-                Where(x => x.UID == uid && x.UName == name).Count() > 0)
-            {
-                sceneGraph.removeEntity(uid, name);
+            //if (storeEntity.AsEnumerable().Select(x => x).
+            //    Where(x => x.UID == uid && x.UName == name).Count() > 0)
+            //{
+            //    sceneGraph.removeEntity(uid, name);
+            //    storeEntity.RemoveAll(x => x.UID.Equals(uid) && x.UName.Equals(name));
+            //    //remove from render man
+            //    //remove from collision man
+            //}
 
-                storeEntity.RemoveAll(x => x.UID.Equals(uid) && x.UName.Equals(name));
+            renderMan.Remove(ent);
+            collManager.Remove(ent);
 
-                // how do i set entity position to null?
-            }
+            sceneGraph.removeEntity(ent.UID, ent.UName);
+            storeEntity.Remove(ent);
+
+            ent.Dispose();
         }
 
 

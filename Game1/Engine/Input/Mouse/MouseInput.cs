@@ -24,15 +24,21 @@ namespace Engine.Input
             m_subList.Add(sub);
         }
 
+        public static void UnSubscribe(IMouseInputObserver sub)
+        {
+            m_subList.Remove(sub);
+        }
+
         public void Update()
         {
             mouse = Mouse.GetState();
-            notifyInput(new Vector2(mouse.X, mouse.Y), (mouse.LeftButton == ButtonState.Pressed));
+
+            notifyInput(new Vector2(mouse.X, mouse.Y), mouse.LeftButton == ButtonState.Pressed);
         }
 
         public void notifyInput(Vector2 pos, bool pressed)
         {
-            foreach(var sub in m_subList)
+            foreach(var sub in m_subList.ToList())
             {
                 sub.mouseInput(pos, pressed);
             }

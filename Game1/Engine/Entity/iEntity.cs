@@ -11,6 +11,8 @@ namespace Engine.Entity
     /// </summary>
     public interface iEntity : IShape
     {
+        void Dispose();
+
         Guid UID { get; set; }
         String UName { get; set; }
 

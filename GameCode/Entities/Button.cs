@@ -14,8 +14,15 @@ namespace GameCode.Entities
 
         public Button()
         {
+            MouseInput.Subscribe(this);
         }
-        
+
+        public override void Dispose()
+        {
+            //unsubscribe from mouse input
+            MouseInput.UnSubscribe(this);
+        }
+
 
         public void mouseInput(Vector2 pos, bool pressed)
         {
