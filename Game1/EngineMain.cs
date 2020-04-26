@@ -113,14 +113,21 @@ namespace Engine
         }
 
 
-        public T LoadUI<T>(string texture, Vector2 position) where T : iEntity, new()
+        public T LoadUI<T>(string texture, Vector2 position, string font) where T : iEntity, new()
         {
             var ui = entityManager.RequestInstanceAndSetup<T>(texture, position);
             sceneManager.SpawnUI(ui);
 
+            ui.FontString = font;
+
             if (GraphicsDevice != null)
             {
                 sceneManager.LoadResource(ui);
+
+                if(!string.IsNullOrEmpty(font))
+                {
+                    ui.Font = sceneManager.LoadFont(ui.FontString);
+                }
             }
             
             return ui;
@@ -193,7 +200,7 @@ namespace Engine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.MediumSlateBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             sceneManager.Draw();
 

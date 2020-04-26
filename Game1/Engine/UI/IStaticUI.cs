@@ -1,7 +1,8 @@
-﻿namespace Engine.UI
+﻿using Engine.Engine.UI;
+
+namespace Engine.UI
 {
-    interface IStaticUI
+    public interface IStaticUI : IUI
     {
-        void SetText(string text);//maybe?
     }
 }

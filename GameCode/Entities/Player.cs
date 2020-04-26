@@ -5,9 +5,7 @@ using Engine.Entity;
 using Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using static Engine.Collision.SAT;
 
 namespace GameCode.Entities
 {
@@ -18,7 +16,7 @@ namespace GameCode.Entities
 
         private List<BasicInput> inputOptions = new List<BasicInput>
         {
-            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.None, Keys.E),
+            new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.LeftShift, Keys.E),
             new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.None, Keys.End),
             new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
             new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6, Keys.None, Keys.NumPad9)
@@ -34,9 +32,13 @@ namespace GameCode.Entities
 
         private bool sprintActive = false;
 
+        private int playerNum;
+
+        private iEntity artefact;
+
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
-       
+        public bool hasArtefact = false;
 
         #endregion
 
@@ -62,10 +64,11 @@ namespace GameCode.Entities
 
                 KeyboardInput.Subscribe(this, keys.allKeys);
                 inputKeys = keys;
-                acceleration = 8f;
+                acceleration = 4f;
             }
         
             playerCount++;
+            playerNum = playerCount;
 
             DrawPriority = 1f;
         }
@@ -77,46 +80,72 @@ namespace GameCode.Entities
             //Unsubscribe to controller input
         }
 
-        
+        public override void PassIEntity(iEntity ent)
+        {
+            artefact = ent;
+        }
+
+
         public void input(Keys key)
         {
-            if (inputKeys.allKeys.Contains(key))
+            if(InputAccepted)
             {
-                if (key == inputKeys.up)
+                if (inputKeys.allKeys.Contains(key))
                 {
-                    Velocity = new Vector2(0, -1 * acceleration);
-                }
-                else if (key == inputKeys.down)
-                {
-                    Velocity = new Vector2(0, acceleration);
-                }
-                else if (key == inputKeys.left)
-                {
-                    Velocity = new Vector2(-1 * acceleration, 0);
-                }
-                else if (key == inputKeys.right)
-                {
-                    Velocity = new Vector2(acceleration , 0);
-                }
-                else if(key == inputKeys.use)
-                {
-                    if(!abilityTimeout)
+                    if (key == inputKeys.up)
                     {
-                        //OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
-                        var vect = new Vector2(48, -100) - new Vector2(-48, 100);
-                        vect.Normalize();
-
-                        Position += vect * -15;
-
-                        Console.WriteLine("pushed");
-
-                        abilityTimeout = true;
+                        Velocity = new Vector2(0, -1 * acceleration);
                     }
+                    else if (key == inputKeys.down)
+                    {
+                        Velocity = new Vector2(0, acceleration);
+                    }
+                    else if (key == inputKeys.left)
+                    {
+                        Velocity = new Vector2(-1 * acceleration, 0);
+                    }
+                    else if (key == inputKeys.right)
+                    {
+                        Velocity = new Vector2(acceleration, 0);
+                    }
+                    else if (key == inputKeys.use)
+                    {
+                        if (!abilityTimeout)
+                        {
+                            //OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                            abilityTimeout = true;
+                        }
+                    }
+
+                    if (key == inputKeys.sprint)
+                    {
+                        acceleration = 8f;
+
+                        //heartRate += 0.5f;
+                        //heartBeat.SetText(Math.Round(heartRate) + "bpm");
+                    }
+                    else
+                    {
+                        acceleration = 4f;
+
+                        //if(heartRate < 75)
+                        //{
+                        //    heartRate += 0.05f;
+                        //    heartBeat.SetText(Math.Round(heartRate) + "bpm");
+                        //}
+                        //else
+                        //{
+                        //    heartRate = 75;
+                        //    heartBeat.SetText(Math.Round(heartRate) + "bpm");
+                        //}
+                    }
+
+                    //Console.WriteLine(Texture.Name);
+                    OnEntityRequested(new Vector2(Position.X + 25, Position.Y + 25), Texture.Name + "-trail", typeof(Trail));
+                    Position += Velocity;
                 }
-
-                Position += Velocity;
             }
-
+            
             Velocity = new Vector2(0, 0);
         }
         
@@ -132,6 +161,11 @@ namespace GameCode.Entities
             {
                 abilityTimeout = false;
                 abilityTimer = 0;
+            }
+
+            if(hasArtefact)
+            {
+                artefact.Position = Position - new Vector2(25, 25);
             }
 
         }
@@ -152,6 +186,8 @@ namespace GameCode.Entities
 
         public void gamePadInput(Buttons gamePadButtons, GamePadThumbSticks thumbSticks)
         {
+            //acceleration was 2 for this
+
             var leftThumbX = thumbSticks.Left.X * acceleration;
             var leftThumbY = thumbSticks.Left.Y * -1 * acceleration;
 
@@ -195,7 +231,25 @@ namespace GameCode.Entities
         {
             if(colDetails.ColliderUname == UName)
             {
-                Position += colDetails.mtv;
+                if(colDetails.ColldingObject is Patient)
+                {
+                    OnLevelFinished(this);
+                }
+                else if(colDetails.ColldingObject is Artifact)
+                {
+                    CanFinish = true;
+                    hasArtefact = true;
+                }
+                else if(colDetails.ColldingObject is Player)
+                {
+                    CanFinish = false;
+                    hasArtefact = false;
+                    artefact.Position += new Vector2(100, 100);
+                }
+                else
+                {
+                    Position += colDetails.mtv;
+                }
             }
         }
     }

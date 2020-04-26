@@ -13,7 +13,5 @@ namespace Engine.Collision
         void Remove(IShape collidable);
 
         event EventHandler<CollisionDetails> RaiseCollision;
-
-        void Update();
     }
 }

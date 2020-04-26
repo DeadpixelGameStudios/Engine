@@ -58,7 +58,7 @@ namespace DemoCode
 
             foreach (var ent in ents)
             {
-                ent.LevelFinished += OnLevelFinished;
+                //ent.LevelFinished += OnLevelFinished;
                 ent.EntityRequested += OnEntityRequested;
 
                 if (ent is Player)

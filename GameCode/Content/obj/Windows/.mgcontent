@@ -41,5 +41,17 @@
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/reg-hex.png</File>
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/help-me.png</File>
     <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/pause.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/heart.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Font.spritefont</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Patient.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player4-trail.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player3-trail.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player2-trail.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/player1-trail.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/Floor.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/home-screen.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/finish-screen.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/floor2.png</File>
+    <File>C:/Code/GitHub/Engine/GameCode/Content/Resources/key.png</File>
   </SourceFiles>
 </SourceFileCollection>

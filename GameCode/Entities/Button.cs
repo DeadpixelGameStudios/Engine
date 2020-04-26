@@ -52,6 +52,11 @@ namespace GameCode.Entities
             Transparency = 0.5f;
             OnHover?.Invoke(this, new EventArgs());
         }
+
+        public void SetText(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

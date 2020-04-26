@@ -30,7 +30,7 @@ namespace Engine
         /// <param name="texture">The texture of the requested entity</param>
         /// <typeparam name="T">Generic</typeparam>
         /// <returns>Reference to EntityInstance</returns>
-        T LoadUI<T>(string texture, Vector2 postion) where T : iEntity, new();
+        T LoadUI<T>(string texture, Vector2 postion, string font = "") where T : iEntity, new();
 
 
         /// <summary>

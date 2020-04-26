@@ -17,5 +17,10 @@ namespace Engine.UI
         {
             OnHover?.Invoke(this, new EventArgs());
         }
+
+        public void SetText(string text)
+        {
+            Text = text;
+        }
     }
 }

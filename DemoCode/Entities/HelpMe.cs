@@ -20,19 +20,6 @@ namespace GameCode.Entities
 
         public void mouseInput(Vector2 pos, bool pressed)
         {
-        //    if (HitBox.Intersects(new Rectangle((int)pos.X, (int)pos.Y, 1, 1)))
-        //    {
-        //        Hovering();
-
-        //        if (pressed)
-        //        {
-        //            Clicked();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Transparency = 1f;
-        //    }
         }
 
         public virtual void Clicked()
@@ -45,6 +32,11 @@ namespace GameCode.Entities
         {
             Transparency = 0.5f;
             OnHover?.Invoke(this, new EventArgs());
+        }
+
+        public void SetText(string text)
+        {
+            throw new NotImplementedException();
         }
     }
 }

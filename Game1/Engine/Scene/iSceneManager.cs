@@ -49,6 +49,8 @@ namespace Engine.Scene
         /// </summary>
         void LoadResources();
 
+        SpriteFont LoadFont(string font);
+
         /// <summary>
         /// Loads a single resource
         /// </summary>

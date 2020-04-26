@@ -52,6 +52,7 @@
     <Compile Include="Engine\Collision\SAT.cs" />
     <Compile Include="Engine\Entity\EntityRequestArgs.cs" />
     <Compile Include="Engine\Entity\LevelAsset.cs" />
+    <Compile Include="Engine\Entity\LevelFinishedArgs.cs" />
     <Compile Include="Engine\Input\Controller\ControllerInput.cs" />
     <Compile Include="Engine\Input\Controller\iControllerObserver.cs" />
     <Compile Include="Engine\Input\Controller\iControllerObserverable.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="Engine\UI\IInteractiveUI.cs" />
     <Compile Include="Engine\UI\InteractiveUI.cs" />
     <Compile Include="Engine\UI\IStaticUI.cs" />
+    <Compile Include="Engine\UI\IUI.cs" />
+    <Compile Include="Engine\UI\StaticUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -96,6 +96,21 @@ namespace Engine.Scene
         public void LoadResource(iEntity ent)
         {
             ent.Texture = contentMan.Load<Texture2D>(ent.TextureString);
+
+            if(ent.GetVertices().Count == 0)
+            {
+                ent.SetVertices(new List<Vector2>() { new Vector2(0,0), new Vector2(ent.Texture.Width, 0), new Vector2(ent.Texture.Width, ent.Texture.Height), new Vector2(0, ent.Texture.Height) });
+            }
+
+            if(!string.IsNullOrEmpty(ent.FontString))
+            {
+                ent.Font = LoadFont(ent.FontString);
+            }
+        }
+
+        public SpriteFont LoadFont(string font)
+        {
+            return contentMan.Load<SpriteFont>(font);
         }
 
 
@@ -155,15 +170,6 @@ namespace Engine.Scene
         /// <param name="uname">Unique Name</param>
         public void Remove<T>(T ent) where T : iEntity
         {
-            //if (storeEntity.AsEnumerable().Select(x => x).
-            //    Where(x => x.UID == uid && x.UName == name).Count() > 0)
-            //{
-            //    sceneGraph.removeEntity(uid, name);
-            //    storeEntity.RemoveAll(x => x.UID.Equals(uid) && x.UName.Equals(name));
-            //    //remove from render man
-            //    //remove from collision man
-            //}
-
             renderMan.Remove(ent);
             collManager.Remove(ent);
 
@@ -212,7 +218,17 @@ namespace Engine.Scene
         /// </summary>
         public void Update()
         {
-            sceneGraph.childNodes.ForEach(entity => entity.Update());
+            foreach(var ent in sceneGraph.childNodes.ToList())
+            {
+                if(ent.Destroy)
+                {
+                    Remove(ent);
+                }
+                else
+                {
+                    ent.Update();
+                }
+            }
 
             foreach(var manager in managerList)
             {

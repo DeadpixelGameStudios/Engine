@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Engine.Shape;
+using Engine.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -27,11 +28,11 @@ namespace Engine.Entity
             EntityRequested?.Invoke(this, new EntityRequestArgs() { Position = pos, Texture = texture, type = pType });
         }
 
-        public event EventHandler<EventArgs> LevelFinished;
+        public event EventHandler<LevelFinishedArgs> LevelFinished;
 
-        public virtual void OnLevelFinished()
+        public virtual void OnLevelFinished(iEntity finisher)
         {
-            LevelFinished?.Invoke(this, new EventArgs());
+            LevelFinished?.Invoke(this, new LevelFinishedArgs() { Finisher = finisher });
         }
         #endregion
         
@@ -256,8 +257,8 @@ namespace Engine.Entity
             }
             else
             {
-                //Vertices = new List<Vector2>();
-                Vertices = new List<Vector2>() { new Vector2(0, 0), new Vector2(50, 0), new Vector2(50, 50), new Vector2(0, 50) };
+                Vertices = new List<Vector2>();
+                //Vertices = new List<Vector2>() { new Vector2(0, 0), new Vector2(50, 0), new Vector2(50, 50), new Vector2(0, 50) };
             }
             
         }
@@ -275,6 +276,19 @@ namespace Engine.Entity
 
         #endregion
 
+
+        public bool Destroy
+        {
+            get;
+            set;
+        } = false;
+
+        public bool InputAccepted
+        {
+            get;
+            set;
+        } = true;
+
         #region IShape
 
         public List<Vector2> Vertices
@@ -282,10 +296,16 @@ namespace Engine.Entity
             get;
             set;
         }
+        
 
         public List<Vector2> GetVertices()
         {
             return Vertices;
+        }
+
+        public void SetVertices(List<Vector2> verts)
+        {
+            Vertices = verts;
         }
 
         public Vector2 GetPosition()
@@ -300,5 +320,26 @@ namespace Engine.Entity
 
         #endregion
 
+        public bool CanFinish { get; set; } = false;
+
+        public virtual void PassIEntity(iEntity ent)
+        {
+        }
+
+        #region Stuff for text rendering
+
+        public string Text { get; set; } = "";
+        public string FontString { get; set; }
+        public SpriteFont Font { get; set; }
+        public Vector2 TextPosition { get; set; } = default(Vector2);
+
+        public IStaticUI heartBeat;
+
+        public void PassUI(IStaticUI ui)
+        {
+            heartBeat = ui;
+        }
+
+        #endregion
     }
 }
