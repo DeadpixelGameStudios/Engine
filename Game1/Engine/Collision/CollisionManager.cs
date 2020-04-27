@@ -23,10 +23,7 @@ namespace Engine.Collision
 
         public void AddCollidable(IShape collidable)
         {
-            if(!(collidable is ICollisionListener))
-            {
-                collidableList.Add(collidable);
-            }
+            collidableList.Add(collidable);
         }
 
         public void AddCollisionListener(IShape colListener)
@@ -77,34 +74,24 @@ namespace Engine.Collision
         {
             foreach (IShape col in midList)
             {
-                iEntity Collider = (iEntity)shape;
-                
+                if ((shape as iEntity).UName == (col as iEntity).UName)
+                {
+                    continue;
+                }
+
                 if (col.GetBoundingBox().Intersects(shape.GetBoundingBox()))
                 {
+                    //Console.WriteLine((col as iEntity).UName + " and " + (shape as iEntity).UName);
 
                     NarrowPhase(col, shape);
 
                     //Checks to see whether the vertices of the shape are the same as the bounding box
-                    if (!isSameAsBoundingBox(col) || !isSameAsBoundingBox(shape))
-                    {
-                        //Go to narrow phase (SAT) if either shape isnt
-                        //NarrowPhase(col, shape);
-                    }
-                    else
-                    {
-                        //collision alert - events or not? not sure yet, but probably
-                        //Collider.CollidingEntity = (iEntity)col;
-                        //Collider.isColliding = true;
-                        
-                        var ent = (iEntity)shape;
-                        var ent2 = (iEntity)col;
-
-                        //OnRaiseCollision(new CollisionDetails(ent.UName, ent2));
-
-                        //Console.WriteLine("colliding things? " + ent.UName + " - " + ent2.UName);
-                    }
+                    //if (!isSameAsBoundingBox(col) || !isSameAsBoundingBox(shape))
+                    //{
+                    //    //Go to narrow phase (SAT) if either shape isnt
+                    //    //NarrowPhase(col, shape);
+                    //}
                 }
-
             }
         }
         

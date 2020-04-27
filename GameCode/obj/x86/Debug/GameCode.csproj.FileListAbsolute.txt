@@ -453,3 +453,4 @@ C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\home-scre
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\finish-screen.xnb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\floor2.xnb
 C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\key.xnb
+C:\Code\GitHub\Engine\GameCode\bin\Windows\x86\Debug\Content\Resources\ice-block.xnb

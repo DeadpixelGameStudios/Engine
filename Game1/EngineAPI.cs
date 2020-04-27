@@ -38,7 +38,5 @@ namespace Engine
         /// </summary>
         /// <param name="ent">The entity to unload</param>
         void UnLoad(iEntity ent);
-
-        void SetPathFindingGrid(IGrid mGrid, bool showGrid = false);
     }
 }

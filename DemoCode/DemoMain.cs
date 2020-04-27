@@ -35,7 +35,7 @@ namespace DemoCode
             var level = levelLoader.requestLevel("test-level.tmx");
 
             IPathFinding path = new PathFinding(levelLoader.grid);
-            engine.SetPathFindingGrid(levelLoader.grid, true);
+            //engine.SetPathFindingGrid(levelLoader.grid, true);
 
 
             var star = engine.LoadEntity<Star>("Walls/Star", new Vector2(1500, 100));

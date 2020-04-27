@@ -47,12 +47,14 @@
     <Compile Include="Entities\DemoWall.cs" />
     <Compile Include="Entities\Background.cs" />
     <Compile Include="Entities\Heart.cs" />
+    <Compile Include="Entities\Ice.cs" />
     <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Button.cs" />
     <Compile Include="Entities\Trail.cs" />
     <Compile Include="Entities\UI.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\WallAbility.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Level\LevelLoader.cs" />
     <Compile Include="Program.cs" />

@@ -34,6 +34,7 @@ namespace GameCode
         
         public void Start()
         {
+            // Load the start screen
             startScreen = engine.LoadUI<Background>("home-screen", new Vector2(0, 0), "Font");
             startScreen.DrawPriority = 0;
             startScreen.TextPosition = new Vector2(600, 600);
@@ -69,16 +70,16 @@ namespace GameCode
                 }
             }
 
+            // Place the patient and the artefact
+            var patient = engine.LoadEntity<Patient>("Patient", new Vector2(950, 500));
+            var key = engine.LoadEntity<Artifact>("key", new Vector2(1050, 1250));
+
+            // Load the level and set up players
             var ents = engine.LoadLevel(level);
-
-            var key = engine.LoadEntity<Artifact>("key", new Vector2(900, 500));
-
             foreach (var ent in ents)
             {
                 if(ent is Player)
                 {
-                    //var heart = engine.LoadUI<Heart>("heart", ent.Position, "Font");
-                    //ent.PassUI(heart);
                     ent.LevelFinished += OnLevelFinished;
                     ent.EntityRequested += OnEntityRequested;
                     ent.PassIEntity(key);
@@ -87,19 +88,13 @@ namespace GameCode
                 
             }
 
+            //Add the UI seperator
             if(playerCount > 1)
             {
                 string uiSeperator = "Walls/" + playerCount.ToString() + "player";
                 engine.LoadUI<UI>(uiSeperator, new Vector2(0, 0));
             }
-
-            //Need logic for pause button first
-            //var pauseButton = engine.LoadUI<Button>("pause", new Vector2(1550, 0));
             
-            var patient = engine.LoadEntity<Patient>("Patient", new Vector2(950, 500));
-
-            
-
             //Floor textures
             var floor1 = engine.LoadEntity<Background>("floor2", new Vector2(0, 0));
             var floor2 = engine.LoadEntity<Background>("floor2", new Vector2(1600, 0));
@@ -107,12 +102,22 @@ namespace GameCode
             var floor4 = engine.LoadEntity<Background>("floor2", new Vector2(1600, 900));
         }
         
-
-
+        
 
         private void OnEntityRequested(object sender, EntityRequestArgs e)
         {
-            engine.LoadEntity<Trail>(e.Texture, e.Position);
+            if(e.type == typeof(Trail))
+            {
+                engine.LoadEntity<Trail>(e.Texture, e.Position);
+            }
+            else if(e.type == typeof(Ice))
+            {
+                engine.LoadEntity<Ice>(e.Texture, e.Position);
+            }
+            else
+            {
+                engine.LoadEntity<Wall>(e.Texture, e.Position);
+            }
         }
 
         private void OnLevelFinished(object sender, LevelFinishedArgs e)
@@ -121,7 +126,6 @@ namespace GameCode
             {
                 var finishScreen = engine.LoadUI<FinishScreen>("finish-screen", new Vector2(0, 0));
 
-                //will ideally be unloading things but this works
                 foreach (var player in playerList)
                 {
                     player.InputAccepted = false;

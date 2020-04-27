@@ -5,6 +5,7 @@ using Engine.Entity;
 using Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace GameCode.Entities
@@ -17,8 +18,8 @@ namespace GameCode.Entities
         private List<BasicInput> inputOptions = new List<BasicInput>
         {
             new BasicInput(Keys.W, Keys.S, Keys.A, Keys.D, Keys.LeftShift, Keys.E),
-            new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.None, Keys.End),
-            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.None, Keys.O),
+            new BasicInput(Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.RightControl, Keys.End),
+            new BasicInput(Keys.I, Keys.K, Keys.J, Keys.L, Keys.N, Keys.O),
             new BasicInput(Keys.NumPad8, Keys.NumPad5, Keys.NumPad4, Keys.NumPad6, Keys.None, Keys.NumPad9)
         };
 
@@ -38,10 +39,24 @@ namespace GameCode.Entities
 
         GamePadInput inputButtons = new GamePadInput(Buttons.RightThumbstickRight, Buttons.RightThumbstickLeft, Buttons.X, Buttons.RightTrigger);
 
-        public bool hasArtefact = false;
+        private bool hasArtefact = false;
 
+        private Vector2 lastVelocity = new Vector2(-1, 0);
+
+        private bool onIce = false;
+
+        private List<RequestDeets> requestList = new List<RequestDeets> { new RequestDeets { type = typeof(Ice), texture = "ice-block" }, new RequestDeets { type = typeof(Wall), texture = "Walls/wall-closed" },
+                                                                            new RequestDeets { type = typeof(Ice), texture = "ice-block" }, new RequestDeets { type = typeof(Wall), texture = "Walls/wall-closed" }};
+
+        private RequestDeets requestDeets;
+        
         #endregion
 
+        struct RequestDeets
+        {
+            public Type type;
+            public string texture;
+        }
         
         public Player()
         {
@@ -65,6 +80,17 @@ namespace GameCode.Entities
                 KeyboardInput.Subscribe(this, keys.allKeys);
                 inputKeys = keys;
                 acceleration = 4f;
+
+                try
+                {
+                    requestDeets = requestList[playerCount];
+                }
+                catch
+                {
+                    requestDeets = requestList[0];
+                }
+                
+
             }
         
             playerCount++;
@@ -92,6 +118,11 @@ namespace GameCode.Entities
             {
                 if (inputKeys.allKeys.Contains(key))
                 {
+                    if(onIce)
+                    {
+                        acceleration = 1;
+                    }
+
                     if (key == inputKeys.up)
                     {
                         Velocity = new Vector2(0, -1 * acceleration);
@@ -112,37 +143,42 @@ namespace GameCode.Entities
                     {
                         if (!abilityTimeout)
                         {
-                            //OnEntityRequested(new Vector2(Position.X + 80, Position.Y), "Walls/wall-left", typeof(Wall));
+                            if (lastVelocity.Y == 0)
+                            {
+                                int multiplier = lastVelocity.X > 0 ? -1 : 1;
+                                var test = requestDeets.type;
+                                OnEntityRequested(new Vector2(Position.X + (75 * multiplier), Position.Y - 50), requestDeets.texture, requestDeets.type);
+                                OnEntityRequested(new Vector2(Position.X + (75 * multiplier), Position.Y), requestDeets.texture, requestDeets.type);
+                                OnEntityRequested(new Vector2(Position.X + (75 * multiplier), Position.Y + 50), requestDeets.texture, requestDeets.type);
+                            }
+                            else
+                            {
+                                int multiplier = lastVelocity.Y > 0 ? -1 : 1;
+
+                                OnEntityRequested(new Vector2(Position.X - 50, Position.Y + (75 * multiplier)), requestDeets.texture, requestDeets.type);
+                                OnEntityRequested(new Vector2(Position.X, Position.Y + (75 * multiplier)), requestDeets.texture, requestDeets.type);
+                                OnEntityRequested(new Vector2(Position.X + 50, Position.Y + (75 * multiplier)), requestDeets.texture, requestDeets.type);
+                            }
+
                             abilityTimeout = true;
                         }
                     }
 
+                    lastVelocity = Velocity;
+
                     if (key == inputKeys.sprint)
                     {
                         acceleration = 8f;
-
-                        //heartRate += 0.5f;
-                        //heartBeat.SetText(Math.Round(heartRate) + "bpm");
                     }
                     else
                     {
                         acceleration = 4f;
-
-                        //if(heartRate < 75)
-                        //{
-                        //    heartRate += 0.05f;
-                        //    heartBeat.SetText(Math.Round(heartRate) + "bpm");
-                        //}
-                        //else
-                        //{
-                        //    heartRate = 75;
-                        //    heartBeat.SetText(Math.Round(heartRate) + "bpm");
-                        //}
                     }
 
-                    //Console.WriteLine(Texture.Name);
                     OnEntityRequested(new Vector2(Position.X + 25, Position.Y + 25), Texture.Name + "-trail", typeof(Trail));
                     Position += Velocity;
+
+                    onIce = false;
                 }
             }
             
@@ -242,9 +278,16 @@ namespace GameCode.Entities
                 }
                 else if(colDetails.ColldingObject is Player)
                 {
-                    CanFinish = false;
-                    hasArtefact = false;
-                    artefact.Position += new Vector2(100, 100);
+                    if(hasArtefact)
+                    {
+                        CanFinish = false;
+                        hasArtefact = false;
+                        artefact.Position += new Vector2(100, 100);
+                    }
+                }
+                else if(colDetails.ColldingObject is Ice)
+                {
+                    onIce = true;
                 }
                 else
                 {
