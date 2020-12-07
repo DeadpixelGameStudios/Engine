@@ -1,6 +1,8 @@
-﻿namespace Engine.UI
+﻿using Engine.Engine.UI;
+
+namespace Engine.UI
 {
-    interface IStaticUI
+    public interface IStaticUI : IUI
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Engine.Collision;
+using Engine.Engine.Collision;
 using Engine.Entity;
 using Engine.Input;
 using Engine.Managers;
@@ -95,6 +96,21 @@ namespace Engine.Scene
         public void LoadResource(iEntity ent)
         {
             ent.Texture = contentMan.Load<Texture2D>(ent.TextureString);
+
+            if(ent.GetVertices().Count == 0)
+            {
+                ent.SetVertices(new List<Vector2>() { new Vector2(0,0), new Vector2(ent.Texture.Width, 0), new Vector2(ent.Texture.Width, ent.Texture.Height), new Vector2(0, ent.Texture.Height) });
+            }
+
+            if(!string.IsNullOrEmpty(ent.FontString))
+            {
+                ent.Font = LoadFont(ent.FontString);
+            }
+        }
+
+        public SpriteFont LoadFont(string font)
+        {
+            return contentMan.Load<SpriteFont>(font);
         }
 
 
@@ -115,8 +131,14 @@ namespace Engine.Scene
                 {
                     collManager.AddCollidable(entityInstance);
                 }
-                
-                
+
+                if (entityInstance is ICollisionListener)
+                {
+                    var colEnt = (ICollisionListener)entityInstance;
+                    collManager.RaiseCollision += colEnt.Collision;
+
+                    collManager.AddCollisionListener(entityInstance);
+                }
 
                 renderMan.addEntity(entityInstance);
             }
@@ -133,10 +155,10 @@ namespace Engine.Scene
             storeEntity.Add(UI);
             renderMan.addUI(UI);
 
-            if(UI is IInteractiveUI)
-            {
-                MouseInput.Subscribe((IMouseInputObserver)UI);
-            }
+            //if(UI is IInteractiveUI)
+            //{
+            //    //MouseInput.Subscribe((IMouseInputObserver)UI);
+            //}
         }
         
 
@@ -146,17 +168,15 @@ namespace Engine.Scene
         /// <typeparam name="T">Dynamic</typeparam>
         /// <param name="uid">Unique ID</param>
         /// <param name="uname">Unique Name</param>
-        public void Remove<T>(Guid uid, string name) where T : iEntity
+        public void Remove<T>(T ent) where T : iEntity
         {
-            if (storeEntity.AsEnumerable().Select(x => x).
-                Where(x => x.UID == uid && x.UName == name).Count() > 0)
-            {
-                sceneGraph.removeEntity(uid, name);
+            renderMan.Remove(ent);
+            collManager.Remove(ent);
 
-                storeEntity.RemoveAll(x => x.UID.Equals(uid) && x.UName.Equals(name));
+            sceneGraph.removeEntity(ent.UID, ent.UName);
+            storeEntity.Remove(ent);
 
-                // how do i set entity position to null?
-            }
+            ent.Dispose();
         }
 
 
@@ -198,7 +218,17 @@ namespace Engine.Scene
         /// </summary>
         public void Update()
         {
-            sceneGraph.childNodes.ForEach(entity => entity.Update());
+            foreach(var ent in sceneGraph.childNodes.ToList())
+            {
+                if(ent.Destroy)
+                {
+                    Remove(ent);
+                }
+                else
+                {
+                    ent.Update();
+                }
+            }
 
             foreach(var manager in managerList)
             {

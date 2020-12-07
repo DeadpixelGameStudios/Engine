@@ -42,11 +42,19 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Entities\Artifact.cs" />
+    <Compile Include="Entities\FinishScreen.cs" />
     <Compile Include="Entities\DemoWall.cs" />
+    <Compile Include="Entities\Background.cs" />
+    <Compile Include="Entities\Heart.cs" />
+    <Compile Include="Entities\Ice.cs" />
+    <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Button.cs" />
+    <Compile Include="Entities\Trail.cs" />
     <Compile Include="Entities\UI.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\WallAbility.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Level\LevelLoader.cs" />
     <Compile Include="Program.cs" />
@@ -72,30 +80,53 @@
     <Content Include="Content\Resources\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\finish-screen.png" />
+    <Content Include="Content\Resources\Floor.png" />
+    <Content Include="Content\Resources\heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resources\help-me.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resources\home-screen.png" />
+    <Content Include="Content\Resources\Patient.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resources\pause.png" />
     <Content Include="Content\Resources\start-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\2player-button.png" />
     <Content Include="Content\Resources\Walls\2player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\3player-button.png" />
     <Content Include="Content\Resources\Walls\3player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\4player-button.png" />
     <Content Include="Content\Resources\Walls\4player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\BrownPath.png" />
+    <Content Include="Content\Resources\Walls\node.png" />
     <Content Include="Content\Resources\Walls\pent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\pentagon.png" />
+    <Content Include="Content\Resources\Walls\player1-trail.png" />
     <Content Include="Content\Resources\Walls\player1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\player2-trail.png" />
     <Content Include="Content\Resources\Walls\player2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\player3-trail.png" />
     <Content Include="Content\Resources\Walls\player3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\Walls\player4-trail.png" />
     <Content Include="Content\Resources\Walls\player4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,6 +183,12 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Resources\Font.spritefont">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Level\LevelFiles\big-level.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Level\LevelFiles\level1.tmx" />
     <None Include="Level\LevelFiles\level2.tmx" />
     <None Include="Level\LevelFiles\test-level.tmx">

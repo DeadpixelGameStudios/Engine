@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Misc
 {
-    class MathsHelper
+    public class MathsHelper
     {
         public struct Normal
         {
@@ -41,6 +41,18 @@ namespace Engine.Misc
             float dy = point2.Y - point1.Y;
 
             return new Normal(new Vector2(-dy, dx), new Vector2(dy, -dx));
+        }
+
+        public static Vector2 GreaterVector2(Vector2 vect1, Vector2 vect2)
+        {
+            if((vect1.X + vect1.Y) >= (vect2.X + vect2.Y))
+            {
+                return vect1;
+            }
+            else
+            {
+                return vect2;
+            }
         }
         
         /// <summary>

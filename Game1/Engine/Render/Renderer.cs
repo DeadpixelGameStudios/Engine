@@ -3,6 +3,7 @@ using Engine.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Engine.Render
 {
@@ -58,6 +59,12 @@ namespace Engine.Render
             uiList.Add(ui);
         }
 
+        public void Remove(iEntity ent)
+        {
+            entityList.Remove(ent);
+            uiList.Remove(ent);
+        }
+
         /// <summary>
         /// Draws all entities to be rendered
         /// </summary>
@@ -76,6 +83,7 @@ namespace Engine.Render
 
             spriteBatch.Begin();
             drawEntities(uiList);
+            drawText(uiList.Where(ent => !string.IsNullOrEmpty(ent.FontString)).ToList());
             spriteBatch.End();
 
         }
@@ -89,6 +97,14 @@ namespace Engine.Render
             foreach (var entity in drawList)
             {
                 spriteBatch.Draw(entity.Texture, entity.Position, null, Color.White*entity.Transparency, entity.Rotation, new Vector2(0, 0), 1, SpriteEffects.None, entity.DrawPriority);
+            }
+        }
+
+        private void drawText(List<iEntity> drawList)
+        {
+            foreach (var entity in drawList)
+            {
+                spriteBatch.DrawString(entity.Font, entity.Text, entity.TextPosition == default(Vector2) ? entity.Position : entity.TextPosition, Color.Black);              
             }
         }
 

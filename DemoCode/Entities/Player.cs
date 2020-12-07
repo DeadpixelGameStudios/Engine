@@ -77,7 +77,7 @@ namespace DemoCode.Entities
 
             DrawPriority = 1f;
 
-            listenToCollisions = true;
+            //listenToCollisions = true;
         }
 
         public void input(Keys key)

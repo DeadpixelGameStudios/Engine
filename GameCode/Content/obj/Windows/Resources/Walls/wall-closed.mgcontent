@@ -3,7 +3,7 @@
   <SourceFile>C:/Code/GitHub/Engine/GameCode/Content/Resources/Walls/wall-closed.png</SourceFile>
   <SourceTime>2019-11-17T12:11:14.2911816+00:00</SourceTime>
   <DestFile>C:/Code/GitHub/Engine/GameCode/Content/bin/Windows/Resources/Walls/wall-closed.xnb</DestFile>
-  <DestTime>2020-03-21T19:03:59.1642398+00:00</DestTime>
+  <DestTime>2020-04-27T08:45:30.9333765+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T18:14:44+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

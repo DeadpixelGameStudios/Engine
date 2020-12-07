@@ -3,5 +3,5 @@
  <properties>
   <property name="class" value="Wall"/>
  </properties>
- <image source="../../../../Content/Resources/Walls/wall-corner-top-left.png" width="50" height="50"/>
+ <image source="../../../Content/Resources/Walls/wall-corner-top-left.png" width="50" height="50"/>
 </tileset>
